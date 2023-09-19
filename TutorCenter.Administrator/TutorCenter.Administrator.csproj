@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TutorCenter.Application\TutorCenter.Application.csproj" />
+    <ProjectReference Include="..\TutorCenter.Infrastructure\TutorCenter.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

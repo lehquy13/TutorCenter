@@ -1,7 +1,15 @@
+using TutorCenter.Infrastructure;
+using TutorCenter.Application;
+using TutorCenter.Administrator;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services
+        .AddInfrastructure(builder.Configuration)
+        .AddApplication()
+        .AddPresentation();
 
 var app = builder.Build();
 
@@ -16,6 +24,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSession();
+
+app.UseAuthentication();
 app.UseRouting();
 
 app.UseAuthorization();
