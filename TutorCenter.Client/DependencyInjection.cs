@@ -1,5 +1,5 @@
 ﻿
-namespace TutorCenter.Administrator;
+namespace TutorCenter.Client;
 public static class DependencyInjection
 {
     public static IServiceCollection AddPresentation(this IServiceCollection services)

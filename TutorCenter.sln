@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorCenter.Infrastructure"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorCenter.Client", "TutorCenter.Client\TutorCenter.Client.csproj", "{75871465-CF64-437C-BF65-0525700B2A2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorCenter.DBMigrator", "TutorCenter.DBMigrator\TutorCenter.DBMigrator.csproj", "{33A574D2-E2AF-4CF0-9331-C881D7003804}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{75871465-CF64-437C-BF65-0525700B2A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75871465-CF64-437C-BF65-0525700B2A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75871465-CF64-437C-BF65-0525700B2A2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33A574D2-E2AF-4CF0-9331-C881D7003804}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33A574D2-E2AF-4CF0-9331-C881D7003804}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33A574D2-E2AF-4CF0-9331-C881D7003804}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33A574D2-E2AF-4CF0-9331-C881D7003804}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
