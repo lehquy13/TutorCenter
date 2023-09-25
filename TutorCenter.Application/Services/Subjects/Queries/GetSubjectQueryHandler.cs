@@ -7,7 +7,7 @@ using TutorCenter.Domain.Courses.Repos;
 
 namespace TutorCenter.Application.Services.Subjects.Queries;
 
-public class GetSubjectQueryHandler : GetByIdQueryHandler<GetObjectQuery<SubjectDto>, SubjectDto>
+public class GetSubjectQueryHandler : GetByIdQueryHandler<GetSubjectQuery, SubjectDto>
 {
     private readonly ISubjectRepository _subjectRepository;
     public GetSubjectQueryHandler(ISubjectRepository subjectRepository, IMapper mapper) : base(mapper)
@@ -15,9 +15,9 @@ public class GetSubjectQueryHandler : GetByIdQueryHandler<GetObjectQuery<Subject
         _subjectRepository = subjectRepository;
     }
 
-    public override async Task<Result<SubjectDto>> Handle(GetObjectQuery<SubjectDto> query, CancellationToken cancellationToken)
+    public override async Task<Result<SubjectDto>> Handle(GetSubjectQuery query, CancellationToken cancellationToken)
     {
-        Subject? subject = await _subjectRepository.GetById(query.ObjectId);
+        Subject? subject = await _subjectRepository.GetById(query.Id);
         if (subject == null)
         {
             return Result.Fail("Subject does not exist");
