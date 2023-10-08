@@ -3,7 +3,7 @@
 public enum NotificationEnum 
 {
     Subject,
-    ClassInformation,
+    Course,
     RequestGettingClass,
     ReviewClass,
     Tutor,
