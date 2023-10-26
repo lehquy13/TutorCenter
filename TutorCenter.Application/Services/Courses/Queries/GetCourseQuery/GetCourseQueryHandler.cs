@@ -16,7 +16,7 @@ using TutorCenter.Domain.Users.Repos;
 
 namespace TutorCenter.Application.Services.Courses.Queries.GetCourseQuery
 {
-    public class GetCourseQueryHandler : GetByIdQueryHandler<GetObjectQuery<CourseForDetailDto>, CourseForDetailDto>
+    public class GetCourseQueryHandler : GetCourseQueryHandler<GetCourseQuery, CourseForDetailDto>
     {
 
         private readonly ICourseRepository _courseRepository;
@@ -25,9 +25,9 @@ namespace TutorCenter.Application.Services.Courses.Queries.GetCourseQuery
         {
             _courseRepository = courseRepository;                               
         }
-        public override async Task<Result<CourseForDetailDto>> Handle(GetObjectQuery<CourseForDetailDto> query, CancellationToken cancellationToken)
+        public override async Task<Result<CourseForDetailDto>> Handle(GetCourseQuery query, CancellationToken cancellationToken)
         {
-            var classInformation = await _courseRepository.GetById(query.ObjectId);
+            var classInformation = await _courseRepository.GetById(query.Id);
             if (classInformation == null)
             {
                 return Result.Fail("The class doesn't exist");

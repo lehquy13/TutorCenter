@@ -4,13 +4,13 @@ using MediatR;
 
 namespace TutorCenter.Application.Services.Abstractions.QueryHandlers;
 
-public abstract class GetByIdQueryHandler<TQuery, TDto>
+public abstract class GetCourseQueryHandler<TQuery, TDto>
     : IRequestHandler<TQuery, Result<TDto>>
     where TQuery : IRequest<Result<TDto>>
 {
     protected readonly IMapper _mapper;
 
-    public GetByIdQueryHandler(IMapper mapper)
+    public GetCourseQueryHandler(IMapper mapper)
     {
         _mapper = mapper;
     }
