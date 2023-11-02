@@ -3,7 +3,7 @@ using CED.Domain.Users;
 using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using TutorCenter.Application.Contracts.Authentication;
+using TutorCenter.Application.Contracts.Authentications;
 using TutorCenter.Application.Services.Authentication.Customer.Commands.ChangePassword;
 
 namespace CED.Application.Services.Authentication.Customer.Commands.ChangePassword;

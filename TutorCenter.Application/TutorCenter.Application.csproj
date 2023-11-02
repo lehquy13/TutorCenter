@@ -40,4 +40,10 @@
     <ProjectReference Include="..\TutorCenter.Domain\TutorCenter.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="CED.Domain">
+      <HintPath>..\..\CED-ASP_NET_Core.DDD\CED.Domain\bin\Debug\net7.0\CED.Domain.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
