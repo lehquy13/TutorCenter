@@ -1,4 +1,4 @@
-﻿using EduSmart.Domain.Repository;
+﻿ using EduSmart.Domain.Repository;
 using FluentResults;
 using MapsterMapper;
 using System;
@@ -16,7 +16,7 @@ using TutorCenter.Domain.Users.Repos;
 
 namespace TutorCenter.Application.Services.Courses.Queries.GetCourseQuery
 {
-    public class GetCourseQueryHandler : GetCourseQueryHandler<GetCourseQuery, CourseForDetailDto>
+    public class GetCourseQueryHandler : GetByIdQueryHandler<GetObjectQuery<CourseForDetailDto>, CourseForDetailDto>
     {
 
         private readonly ICourseRepository _courseRepository;
@@ -25,9 +25,9 @@ namespace TutorCenter.Application.Services.Courses.Queries.GetCourseQuery
         {
             _courseRepository = courseRepository;                               
         }
-        public override async Task<Result<CourseForDetailDto>> Handle(GetCourseQuery query, CancellationToken cancellationToken)
+        public override async Task<Result<CourseForDetailDto>> Handle(GetObjectQuery<CourseForDetailDto> query, CancellationToken cancellationToken)
         {
-            var classInformation = await _courseRepository.GetById(query.Id);
+            var classInformation = await _courseRepository.GetById(query.ObjectId);
             if (classInformation == null)
             {
                 return Result.Fail("The class doesn't exist");
