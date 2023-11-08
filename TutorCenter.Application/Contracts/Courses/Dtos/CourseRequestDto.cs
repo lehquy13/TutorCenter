@@ -35,7 +35,7 @@ public class CourseRequestForDetailDto
 
     public string RequestStatus { get; set; } = "Verifying"; 
     public string LearnerName { get; set; } = string.Empty;
-                                                                                   public string LearnerContact { get; set; } = string.Empty;
+   public string LearnerContact { get; set; } = string.Empty;
 }
 public class CourseRequestForSuccessDetailDto 
 {
@@ -46,6 +46,7 @@ public class CourseRequestForSuccessDetailDto
     public string Title { get; set; } = string.Empty;
     public string SubjectName { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
+    //learnername, contact
 
     public RequestStatus RequestStatus { get; set; } = RequestStatus.Verifying;
    

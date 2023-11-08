@@ -1,0 +1,21 @@
+@model CED.Contracts.TutorReview.TutorReviewDto
+@{
+}
+<form asp-action="RemoveReview" asp-controller="ClassInformation" onclick="this.submit(); this.hide(); return false;">
+    <div class="card">
+    
+        <div class="card-body">
+            <h5 class="card-title">Review's detail</h5>
+            <input name="id" value="@Model.Id" class="form-control" readonly="" hidden/>
+            <div class="col-md-12">
+                @* <label asp-for="Description" class="form-label">Description</label> *@
+                <textarea asp-for="Description" class="form-control">
+                </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <button class="btn btn-danger" type="submit">Remove</button>
+            
+        </div>
+    </div>
+    
+</form>
