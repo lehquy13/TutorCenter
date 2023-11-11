@@ -1,18 +1,15 @@
-﻿using CED.Application.Services.Abstractions.QueryHandlers;
+﻿using CED.Web.Utilities;
 using MapsterMapper;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using CED.Application.Services.Users.Admin.Commands;
-using CED.Application.Services.Users.Queries.CustomerQueries;
-using CED.Contracts;
-using CED.Contracts.Subjects;
-using CED.Domain.Shared;
-using CED.Web.Utilities;
-using Microsoft.EntityFrameworkCore;
-using CED.Contracts.Users.Tutors;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using TutorCenter.Application.Contracts;
+using TutorCenter.Application.Contracts.Users.Tutors;
+using TutorCenter.Application.Services.Abstractions.QueryHandlers;
+using TutorCenter.Application.Services.Users.Queries.CustomerQueries;
+using TutorCenter.Domain;
 
-namespace CED.Web.Controllers;
+namespace TutorCenter.Administrator.Controllers;
 [Authorize(Policy = "RequireAdministratorRole")]
 [Route("[controller]")]
 public class TutorController : Controller

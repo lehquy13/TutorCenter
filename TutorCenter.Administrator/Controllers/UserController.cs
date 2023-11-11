@@ -1,14 +1,14 @@
-﻿using CED.Application.Services.Abstractions.QueryHandlers;
-using CED.Contracts.Users;
+﻿using CED.Web.Utilities;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using CED.Application.Services.Users.Admin.Commands;
-using CED.Contracts;
-using CED.Domain.Shared;
-using CED.Web.Utilities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using TutorCenter.Application.Contracts;
+using TutorCenter.Application.Contracts.Users;
+using TutorCenter.Application.Contracts.Users.Learners;
+using TutorCenter.Application.Services.Abstractions.QueryHandlers;
+using TutorCenter.Domain;
 
-namespace CED.Web.Controllers;
+namespace TutorCenter.Administrator.Controllers;
 
 [Authorize(Policy = "RequireAdministratorRole")]
 [Route("[controller]")]

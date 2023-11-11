@@ -1,15 +1,15 @@
-@using TutorCenter.Domain.Shared.ClassInformationConsts
-@model TutorCenter.Applicantion.Contracts.ClassInformations.Dtos.RequestGettingClassMinimalDto
+@using TutorCenter.Domain.Shared.CourseConsts
+@model TutorCenter.Applicantion.Contracts.Courses.Dtos.RequestGettingClassMinimalDto
 @{
 }
-<form asp-action="CancelRequest" asp-controller="ClassInformation" >
+<form asp-action="CancelRequest" asp-controller="Course" >
     <div class="card">
     
         <div class="card-body">
             <h5 class="card-title">Request's detail</h5>
                 <input type="text" asp-for="TutorId" class="form-control" readonly="" hidden/>
                 <input type="text" asp-for="Id" class="form-control" readonly="" hidden/>
-                <input type="text" asp-for="ClassInformationId" class="form-control" readonly="" hidden/>
+                <input type="text" asp-for="CourseId" class="form-control" readonly="" hidden/>
             
             <div class="col-md-6">
                 <label asp-for="TutorName" class="form-label">Tutor Name</label>

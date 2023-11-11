@@ -30,8 +30,6 @@
     <Folder Include="Services\Users\Queries\CustomerQueries\" />
     <Folder Include="Services\Users\Queries\GetTutorProfile\" />
     <Folder Include="Services\Users\Queries\Handlers\" />
-    <Folder Include="Services\Users\Student\Commands\" />
-    <Folder Include="Services\Users\Student\Queries\" />
     <Folder Include="Services\Users\Tutor\ChangeInfo\" />
     <Folder Include="Services\Users\Tutor\Registers\" />
   </ItemGroup>
