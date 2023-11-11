@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace CED.Application.Services.Authentication.ManageAccount;
+namespace TutorCenter.Application.Services.Authentication.ManageAccount;
 
 public class ManageAccountQueryValidator : AbstractValidator<ManageAccountQuery>
 {

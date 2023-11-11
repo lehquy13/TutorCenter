@@ -10,7 +10,8 @@ using TutorCenter.Domain.Users;
 
 namespace TutorCenter.Application.Services.Subjects.Queries;
 
-public class GetAllSubjectsQueryHandler : GetAllQueryHandler<GetObjectQuery<PaginatedList<SubjectDto>>, SubjectDto>
+public class GetAllSubjectsQueryHandler : GetAllQueryHandler<GetObjectQuery<PaginatedList<SubjectDto>>, SubjectDto>// không nên như này
+//public class GetAllSubjectsQueryHandler : GetAllQueryHandler<GetAllSubjectsQuery, SubjectDto>// nên như này
 {
     private readonly ISubjectRepository _subjectRepository;
     private readonly IRepository<TutorMajor> _tutorMajorRepository;

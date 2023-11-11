@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using MediatR;
 
-namespace CED.Application.Services.Authentication.RefreshToken;
+namespace TutorCenter.Application.Services.Authentication.RefreshToken;
 
 public record RefreshTokenQuery
 (

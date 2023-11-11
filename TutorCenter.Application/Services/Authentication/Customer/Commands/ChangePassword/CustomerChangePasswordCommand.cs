@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentResults;
+using MediatR;
 using TutorCenter.Application.Contracts.Authentications;
 
 namespace TutorCenter.Application.Services.Authentication.Customer.Commands.ChangePassword;
@@ -9,5 +10,5 @@ public record CustomerChangePasswordCommand
     string CurrentPassword,
     string NewPassword,
     string ConfirmedPassword
-    ) : IRequest<AuthenticationResult>;
+    ) : IRequest<Result<AuthenticationResult>>;
 

@@ -1,10 +1,11 @@
-﻿using MediatR;
-using TutorCenter.Application.Contracts.Authentication;
+﻿using FluentResults;
+using MediatR;
+using TutorCenter.Application.Contracts.Authentications;
 
-namespace CED.Application.Services.Authentication.Customer.Queries.Login;
+namespace TutorCenter.Application.Services.Authentication.Customer.Queries.Login;
 
 public record CustomerLoginQuery
 (
     string Email,
-    string Password) : IRequest<AuthenticationResult>;
+    string Password) : IRequest<Result<AuthenticationResult>>;
 

@@ -1,10 +1,11 @@
-﻿using MediatR;
-using TutorCenter.Application.Contracts.Authentication;
+﻿using FluentResults;
+using MediatR;
+using TutorCenter.Application.Contracts.Authentications;
 
-namespace CED.Application.Services.Authentication.ManageAccount;
+namespace TutorCenter.Application.Services.Authentication.ManageAccount;
 
 public record ManageAccountQuery
 (
    string Token
-    ) : IRequest<AuthenticationResult>;
+    ) : IRequest<Result<AuthenticationResult>>;
 

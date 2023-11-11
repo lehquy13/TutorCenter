@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CED.Application.Services.Authentication.ValidateToken;
+namespace TutorCenter.Application.Services.Authentication.ValidateToken;
 
 public record ValidateTokenQuery
 (

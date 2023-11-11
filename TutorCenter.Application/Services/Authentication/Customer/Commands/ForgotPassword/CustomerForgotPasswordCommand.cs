@@ -1,10 +1,11 @@
-﻿using MediatR;
-using TutorCenter.Application.Contracts.Authentication;
+﻿using FluentResults;
+using MediatR;
+using TutorCenter.Application.Contracts.Authentications;
 
-namespace CED.Application.Services.Authentication.Customer.Commands.ForgotPassword;
+namespace TutorCenter.Application.Services.Authentication.Customer.Commands.ForgotPassword;
 
 public record CustomerForgotPasswordCommand
 (
     string Email
-    ) : IRequest<AuthenticationResult>;
+    ) : IRequest<Result<AuthenticationResult>>;
 

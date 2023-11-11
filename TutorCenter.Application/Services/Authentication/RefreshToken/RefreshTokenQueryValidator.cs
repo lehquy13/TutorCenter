@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace CED.Application.Services.Authentication.RefreshToken;
+namespace TutorCenter.Application.Services.Authentication.RefreshToken;
 
 public class RefreshTokenQueryValidator : AbstractValidator<RefreshTokenQuery>
 {

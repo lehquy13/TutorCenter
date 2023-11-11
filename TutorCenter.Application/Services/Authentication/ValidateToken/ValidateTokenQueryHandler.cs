@@ -1,7 +1,7 @@
-﻿using CED.Domain.Interfaces.Authentication;
-using MediatR;
+﻿using MediatR;
+using TutorCenter.Domain.Interfaces.Authentication;
 
-namespace CED.Application.Services.Authentication.ValidateToken;
+namespace TutorCenter.Application.Services.Authentication.ValidateToken;
 
 public class ValidateTokenQueryHandler
     : IRequestHandler<ValidateTokenQuery, bool>

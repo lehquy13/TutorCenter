@@ -1,13 +1,11 @@
-﻿using CED.Application.Common.Errors.Users;
-using CED.Contracts.Users;
-using CED.Domain.Interfaces.Authentication;
-using CED.Domain.Users;
-using FluentResults;
+﻿using FluentResults;
 using MapsterMapper;
 using MediatR;
-using Microsoft.AspNetCore.Authentication;
+using TutorCenter.Application.Common.Errors.User;
+using TutorCenter.Domain.Interfaces.Authentication;
+using TutorCenter.Domain.Users.Repos;
 
-namespace CED.Application.Services.Authentication.RefreshToken;
+namespace TutorCenter.Application.Services.Authentication.RefreshToken;
 
 public class RefreshTokenQueryHandler: IRequestHandler<RefreshTokenQuery, Result<string> >
 {

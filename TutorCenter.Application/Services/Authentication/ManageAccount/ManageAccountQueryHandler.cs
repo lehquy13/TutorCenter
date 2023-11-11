@@ -1,12 +1,13 @@
-﻿using CED.Domain.Interfaces.Authentication;
-using CED.Domain.Users;
+﻿using FluentResults;
 using MediatR;
-using TutorCenter.Application.Contracts.Authentication;
+using TutorCenter.Application.Contracts.Authentications;
+using TutorCenter.Domain.Interfaces.Authentication;
+using TutorCenter.Domain.Users.Repos;
 
-namespace CED.Application.Services.Authentication.ManageAccount;
+namespace TutorCenter.Application.Services.Authentication.ManageAccount;
 
 public class ManageAccountQueryHandler
-    : IRequestHandler<ManageAccountQuery, AuthenticationResult>
+    : IRequestHandler<ManageAccountQuery, Result<AuthenticationResult>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IUserRepository _userRepository;
@@ -15,16 +16,16 @@ public class ManageAccountQueryHandler
         _jwtTokenGenerator = jwtTokenGenerator;
         _userRepository = userRepository;
     }
-    public async Task<AuthenticationResult> Handle(ManageAccountQuery query, CancellationToken cancellationToken)
+    public async Task<Result<AuthenticationResult>> Handle(ManageAccountQuery query, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
         //1. Check if user exist
         if (_jwtTokenGenerator.ValidateToken(query.Token) is false)
         {
-            return new AuthenticationResult(null,"",false, "User doesn't exist");
-            //throw new Exception("User with an email doesn't exist");
+            return Result.Fail("Token is invalid");
         }
-
+            //throw new Exception("User with an email doesn't exist");
+       
         //2. Check if logining with right password
 
         //if (user.Password != query.Password)
@@ -37,9 +38,7 @@ public class ManageAccountQueryHandler
         //    user.Id,
         //    user.FirstName,
         //    user.LastName);
-        return new AuthenticationResult(null, "", false, "User doesn't exist");
-
-        //return new AuthenticationResult(user, loginToken, true, "Login successfully");
+        return Result.Ok();
     }
 }
 

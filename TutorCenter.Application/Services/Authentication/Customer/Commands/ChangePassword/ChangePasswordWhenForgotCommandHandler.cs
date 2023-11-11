@@ -1,13 +1,14 @@
-﻿using CED.Domain.Interfaces.Authentication;
-using CED.Domain.Users;
+﻿using FluentResults;
 using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using TutorCenter.Application.Services.Authentication.Customer.Commands.ChangePassword;
+using TutorCenter.Domain.Interfaces.Authentication;
+using TutorCenter.Domain.Users;
+using TutorCenter.Domain.Users.Repos;
 
-namespace CED.Application.Services.Authentication.Customer.Commands.ChangePassword;
+namespace TutorCenter.Application.Services.Authentication.Customer.Commands.ChangePassword;
 
-public class ChangePasswordWhenForgotCommandHandler : IRequestHandler<ChangePasswordWhenForgotCommand, bool>
+public class ChangePasswordWhenForgotCommandHandler : IRequestHandler<ChangePasswordWhenForgotCommand, Result<bool>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IValidator _validator;
@@ -26,7 +27,7 @@ public class ChangePasswordWhenForgotCommandHandler : IRequestHandler<ChangePass
         _logger = logger;
         _mapper = mapper;
     }
-    public async Task<bool> Handle(ChangePasswordWhenForgotCommand command, CancellationToken cancellationToken)
+    public async Task<Result<bool>> Handle(ChangePasswordWhenForgotCommand command, CancellationToken cancellationToken)
     {
 
         //Check if the user existed

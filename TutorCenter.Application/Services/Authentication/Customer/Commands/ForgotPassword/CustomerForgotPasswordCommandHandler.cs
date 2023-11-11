@@ -1,12 +1,13 @@
-﻿using CED.Domain.Interfaces.Authentication;
-using CED.Domain.Users;
+﻿using FluentResults;
 using MediatR;
-using TutorCenter.Application.Contracts.Authentication;
+using TutorCenter.Application.Contracts.Authentications;
+using TutorCenter.Domain.Interfaces.Authentication;
+using TutorCenter.Domain.Users.Repos;
 
-namespace CED.Application.Services.Authentication.Customer.Commands.ForgotPassword;
+namespace TutorCenter.Application.Services.Authentication.Customer.Commands.ForgotPassword;
 
 public class CustomerForgotPasswordCommandHandler
-    : IRequestHandler<CustomerForgotPasswordCommand, AuthenticationResult>
+    : IRequestHandler<CustomerForgotPasswordCommand, Result<AuthenticationResult>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IUserRepository _userRepository;
@@ -16,10 +17,10 @@ public class CustomerForgotPasswordCommandHandler
         _jwtTokenGenerator = jwtTokenGenerator;
         _userRepository = userRepository;
     }
-    public async Task<AuthenticationResult> Handle(CustomerForgotPasswordCommand command, CancellationToken cancellationToken)
+    public async Task<Result<AuthenticationResult>> Handle(CustomerForgotPasswordCommand command, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        return new AuthenticationResult(null, "",false,"");
+        return Result.Fail("Not implemented");
     }
 }
 
