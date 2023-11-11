@@ -1,4 +1,4 @@
-namespace EduSmart.Domain.Repository;
+namespace TutorCenter.Domain.Repository;
 
 public interface IUnitOfWork
 {

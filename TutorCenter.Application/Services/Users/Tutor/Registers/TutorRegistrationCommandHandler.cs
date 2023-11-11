@@ -13,6 +13,7 @@ using TutorCenter.Domain;
 using TutorCenter.Domain.ClassInformationConsts;
 using TutorCenter.Domain.Courses.Repos;
 using TutorCenter.Domain.Interfaces.Services;
+using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Users;
 using TutorCenter.Domain.Users.Repos;
 

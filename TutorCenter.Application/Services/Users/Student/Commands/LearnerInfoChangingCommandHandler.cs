@@ -5,6 +5,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using TutorCenter.Domain.Interfaces.Services;
+using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Users;
 using TutorCenter.Domain.Users.Repos;
 

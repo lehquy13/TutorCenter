@@ -1,5 +1,6 @@
 using EduSmart.Domain.Repository;
 using Microsoft.Extensions.Logging;
+using TutorCenter.Domain.Repository;
 using TutorCenter.Infrastructure.Entity_Framework_Core;
 
 namespace TutorCenter.Infrastructure.Persistence;

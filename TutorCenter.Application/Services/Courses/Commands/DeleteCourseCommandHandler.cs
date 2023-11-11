@@ -13,6 +13,7 @@ using TutorCenter.Application.Services.Courses.Queries;
 using TutorCenter.Application.Services.Courses.Queries.GetAllCoursesQuery;
 using TutorCenter.Domain.Courses;
 using TutorCenter.Domain.Courses.Repos;
+using TutorCenter.Domain.Repository;
 
 namespace TutorCenter.Application.Services.Courses.Commands
 {

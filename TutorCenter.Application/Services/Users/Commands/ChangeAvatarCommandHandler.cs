@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using TutorCenter.Application.Services.Users.Commands;
 using TutorCenter.Domain.Interfaces.Services;
+using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Users.Repos;
 
 namespace CED.Application.Services.Users.Commands;

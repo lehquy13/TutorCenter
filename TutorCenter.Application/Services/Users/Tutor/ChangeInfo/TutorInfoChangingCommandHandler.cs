@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using TutorCenter.Application.Services.Users.Tutor.ChangeInfo;
 using TutorCenter.Domain.Interfaces.Services;
+using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Users;
 using TutorCenter.Domain.Users.Repos;
 

@@ -12,6 +12,7 @@ using TutorCenter.Domain.Courses.Repos;
 using TutorCenter.Domain.Interfaces.Authentication;
 using TutorCenter.Domain.Interfaces.Logger;
 using TutorCenter.Domain.Interfaces.Services;
+using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Users.Repos;
 using TutorCenter.Infrastructure.Authentication;
 using TutorCenter.Infrastructure.Entity_Framework_Core;

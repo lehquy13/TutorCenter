@@ -11,6 +11,7 @@ using TutorCenter.Application.Services.Abstractions.CommandHandlers;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Domain.Courses;
 using TutorCenter.Domain.Courses.Repos;
+using TutorCenter.Domain.Repository;
 
 namespace TutorCenter.Application.Services.Subjects.Commands;
 

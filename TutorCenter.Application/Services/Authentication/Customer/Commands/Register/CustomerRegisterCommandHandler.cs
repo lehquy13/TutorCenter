@@ -5,6 +5,7 @@ using MediatR;
 using TutorCenter.Application.Contracts.Authentications;
 using TutorCenter.Domain.ClassInformationConsts;
 using TutorCenter.Domain.Interfaces.Authentication;
+using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Users;
 using TutorCenter.Domain.Users.Repos;
 

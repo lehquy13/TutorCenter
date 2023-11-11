@@ -2,6 +2,7 @@
 using MediatR;
 using TutorCenter.Domain.Interfaces.Logger;
 using TutorCenter.Domain.Notifications;
+using TutorCenter.Domain.Repository;
 
 namespace TutorCenter.Application.Services.Courses.Commands;
 

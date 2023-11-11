@@ -4,6 +4,7 @@ using LazyCache;
 using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using TutorCenter.Domain.Repository;
 
 namespace TutorCenter.Application.Services.Abstractions.CommandHandlers;
 

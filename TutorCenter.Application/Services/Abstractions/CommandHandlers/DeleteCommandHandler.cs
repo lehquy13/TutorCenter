@@ -2,6 +2,7 @@
 using FluentResults;
 using LazyCache;
 using MediatR;
+using TutorCenter.Domain.Repository;
 
 namespace TutorCenter.Application.Services.Abstractions.CommandHandlers;
 

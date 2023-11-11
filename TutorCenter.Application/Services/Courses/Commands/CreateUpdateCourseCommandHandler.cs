@@ -14,6 +14,7 @@ using TutorCenter.Domain.Users.Repos;
 using TutorCenter.Domain.Courses.Repos;
 using TutorCenter.Domain.ClassInformationConsts;
 using TutorCenter.Domain.NotificationConsts;
+using TutorCenter.Domain.Repository;
 
 namespace TutorCenter.Application.Services.Courses.Commands;
 
