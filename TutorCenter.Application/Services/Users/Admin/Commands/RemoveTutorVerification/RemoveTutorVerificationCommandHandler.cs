@@ -1,11 +1,10 @@
-
 using FluentResults;
 using LazyCache;
 using MediatR;
 using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Users;
 
-namespace CED.Application.Services.Users.Admin.Commands;
+namespace TutorCenter.Application.Services.Users.Admin.Commands.RemoveTutorVerification;
 
 public class RemoveTutorVerificationCommandHandler : IRequestHandler<RemoveTutorVerificationCommand,Result<bool>>
 {

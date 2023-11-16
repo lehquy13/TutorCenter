@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using MediatR;
 
-namespace CED.Application.Services.Users.Admin.Commands;
+namespace TutorCenter.Application.Services.Users.Admin.Commands.DeleteUser;
 /// <summary>
 /// This command is used for admin to delete user
 /// </summary>

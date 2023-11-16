@@ -1,11 +1,10 @@
-using EduSmart.Domain.Repository;
 using FluentResults;
 using LazyCache;
 using MediatR;
 using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Review;
 
-namespace CED.Application.Services.Users.Admin.Commands;
+namespace TutorCenter.Application.Services.Users.Admin.Commands.RemoveTutorReview;
 
 public class RemoveTutorReviewCommandHandler : IRequestHandler<RemoveTutorReviewCommand,Result<bool>>
 {

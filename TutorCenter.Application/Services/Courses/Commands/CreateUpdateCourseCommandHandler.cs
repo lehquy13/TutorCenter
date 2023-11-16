@@ -9,7 +9,6 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using EduSmart.Domain.Repository;
 using TutorCenter.Domain.Users.Repos;
 using TutorCenter.Domain.Courses.Repos;
 using TutorCenter.Domain.ClassInformationConsts;

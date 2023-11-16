@@ -14,7 +14,7 @@ public class CourseRepository : Repository<Course>, ICourseRepository
 
     public override async Task<Course?> GetById(int id)
     {
-        var result = await AppDbContext.Courses
+        var result = await Context.Courses
             .Where(x => x.Id == id)
             .Include(x => x.CourseRequests)
             //.Include(x => x.TutorReviews)
@@ -26,7 +26,7 @@ public class CourseRepository : Repository<Course>, ICourseRepository
     }
     public async Task<Course?> GetLearningCourseById(int id)
     {
-        var result = await AppDbContext.Courses
+        var result = await Context.Courses
             .Where(x => x.Id == id)
             .Include(x => x.CourseRequests)
             .Include(x => x.Subject)
@@ -40,7 +40,7 @@ public class CourseRepository : Repository<Course>, ICourseRepository
 
     public async Task<List<Course>> GetAllTeachingClassesOfTutor(int tutorId)
     {
-        var result = await AppDbContext.Courses
+        var result = await Context.Courses
             //.Where(x => x.TutorId == tutorId && x.Status == Status.Confirmed)
             .Include(x => x.ReviewDetail)
             .OrderByDescending(x => x.CreationTime)
@@ -51,7 +51,7 @@ public class CourseRepository : Repository<Course>, ICourseRepository
 
     public async Task<List<Course>> GetLearningCoursesByUserId(int learnerId)
     {
-        var result = await AppDbContext.Courses
+        var result = await Context.Courses
             .Where(x => x.LearnerId == learnerId && x.IsDeleted == false)
             .Include(x => x.Subject)
             .Include(x => x.CourseRequests.Where(cr => cr.RequestStatus == RequestStatus.Success))
@@ -64,7 +64,7 @@ public class CourseRepository : Repository<Course>, ICourseRepository
 
     public async Task<List<CourseRequest>> GetAllCourseRequestsByTutorId(int tutorId)
     {
-        var result = await AppDbContext.Set<CourseRequest>()
+        var result = await Context.Set<CourseRequest>()
             .Where(x => x.TutorId == tutorId)
             .Include(x => x.Course)
             .ThenInclude(x => x.Subject)
@@ -74,7 +74,7 @@ public class CourseRepository : Repository<Course>, ICourseRepository
 
     public async Task<Course?> GetAllClassWithRequest(int classId)
     {
-        var result = await AppDbContext.Courses
+        var result = await Context.Courses
             .Where(x => x.Id == classId)
             .Include(x => x.CourseRequests)
             .Include(x => x.Subject)
@@ -85,14 +85,14 @@ public class CourseRepository : Repository<Course>, ICourseRepository
 
     public async Task<ReviewDetail?> GetReviewByClassId(int classId)
     {
-        var result = await AppDbContext.Courses.SingleOrDefaultAsync(x => x.Id == classId);
+        var result = await Context.Courses.SingleOrDefaultAsync(x => x.Id == classId);
         if (result != null) return result.ReviewDetail;
         return null;
     }
 
     public async Task<Course?> GetCourseByRequestId(int requestId)
     {
-        var result = await AppDbContext.CourseRequests
+        var result = await Context.CourseRequests
             .Include(x => x.Course)
             .SingleOrDefaultAsync(x => x.Id == requestId);
         return result?.Course;
@@ -100,7 +100,7 @@ public class CourseRepository : Repository<Course>, ICourseRepository
 
     public async Task<List<CourseRequest>> GetCourseRequestsByClassId(int classId)
     {
-        var result = await AppDbContext.CourseRequests
+        var result = await Context.CourseRequests
             .Where(x => x.CourseId == classId)
             // .Include(x => x.Tutor)
             .ToListAsync();

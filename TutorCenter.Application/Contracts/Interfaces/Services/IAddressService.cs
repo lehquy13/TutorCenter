@@ -1,4 +1,4 @@
-using CED.Contracts.Users;
+using TutorCenter.Application.Contracts.Users;
 
 namespace TutorCenter.Application.Contracts.Interfaces.Services;
 

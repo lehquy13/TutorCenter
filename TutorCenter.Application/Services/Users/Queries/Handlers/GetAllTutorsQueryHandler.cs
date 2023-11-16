@@ -1,5 +1,4 @@
-﻿using EduSmart.Domain.Repository;
-using MapsterMapper;
+﻿using MapsterMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +11,7 @@ using TutorCenter.Domain.Users.Repos;
 using TutorCenter.Domain.Users;
 using FluentResults;
 using TutorCenter.Application.Contracts;
+using TutorCenter.Domain.Repository;
 
 namespace TutorCenter.Application.Services.Users.Queries.Handlers
 { 

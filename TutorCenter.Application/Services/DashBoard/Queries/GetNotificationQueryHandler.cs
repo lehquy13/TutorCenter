@@ -1,9 +1,9 @@
-﻿using EduSmart.Domain.Repository;
-using FluentResults;
+﻿using FluentResults;
 using MapsterMapper;
 using TutorCenter.Application.Contracts.Notifications;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Domain.Notifications;
+using TutorCenter.Domain.Repository;
 
 namespace TutorCenter.Application.Services.DashBoard.Queries;
 

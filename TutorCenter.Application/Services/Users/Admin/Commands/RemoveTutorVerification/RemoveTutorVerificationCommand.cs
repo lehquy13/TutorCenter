@@ -1,6 +1,6 @@
 using FluentResults;
 using MediatR;
 
-namespace CED.Application.Services.Users.Admin.Commands;
+namespace TutorCenter.Application.Services.Users.Admin.Commands.RemoveTutorVerification;
 
 public record RemoveTutorVerificationCommand(int Guid) : IRequest<Result<bool>>;

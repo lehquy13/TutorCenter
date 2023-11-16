@@ -10,7 +10,7 @@ using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Users;
 using TutorCenter.Domain.Users.Repos;
 
-namespace CED.Application.Services.Users.Admin.Commands;
+namespace TutorCenter.Application.Services.Users.Admin.Commands.CreateUpdateUser;
 
 public class CreateUpdateUserCommandHandler : IRequestHandler<CreateUpdateUserCommand,Result<bool>>
 {

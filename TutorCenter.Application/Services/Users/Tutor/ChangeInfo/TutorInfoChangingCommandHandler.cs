@@ -1,16 +1,14 @@
-﻿
-using EduSmart.Domain.Repository;
-using FluentResults;
+﻿using FluentResults;
 using LazyCache;
 using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using TutorCenter.Application.Services.Users.Tutor.ChangeInfo;
 using TutorCenter.Domain.Interfaces.Services;
+using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Users;
 using TutorCenter.Domain.Users.Repos;
 
-namespace CED.Application.Services.Users.Tutor.ChangeInfo;
+namespace TutorCenter.Application.Services.Users.Tutor.ChangeInfo;
 
 public class TutorInfoChangingCommandHandler : IRequestHandler<TutorInfoChangingCommand, Result<bool>>
 {

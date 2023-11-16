@@ -1,22 +1,18 @@
-﻿
-using EduSmart.Domain.Repository;
-using FluentResults;
+﻿using FluentResults;
 using LazyCache;
-using Mapster;
 using MapsterMapper;
 using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Logging;
 using TutorCenter.Application.Common.Errors.User;
-using TutorCenter.Application.Services.Abstractions.CommandHandlers;
 using TutorCenter.Domain;
 using TutorCenter.Domain.ClassInformationConsts;
 using TutorCenter.Domain.Courses.Repos;
 using TutorCenter.Domain.Interfaces.Services;
+using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Users;
 using TutorCenter.Domain.Users.Repos;
 
-namespace CED.Application.Services.Users.Tutor.Registers;
+namespace TutorCenter.Application.Services.Users.Tutor.Registers;
 
 public class TutorRegisterCommandHandler : IRequestHandler<TutorRegistrationCommand,Result<bool>>
 {

@@ -7,7 +7,7 @@ using TutorCenter.Domain.NotificationConsts;
 using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Users.Repos;
 
-namespace CED.Application.Services.Users.Admin.Commands;
+namespace TutorCenter.Application.Services.Users.Admin.Commands.DeleteUser;
 
 public class DeleteUserCommandHandler
     : IRequestHandler<DeleteUserCommand,Result<bool>>

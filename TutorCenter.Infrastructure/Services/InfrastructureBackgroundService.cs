@@ -1,10 +1,10 @@
 using System.Text;
-using EduSmart.Domain.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using TutorCenter.Domain.Courses;
 using TutorCenter.Domain.Interfaces.Services;
+using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Subscribers;
 using TutorCenter.Domain.Users;
 using TutorCenter.Domain.Users.Repos;

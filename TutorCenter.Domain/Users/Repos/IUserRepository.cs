@@ -1,4 +1,4 @@
-﻿using EduSmart.Domain.Repository;
+﻿using TutorCenter.Domain.Repository;
 
 namespace TutorCenter.Domain.Users.Repos;
 

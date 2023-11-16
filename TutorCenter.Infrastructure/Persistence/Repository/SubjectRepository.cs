@@ -7,7 +7,7 @@ namespace TutorCenter.Infrastructure.Persistence.Repository;
 
 public class SubjectRepository : Repository<Subject>, ISubjectRepository
 {
-    public SubjectRepository(AppDbContext cEdDbContext) : base(cEdDbContext)
+    public SubjectRepository(AppDbContext appDbContext) : base(appDbContext)
     {
     }
 
@@ -15,7 +15,7 @@ public class SubjectRepository : Repository<Subject>, ISubjectRepository
     {
         try
         {
-            return await AppDbContext.Set<Subject>().FirstOrDefaultAsync(o => o.Name.ToLower() == name.ToLower());
+            return await Context.Set<Subject>().FirstOrDefaultAsync(o => o.Name.ToLower() == name.ToLower());
         }
         catch (Exception ex)
         {
@@ -28,7 +28,7 @@ public class SubjectRepository : Repository<Subject>, ISubjectRepository
         //throw new NotImplementedException();
         try
         {
-            return await AppDbContext.Tutors.Where(x => x.Id == tutorId)
+            return await Context.Tutors.Where(x => x.Id == tutorId)
                 .Include(x => x.Subjects)
                 .SelectMany(x => x.Subjects)
                 .ToListAsync();

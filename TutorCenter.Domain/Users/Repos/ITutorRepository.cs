@@ -1,5 +1,5 @@
-﻿using EduSmart.Domain.Repository;
-using TutorCenter.Domain.Courses;
+﻿using TutorCenter.Domain.Courses;
+using TutorCenter.Domain.Repository;
 
 namespace TutorCenter.Domain.Users.Repos;
 

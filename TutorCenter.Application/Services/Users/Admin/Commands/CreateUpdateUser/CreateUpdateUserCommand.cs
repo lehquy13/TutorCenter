@@ -2,7 +2,7 @@
 using MediatR;
 using TutorCenter.Application.Contracts.Users;
 
-namespace CED.Application.Services.Users.Admin.Commands;
+namespace TutorCenter.Application.Services.Users.Admin.Commands.CreateUpdateUser;
 
 public record CreateUpdateUserCommand
     (

@@ -1,4 +1,4 @@
-﻿namespace ESCenter.Application.Contracts.Courses;
+﻿namespace TutorCenter.Application.Contracts.Courses;
 
 public class ReviewCourseRequest
 {

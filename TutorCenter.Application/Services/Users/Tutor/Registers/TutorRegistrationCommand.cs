@@ -2,7 +2,7 @@
 using MediatR;
 using TutorCenter.Application.Contracts.Users.Tutors;
 
-namespace CED.Application.Services.Users.Tutor.Registers;
+namespace TutorCenter.Application.Services.Users.Tutor.Registers;
 
 public record TutorRegistrationCommand
 (

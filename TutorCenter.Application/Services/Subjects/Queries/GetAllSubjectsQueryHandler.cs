@@ -1,11 +1,11 @@
-﻿using EduSmart.Domain.Repository;
-using FluentResults;
+﻿using FluentResults;
 using MapsterMapper;
 using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Contracts.Subjects;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Domain.Courses;
 using TutorCenter.Domain.Courses.Repos;
+using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Users;
 
 namespace TutorCenter.Application.Services.Subjects.Queries;

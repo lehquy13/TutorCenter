@@ -1,4 +1,4 @@
-namespace CED.Contracts.Users;
+namespace TutorCenter.Application.Contracts.Users;
 
 public record AddressDto(List<CityDto> Cities);
 

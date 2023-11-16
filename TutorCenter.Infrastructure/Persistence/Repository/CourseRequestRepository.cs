@@ -13,7 +13,7 @@ public class CourseRequestRepository : Repository<CourseRequest>, ICourseRequest
 
     public async Task<bool> IsRequested(int tutorId, int classId)
     {
-        return await AppDbContext.CourseRequests.Where(x => x.CourseId == classId /* && x.TutorId == tutorId*/).AnyAsync();
+        return await Context.CourseRequests.Where(x => x.CourseId == classId /* && x.TutorId == tutorId*/).AnyAsync();
 
     }
 }

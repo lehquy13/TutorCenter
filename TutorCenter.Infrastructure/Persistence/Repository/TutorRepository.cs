@@ -18,7 +18,7 @@ public class TutorRepository : Repository<Tutor>, ITutorRepository
         try
         {
             //TODO: still lack of tutor learning class
-            var tutor = await AppDbContext.Tutors
+            var tutor = await Context.Tutors
                 .Where(o => o.Id == id && o.IsDeleted == false)
                 .Include(x => x.Subjects)
                 .Include(x => x.TutorVerificationInfos)
@@ -38,7 +38,7 @@ public class TutorRepository : Repository<Tutor>, ITutorRepository
     {
         try
         {
-            return await AppDbContext.Tutors
+            return await Context.Tutors
                 .Where(x => x.IsDeleted == false)
                 .Include(x => x.Subjects)
                 .Include(x => x.TutorVerificationInfos)
@@ -55,7 +55,7 @@ public class TutorRepository : Repository<Tutor>, ITutorRepository
     {
         try
         {
-            return await AppDbContext.Tutors.FirstOrDefaultAsync(o => o.Email == email);
+            return await Context.Tutors.FirstOrDefaultAsync(o => o.Email == email);
         }
         catch (Exception ex)
         {
@@ -66,7 +66,7 @@ public class TutorRepository : Repository<Tutor>, ITutorRepository
 
     public async Task<List<ReviewDetail>> GetReviewsOfTutor(int tutorId)
     {
-        var result = await AppDbContext.Courses
+        var result = await Context.Courses
             .Where(x => x.Status == Status.Confirmed && x.IsDeleted == false)
             .Include(x =>
                 x.CourseRequests.Where(cq => cq.TutorId == tutorId && cq.RequestStatus == RequestStatus.Success))
@@ -83,7 +83,7 @@ public class TutorRepository : Repository<Tutor>, ITutorRepository
             DateTime.Now.Month,
             1
         );
-        var result = await AppDbContext.CourseRequests
+        var result = await Context.CourseRequests
             .Where(x => x.RequestStatus == RequestStatus.Success)
             .Include(x => x.Course)
             .Where(x => x.Course.CreationTime > thisMonth)
