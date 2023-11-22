@@ -20,15 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Errors\" />
     <Folder Include="Services\Courses\Queries\GetTeachingClassDetailQuery\" />
-    <Folder Include="Services\Courses\Tutor\Commands\" />
-    <Folder Include="Services\Courses\Tutor\Queries\GetAllRequestGettingClassOfTutor\" />
-    <Folder Include="Services\Courses\Tutor\Queries\GetTeachingClassDetailQuery\" />
     <Folder Include="Services\SubscribeRegistration\Commands\" />
     <Folder Include="Services\Users\Queries\CustomerQueries\" />
     <Folder Include="Services\Users\Queries\GetTutorProfile\" />
-    <Folder Include="Services\Users\Queries\Handlers\" />
   </ItemGroup>
 
   <ItemGroup>

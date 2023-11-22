@@ -1,10 +1,5 @@
 ﻿using FluentResults;
 using MapsterMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TutorCenter.Application.Contracts.Users.Learners;
 using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
