@@ -8,5 +8,4 @@ public record ChangeAvatarCommand
 (
     int Id,
     IFormFile? File
-    ) : IRequest<Result<string>>;
-
+) : IRequest<Result<string>>;

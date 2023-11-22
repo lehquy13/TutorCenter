@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TutorCenter.Application.Services.Abstractions.QueryHandlers;
-using TutorCenter.Application.Contracts.Users.Tutors;
+﻿using FluentResults;
 using MediatR;
-using FluentResults;
+using TutorCenter.Application.Contracts.Users.Tutors;
 
-namespace TutorCenter.Application.Services.Users.Queries.GetTutorProfile
+namespace TutorCenter.Application.Services.Users.Queries.GetTutorProfile;
+
+public class GetTutorProfileQuery : IRequest<Result<TutorProfileDto>>
 {
-    public class GetTutorProfileQuery : IRequest<Result<TutorProfileDto>>
-    {
-        public int id { get; set; }
-        public GetTutorProfileQuery() { }
-    }
+    public int id { get; set; }
 }

@@ -6,6 +6,5 @@ namespace TutorCenter.Application.Services.Authentication.ManageAccount;
 
 public record ManageAccountQuery
 (
-   string Token
-    ) : IRequest<Result<AuthenticationResult>>;
-
+    string Token
+) : IRequest<Result<AuthenticationResult>>;

@@ -13,4 +13,3 @@ public class CustomerChangePasswordCommandCommandValidator : AbstractValidator<C
         RuleFor(x => x.ConfirmedPassword).NotEmpty();
     }
 }
-

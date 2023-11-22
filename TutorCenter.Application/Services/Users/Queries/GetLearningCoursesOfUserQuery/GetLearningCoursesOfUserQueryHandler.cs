@@ -1,14 +1,8 @@
 ﻿using FluentResults;
 using MapsterMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Contracts.Courses.Dtos;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
-using TutorCenter.Domain.ClassInformationConsts;
 using TutorCenter.Domain.Courses.Repos;
 using TutorCenter.Domain.Users.Repos;
 
@@ -31,16 +25,15 @@ public class GetLearningCoursesOfUserQueryHandler : GetAllQueryHandler<GetLearni
         _subjectRepository = subjectRepository;
         _userRepository = userRepository;
     }
-    public override async Task<Result<PaginatedList<CourseForListDto>>> Handle(GetLearningCoursesOfUserQuery query, CancellationToken cancellationToken)
+
+    public override async Task<Result<PaginatedList<CourseForListDto>>> Handle(GetLearningCoursesOfUserQuery query,
+        CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
         try
         {
             var student = await _userRepository.GetById(query.ObjectId);
-            if (student is null)
-            {
-                throw new Exception("The user does not exist!");
-            }
+            if (student is null) throw new Exception("The user does not exist!");
 
             var classInformations = await _courseRepository
                 .GetLearningCoursesByUserId(query.ObjectId);
@@ -54,8 +47,6 @@ public class GetLearningCoursesOfUserQueryHandler : GetAllQueryHandler<GetLearni
 
             var resultPaginatedList = PaginatedList<CourseForListDto>.CreateAsync(coursesDtos,
                 query.PageIndex, query.PageSize, coursesDtos.Count);
-
-
 
 
             return resultPaginatedList;

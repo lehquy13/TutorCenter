@@ -6,5 +6,4 @@ namespace TutorCenter.Application.Services.Authentication.RefreshToken;
 public record RefreshTokenQuery
 (
     string Email
-    ) : IRequest<Result<string>>;
-
+) : IRequest<Result<string>>;

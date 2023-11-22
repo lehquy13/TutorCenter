@@ -7,5 +7,4 @@ namespace TutorCenter.Application.Services.Authentication.Customer.Commands.Forg
 public record CustomerForgotPasswordCommand
 (
     string Email
-    ) : IRequest<Result<AuthenticationResult>>;
-
+) : IRequest<Result<AuthenticationResult>>;

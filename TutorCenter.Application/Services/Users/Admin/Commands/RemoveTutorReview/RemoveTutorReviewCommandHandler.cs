@@ -6,20 +6,20 @@ using TutorCenter.Domain.Review;
 
 namespace TutorCenter.Application.Services.Users.Admin.Commands.RemoveTutorReview;
 
-public class RemoveTutorReviewCommandHandler : IRequestHandler<RemoveTutorReviewCommand,Result<bool>>
+public class RemoveTutorReviewCommandHandler : IRequestHandler<RemoveTutorReviewCommand, Result<bool>>
 {
+    private readonly IAppCache _cache;
+    private readonly IPublisher _publisher;
     private readonly IRepository<TutorReview> _tutorReviewnRepository;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IPublisher _publisher;
-    private readonly IAppCache _cache;
 
     public RemoveTutorReviewCommandHandler(IRepository<TutorReview> tutorReviewnRepository, IUnitOfWork unitOfWork,
         IPublisher publisher, IAppCache cache)
     {
         _tutorReviewnRepository = tutorReviewnRepository;
-        this._unitOfWork = unitOfWork;
-        this._publisher = publisher;
-        this._cache = cache;
+        _unitOfWork = unitOfWork;
+        _publisher = publisher;
+        _cache = cache;
     }
 
     public async Task<Result<bool>> Handle(RemoveTutorReviewCommand command, CancellationToken cancellationToken)
@@ -29,12 +29,10 @@ public class RemoveTutorReviewCommandHandler : IRequestHandler<RemoveTutorReview
         if (await _tutorReviewnRepository.DeleteById(command.Guid))
         {
             if (await _unitOfWork.SaveChangesAsync(cancellationToken) <= 0)
-            {
                 return Result.Fail("Error while deleting tutor review");
-            }
             return true;
         }
-        return Result.Fail("Tutor review not found");
 
+        return Result.Fail("Tutor review not found");
     }
 }

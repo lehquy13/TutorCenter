@@ -10,6 +10,7 @@ namespace TutorCenter.Application.Services.DashBoard.Queries;
 public class GetDonutChartDataQueryHandler : GetByIdQueryHandler<GetDonutChartDataQuery, DonutChartData>
 {
     private readonly ICourseRepository _classInformationRepository;
+
     public GetDonutChartDataQueryHandler(IMapper mapper, ICourseRepository classInformationRepository) : base(mapper)
     {
         _classInformationRepository = classInformationRepository;
@@ -35,24 +36,18 @@ public class GetDonutChartDataQueryHandler : GetByIdQueryHandler<GetDonutChartDa
         var classInforsPie = _classInformationRepository.GetAll()
             .Where(x => x.IsDeleted == false && x.LastModificationTime >= startDay)
             .GroupBy(x => x.Status)
-            .Select((x) => new { key = x.Key.ToString(), count = x.Count()})
+            .Select(x => new { key = x.Key.ToString(), count = x.Count() })
             .ToList();
 
 
-        List<int> resultInts = classInforsPie
+        var resultInts = classInforsPie
             .Select(x => x.count)
             .ToList();
-        if (resultInts.Count <=0)
-        {
-            resultInts.Add(1);
-        }
-        List<string> resultStrings = classInforsPie
+        if (resultInts.Count <= 0) resultInts.Add(1);
+        var resultStrings = classInforsPie
             .Select(x => x.key)
             .ToList();
-        if (resultStrings.Count <= 0)
-        {
-            resultStrings.Add("None");
-        }
+        if (resultStrings.Count <= 0) resultStrings.Add("None");
 
         return new DonutChartData(resultInts, resultStrings);
     }

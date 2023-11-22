@@ -8,4 +8,3 @@ public record LoginQuery
 (
     string Email,
     string Password) : IRequest<Result<AuthenticationResult>>;
-

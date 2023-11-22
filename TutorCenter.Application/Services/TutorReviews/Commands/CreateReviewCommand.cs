@@ -11,6 +11,4 @@ public class CreateReviewCommand
     public string LearnerEmail { get; set; } = null!;
     public string TutorEmail { get; set; } = null!;
     public int ClassInformationId { get; set; }
-
 }
-

@@ -11,14 +11,15 @@ namespace TutorCenter.Application.Services.Authentication.Customer.Commands.Chan
 public class ChangePasswordWhenForgotCommandHandler : IRequestHandler<ChangePasswordWhenForgotCommand, Result<bool>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
-    private readonly IValidator _validator;
+    private readonly IMapper _mapper;
 
     private readonly IUserRepository _userRepository;
-    private readonly IMapper _mapper;
-    
+    private readonly IValidator _validator;
 
-    ILogger<ChangePasswordWhenForgotCommandHandler> _logger;
-    public ChangePasswordWhenForgotCommandHandler(IJwtTokenGenerator jwtTokenGenerator,IValidator validator,
+
+    private readonly ILogger<ChangePasswordWhenForgotCommandHandler> _logger;
+
+    public ChangePasswordWhenForgotCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IValidator validator,
         IUserRepository userRepository, ILogger<ChangePasswordWhenForgotCommandHandler> logger, IMapper mapper)
     {
         _jwtTokenGenerator = jwtTokenGenerator;
@@ -27,21 +28,20 @@ public class ChangePasswordWhenForgotCommandHandler : IRequestHandler<ChangePass
         _logger = logger;
         _mapper = mapper;
     }
+
     public async Task<Result<bool>> Handle(ChangePasswordWhenForgotCommand command, CancellationToken cancellationToken)
     {
-
         //Check if the user existed
-        if (await _userRepository.GetById(command.Id) is not User user  )
+        if (await _userRepository.GetById(command.Id) is not User user)
         {
             _logger.LogError("Can not change password. User doesn't exist");
             return false;
         }
-        
+
         user.Password = _validator.HashPassword(command.NewPassword);
-        
+
         var newUser = _userRepository.Update(user);
-        
+
         return true;
     }
 }
-

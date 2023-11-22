@@ -6,7 +6,6 @@ using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Contracts.Courses.Dtos;
 using TutorCenter.Application.Contracts.Users.Learners;
 using TutorCenter.Domain.Courses.Repos;
-using TutorCenter.Domain.Users;
 using TutorCenter.Domain.Users.Repos;
 
 namespace TutorCenter.Application.Services.Users.Student.Queries;
@@ -33,11 +32,8 @@ public class GetLearnerByIdQueryHandler : IRequestHandler<GetLearnerByIdQuery, R
     {
         try
         {
-            User? user = await _userRepository.GetById(query.Id);
-            if (user is null)
-            {
-                return Result.Fail(new NonExistUserError());
-            }
+            var user = await _userRepository.GetById(query.Id);
+            if (user is null) return Result.Fail(new NonExistUserError());
 
             var classInfors = await _classInformationRepository.GetLearningCoursesByUserId(user.Id);
 

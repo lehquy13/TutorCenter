@@ -14,19 +14,19 @@ using TutorCenter.Domain.Users.Repos;
 
 namespace TutorCenter.Application.Services.Users.Tutor.Registers;
 
-public class TutorRegisterCommandHandler : IRequestHandler<TutorRegistrationCommand,Result<bool>>
+public class TutorRegisterCommandHandler : IRequestHandler<TutorRegistrationCommand, Result<bool>>
 {
-    private readonly ITutorRepository _tutorRepository;
-    private readonly ISubjectRepository _subjectRepository;
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IAppCache _cache;
+    private readonly ICloudinaryFile _cloudinaryFile;
     private readonly ILogger<TutorRegisterCommandHandler> _logger;
     private readonly IMapper _mapper;
-    private readonly IAppCache _cache;
     private readonly IPublisher _publisher;
-    private readonly IRepository<TutorVerificationInfo> _tutorVerificationInfoRepository;
+    private readonly ISubjectRepository _subjectRepository;
     private readonly IRepository<TutorMajor> _tutorMajorInfoRepository;
+    private readonly ITutorRepository _tutorRepository;
+    private readonly IRepository<TutorVerificationInfo> _tutorVerificationInfoRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IUserRepository _userRepository;
-    private readonly ICloudinaryFile _cloudinaryFile;
 
     public TutorRegisterCommandHandler(IUserRepository userRepository,
         IRepository<TutorVerificationInfo> tutorVerificationInfoRepository,
@@ -39,11 +39,11 @@ public class TutorRegisterCommandHandler : IRequestHandler<TutorRegistrationComm
     {
         _userRepository = userRepository;
         _tutorRepository = tutorRepository;
-        this._unitOfWork = unitOfWork;
-        this._logger = logger;
-        this._mapper = mapper;
-        this._cache = cache;
-        this._publisher = publisher;
+        _unitOfWork = unitOfWork;
+        _logger = logger;
+        _mapper = mapper;
+        _cache = cache;
+        _publisher = publisher;
         _tutorMajorInfoRepository = tutorMajorInfoRepository;
         _cloudinaryFile = cloudinaryFile;
         _tutorVerificationInfoRepository = tutorVerificationInfoRepository;
@@ -60,26 +60,21 @@ public class TutorRegisterCommandHandler : IRequestHandler<TutorRegistrationComm
 
             var user = await _userRepository.GetById(command.TutorForRegistrationDto.Id);
 
-            if (user is null)
-            {
-                return Result.Fail(new NonExistUserError());
-            }
-            
-            var tutor = _mapper.Map<TutorCenter.Domain.Users.Tutor>(command.TutorForRegistrationDto);
+            if (user is null) return Result.Fail(new NonExistUserError());
+
+            var tutor = _mapper.Map<Domain.Users.Tutor>(command.TutorForRegistrationDto);
             tutor.Role = UserRole.Tutor;
             tutor.Description = command.TutorForRegistrationDto.Description;
             tutor.University = command.TutorForRegistrationDto.University;
             tutor.AcademicLevel = command.TutorForRegistrationDto.AcademicLevel.ToEnum<AcademicLevel>();
             tutor.IsVerified = false;
 
-             _userRepository.Delete(user);
-            var tutorToRegister = await _tutorRepository.Insert(tutor); 
+            _userRepository.Delete(user);
+            var tutorToRegister = await _tutorRepository.Insert(tutor);
 
             if (await _unitOfWork.SaveChangesAsync(cancellationToken) <= 0)
-            {
                 return Result.Fail("Fail to register new tutor");
-            }
-            
+
             foreach (var i in command.TutorForRegistrationDto.TutorVerificationInfoDtos)
             {
                 i.Image = _cloudinaryFile.UploadImage(i.Image);
@@ -91,29 +86,22 @@ public class TutorRegisterCommandHandler : IRequestHandler<TutorRegistrationComm
 
 
             if (command.TutorForRegistrationDto.Majors is { Count: > 0 })
-            {
                 foreach (var i in command.TutorForRegistrationDto.Majors)
                 {
                     var s = await _subjectRepository.GetSubjectByName(i);
 
-                    if (s == null)
-                    {
-                        continue;
-                    }
+                    if (s == null) continue;
 
-                    await _tutorMajorInfoRepository.Insert(new TutorMajor()
+                    await _tutorMajorInfoRepository.Insert(new TutorMajor
                     {
                         SubjectId = s.Id,
                         TutorId = tutorToRegister.Id
                     });
                 }
-            }
 
 
             if (await _unitOfWork.SaveChangesAsync(cancellationToken) <= 0)
-            {
                 return Result.Fail("Fail to save majors and verification info");
-            }
 
             _logger.LogInformation("Done");
             return true;

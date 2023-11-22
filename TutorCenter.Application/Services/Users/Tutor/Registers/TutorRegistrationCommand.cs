@@ -7,5 +7,4 @@ namespace TutorCenter.Application.Services.Users.Tutor.Registers;
 public record TutorRegistrationCommand
 (
     TutorForRegistrationDto TutorForRegistrationDto
-    ) : IRequest<Result<bool>>;
-
+) : IRequest<Result<bool>>;

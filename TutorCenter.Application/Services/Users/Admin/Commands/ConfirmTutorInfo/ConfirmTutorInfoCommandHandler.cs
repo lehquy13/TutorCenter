@@ -8,34 +8,34 @@ using TutorCenter.Domain.Users.Repos;
 
 namespace TutorCenter.Application.Services.Users.Admin.Commands.ConfirmTutorInfo;
 
-public class ConfirmTutorInfoCommandHandler :  IRequestHandler<ConfirmTutorInfoCommand,Result<bool>>
+public class ConfirmTutorInfoCommandHandler : IRequestHandler<ConfirmTutorInfoCommand, Result<bool>>
 {
-    private readonly ITutorRepository _userRepository;
+    private readonly IAppCache _cache;
     private readonly ILogger<ConfirmTutorInfoCommandHandler> _logger;
     private readonly IMapper _mapper;
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IPublisher _publisher;
-    private readonly IAppCache _cache;
+    private readonly IUnitOfWork _unitOfWork;
+
+    private readonly ITutorRepository _userRepository;
+
     //TODO: đổi IUnitOfWork namespace
     public ConfirmTutorInfoCommandHandler(ITutorRepository userRepository,
         ILogger<ConfirmTutorInfoCommandHandler> logger, IMapper mapper, IUnitOfWork unitOfWork, IPublisher publisher,
         IAppCache cache)
     {
         _userRepository = userRepository;
-        this._logger = logger;
-        this._mapper = mapper;
-        this._unitOfWork = unitOfWork;
-        this._publisher = publisher;
-        this._cache = cache;
+        _logger = logger;
+        _mapper = mapper;
+        _unitOfWork = unitOfWork;
+        _publisher = publisher;
+        _cache = cache;
     }
+
     public async Task<Result<bool>> Handle(ConfirmTutorInfoCommand command, CancellationToken cancellationToken)
     {
         //Check if the user existed
         var user = await _userRepository.GetUserByEmail(command.TutorForDetailDto.Email);
-        if (user is null)
-        {
-            throw new Exception("Tutor with an email doesn't exist");
-        }
+        if (user is null) throw new Exception("Tutor with an email doesn't exist");
         //if (user.Role != UserRole.Tutor) return false;
 
         command.TutorForDetailDto.IsVerified = true;
@@ -43,9 +43,8 @@ public class ConfirmTutorInfoCommandHandler :  IRequestHandler<ConfirmTutorInfoC
 
         var afterUpdatedUser = _userRepository.Update(user);
 
-        if (afterUpdatedUser is null) { return false; }
+        if (afterUpdatedUser is null) return false;
 
         return true;
     }
 }
-

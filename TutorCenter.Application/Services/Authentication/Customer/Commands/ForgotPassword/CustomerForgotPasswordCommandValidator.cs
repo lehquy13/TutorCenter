@@ -9,4 +9,3 @@ public class CustomerForgotPasswordCommandValidator : AbstractValidator<Customer
         RuleFor(x => x.Email).NotEmpty();
     }
 }
-

@@ -8,4 +8,3 @@ public record ChangePasswordWhenForgotCommand
     int Id,
     string NewPassword
 ) : IRequest<Result<bool>>;
-

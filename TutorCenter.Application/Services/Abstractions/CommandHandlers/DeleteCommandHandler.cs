@@ -9,9 +9,10 @@ public abstract class DeleteCommandHandler<TCommand>
     : IRequestHandler<TCommand, Result<bool>>
     where TCommand : IRequest<Result<bool>>
 {
-    protected readonly IUnitOfWork _unitOfWork;
     protected readonly IAppCache _cache;
     protected readonly IPublisher _publisher;
+    protected readonly IUnitOfWork _unitOfWork;
+
     public DeleteCommandHandler(IUnitOfWork unitOfWork, IAppCache cache, IPublisher publisher)
     {
         _unitOfWork = unitOfWork;
@@ -21,4 +22,3 @@ public abstract class DeleteCommandHandler<TCommand>
 
     public abstract Task<Result<bool>> Handle(TCommand command, CancellationToken cancellationToken);
 }
-

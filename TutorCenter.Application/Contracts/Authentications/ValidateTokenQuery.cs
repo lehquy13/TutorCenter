@@ -4,4 +4,3 @@ public record ValidateTokenQuery
 (
     string ValidateToken
 );
-

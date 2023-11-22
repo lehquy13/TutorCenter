@@ -9,5 +9,4 @@ public record TutorInfoChangingCommand
     TutorBasicDto TutorDto,
     List<int> SubjectIds,
     List<string> FilePaths
-    ) : IRequest<Result<bool>>;
-
+) : IRequest<Result<bool>>;

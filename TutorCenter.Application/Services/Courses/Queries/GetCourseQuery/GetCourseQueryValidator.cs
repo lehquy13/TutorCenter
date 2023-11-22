@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace TutorCenter.Application.Services.Courses.Queries.GetCourseQuery;
 
-namespace TutorCenter.Application.Services.Courses.Queries.GetCourseQuery
+internal class GetCourseQueryValidator
 {
-    internal class GetCourseQueryValidator
-    {
-    }
 }

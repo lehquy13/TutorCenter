@@ -1,24 +1,17 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TutorCenter.Application.Contracts.Users.Learners;
+﻿using FluentResults;
+using MediatR;
 using TutorCenter.Application.Contracts;
-using TutorCenter.Application.Services.Abstractions.QueryHandlers;
-using Microsoft.AspNetCore.Http.HttpResults;
-using FluentResults;
+using TutorCenter.Application.Contracts.Users.Learners;
 
-namespace TutorCenter.Application.Services.Users.Queries.Handlers
+namespace TutorCenter.Application.Services.Users.Queries.Handlers.GetAllStudents;
+
+public class GetAllStudentsQuery : IRequest<Result<PaginatedList<LearnerDto>>>
 {
-    public class GetAllStudentsQuery : IRequest<Result<PaginatedList<LearnerDto>>>
+    public GetAllStudentsQuery()
     {
-        public int PageIndex { get; set; }
-        public int PageSize { get; set; } = 100;
-        public GetAllStudentsQuery()
-        {
-            PageIndex = 1;
-        }
+        PageIndex = 1;
     }
+
+    public int PageIndex { get; set; }
+    public int PageSize { get; set; } = 100;
 }

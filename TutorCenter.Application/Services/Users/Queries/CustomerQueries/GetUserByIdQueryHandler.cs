@@ -1,42 +1,36 @@
 ﻿using FluentResults;
 using MapsterMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TutorCenter.Application.Common.Errors.User;
 using TutorCenter.Application.Contracts.Users;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Domain.Users.Repos;
-using TutorCenter.Domain.Users;
-using TutorCenter.Application.Common.Errors.User;
 
-namespace TutorCenter.Application.Services.Users.Queries.CustomerQueries
+namespace TutorCenter.Application.Services.Users.Queries.CustomerQueries;
+
+public class GetUserByIdQueryHandler : GetByIdQueryHandler<GetObjectQuery<UserForDetailDto>, UserForDetailDto>
 {
-    public class GetUserByIdQueryHandler : GetByIdQueryHandler<GetObjectQuery<UserForDetailDto>, UserForDetailDto>
+    private readonly IUserRepository _userRepository;
+
+    public GetUserByIdQueryHandler(IUserRepository userRepository,
+        IMapper mapper) : base(mapper)
     {
+        _userRepository = userRepository;
+    }
 
-        private readonly IUserRepository _userRepository;
-
-        public GetUserByIdQueryHandler(IUserRepository userRepository,
-            IMapper mapper) : base(mapper)
+    public override async Task<Result<UserForDetailDto>> Handle(GetObjectQuery<UserForDetailDto> query,
+        CancellationToken cancellationToken)
+    {
+        try
         {
-            _userRepository = userRepository;
+            var user = await _userRepository.GetById(query.ObjectId);
+            if (user is null) return Result.Fail(new NonExistUserError());
+            var result = _mapper.Map<UserForDetailDto>(user);
+
+            return result;
         }
-        public override async Task<Result<UserForDetailDto>> Handle(GetObjectQuery<UserForDetailDto> query, CancellationToken cancellationToken)
+        catch (Exception ex)
         {
-            try
-            {
-                User? user = await _userRepository.GetById(query.ObjectId);
-                if (user is null) { return Result.Fail(new NonExistUserError()); }
-                UserForDetailDto result = _mapper.Map<UserForDetailDto>(user);
-
-                return result;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            throw new Exception(ex.Message);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using TutorCenter.Application.Contracts.Models;
 
 namespace TutorCenter.Application.Contracts.Users;
+
 public class UserForListDto : FullAuditedAggregateRootDto<int>
 {
     //User information
@@ -18,6 +19,4 @@ public class UserForListDto : FullAuditedAggregateRootDto<int>
 
     //is tutor related informtions
     public string Role { get; set; } = "Learner";
-
 }
-

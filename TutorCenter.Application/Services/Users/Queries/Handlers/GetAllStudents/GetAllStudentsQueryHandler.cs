@@ -1,37 +1,36 @@
 ﻿using FluentResults;
 using MapsterMapper;
-using TutorCenter.Application.Contracts.Users.Learners;
 using TutorCenter.Application.Contracts;
+using TutorCenter.Application.Contracts.Users.Learners;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Domain.Users.Repos;
 
-namespace TutorCenter.Application.Services.Users.Queries.Handlers
+namespace TutorCenter.Application.Services.Users.Queries.Handlers.GetAllStudents;
+
+public class GetAllStudentsQueryHandler : GetAllQueryHandler<GetAllStudentsQuery, LearnerDto>
 {
-    public class GetAllStudentsQueryHandler : GetAllQueryHandler<GetAllStudentsQuery, LearnerDto>
+    private readonly IUserRepository _userRepository;
+
+    public GetAllStudentsQueryHandler(IUserRepository userRepository, IMapper mapper) : base(mapper)
     {
-        private readonly IUserRepository _userRepository;
+        _userRepository = userRepository;
+    }
 
-        public GetAllStudentsQueryHandler(IUserRepository userRepository, IMapper mapper) : base(mapper)
+    public override async Task<Result<PaginatedList<LearnerDto>>> Handle(GetAllStudentsQuery query,
+        CancellationToken cancellationToken)
+    {
+        await Task.CompletedTask;
+        try
         {
-            _userRepository = userRepository;
+            var users = await _userRepository.GetLearners();
+            var result = _mapper.Map<List<LearnerDto>>(users.Skip((query.PageIndex - 1) * query.PageSize)
+                .Take(query.PageSize).ToList());
+
+            return PaginatedList<LearnerDto>.CreateAsync(result, query.PageIndex, query.PageSize, users.Count);
         }
-
-        public override async Task<Result<PaginatedList<LearnerDto>>> Handle(GetAllStudentsQuery query,
-            CancellationToken cancellationToken)
+        catch (Exception ex)
         {
-            await Task.CompletedTask;
-            try
-            {
-                var users = await _userRepository.GetLearners();
-                var result = _mapper.Map<List<LearnerDto>>(users.Skip((query.PageIndex - 1) * query.PageSize).Take(query.PageSize).ToList());
-
-                return PaginatedList<LearnerDto>.CreateAsync(result, query.PageIndex, query.PageSize, users.Count);
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            throw new Exception(ex.Message);
         }
     }
 }

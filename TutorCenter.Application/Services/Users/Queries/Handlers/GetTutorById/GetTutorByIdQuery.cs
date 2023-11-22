@@ -1,18 +1,10 @@
 ﻿using FluentResults;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TutorCenter.Application.Contracts.Users.Tutors;
-using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 
-namespace TutorCenter.Application.Services.Users.Queries.Handlers
+namespace TutorCenter.Application.Services.Users.Queries.Handlers.GetTutorById;
+
+public class GetTutorByIdQuery : IRequest<Result<TutorForDetailDto>>
 {
-    public class GetTutorByIdQuery : IRequest<Result<TutorForDetailDto>>
-    {
-       public int ObjectId { get; set; }
-        public GetTutorByIdQuery() { }
-    }
+    public int ObjectId { get; set; }
 }

@@ -8,5 +8,4 @@ public record LearnerInfoChangingCommand
 (
     LearnerForUpdateDto LearnerDto,
     string? FilePath
-    ) : IRequest<Result<bool>>;
-
+) : IRequest<Result<bool>>;

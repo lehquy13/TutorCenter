@@ -5,5 +5,4 @@ namespace TutorCenter.Application.Services.Subjects.Queries;
 
 public class GetAllSubjectsQuery : IRequest<List<SubjectDto>>
 {
-
 }

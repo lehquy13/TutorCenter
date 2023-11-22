@@ -10,5 +10,4 @@ public record CustomerChangePasswordCommand
     string CurrentPassword,
     string NewPassword,
     string ConfirmedPassword
-    ) : IRequest<Result<AuthenticationResult>>;
-
+) : IRequest<Result<AuthenticationResult>>;

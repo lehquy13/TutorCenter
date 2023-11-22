@@ -24,7 +24,7 @@ public class CourseDto : FullAuditedAggregateRootDto<int>
     public int NumberOfLearner { get; set; } = 1;
     public string ContactNumber { get; set; } = string.Empty;
     public int? LearnerId { get; set; }
-   
+
     // Time related information
     public int MinutePerSession { get; set; } = 90;
     public int SessionPerWeek { get; set; } = 2;
@@ -34,13 +34,10 @@ public class CourseDto : FullAuditedAggregateRootDto<int>
 
     //Subject related information
     public int SubjectId { get; set; }
-    public SubjectDto SubjectDto { get; set; }= null!;
-    
-  
+    public SubjectDto SubjectDto { get; set; } = null!;
+
 
     //Request of class
     public List<CourseRequestDto> CourseRequestDtos { get; set; } = new();
     public ReviewDetailDto ReviewDetailDtos { get; set; } = new();
 }
-
-

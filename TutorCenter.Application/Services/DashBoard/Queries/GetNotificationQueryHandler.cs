@@ -11,9 +11,9 @@ public class GetNotificationQueryHandler : GetByIdQueryHandler<GetNotificationQu
 {
     private readonly IRepository<Notification> _notificationRepository;
 
-    public GetNotificationQueryHandler(IMapper mapper, 
+    public GetNotificationQueryHandler(IMapper mapper,
         IRepository<Notification> notificationRepository
-        ) :
+    ) :
         base(mapper)
     {
         _notificationRepository = notificationRepository;
@@ -29,4 +29,4 @@ public class GetNotificationQueryHandler : GetByIdQueryHandler<GetNotificationQu
         var notiDtoList = _mapper.Map<List<NotificationDto>>(notiList);
         return notiDtoList;
     }
-}  
+}

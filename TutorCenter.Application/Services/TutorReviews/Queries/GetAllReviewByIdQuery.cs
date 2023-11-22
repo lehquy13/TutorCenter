@@ -6,5 +6,4 @@ namespace TutorCenter.Application.Services.TutorReviews.Queries;
 
 public class GetAllReviewByIdQuery : GetObjectQuery<PaginatedList<TutorReviewDto>>
 {
-    
 }

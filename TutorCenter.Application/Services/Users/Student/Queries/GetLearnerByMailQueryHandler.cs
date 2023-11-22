@@ -12,9 +12,9 @@ namespace TutorCenter.Application.Services.Users.Student.Queries;
 
 public class GetLearnerByMailQueryHandler : IRequestHandler<GetLearnerByMailQuery, Result<LearnerDto>>
 {
-    private readonly IUserRepository _userRepository;
     private readonly ICourseRepository _classInformationRepository;
     private readonly IMapper _mapper;
+    private readonly IUserRepository _userRepository;
 
     public GetLearnerByMailQueryHandler(ICourseRepository classInformationRepository,
         IMapper mapper, IUserRepository userRepository)
@@ -31,10 +31,7 @@ public class GetLearnerByMailQueryHandler : IRequestHandler<GetLearnerByMailQuer
         {
             var user = await _userRepository.GetUserByEmail(query.Email);
 
-            if (user is null)
-            {
-                return Result.Fail(new NonExistUserError());
-            }
+            if (user is null) return Result.Fail(new NonExistUserError());
 
             var classInfors = await _classInformationRepository.GetLearningCoursesByUserId(user.Id);
 

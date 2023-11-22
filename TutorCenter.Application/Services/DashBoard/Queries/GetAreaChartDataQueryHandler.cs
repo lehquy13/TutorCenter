@@ -23,14 +23,14 @@ public class GetAreaChartDataQueryHandler : GetByIdQueryHandler<GetAreaChartData
         await Task.CompletedTask;
 
         // Create a dateListRange by the query.ByTime
-        List<int> dates = new List<int>();
+        var dates = new List<int>();
 
         var startDay = DateTime.Today.Subtract(TimeSpan.FromDays(6));
         switch (query.ByTime)
         {
             case ByTime.Month:
                 startDay = DateTime.Today.Subtract(TimeSpan.FromDays(29));
-                for (int i = 0; i < 30; i++)
+                for (var i = 0; i < 30; i++)
                 {
                     dates.Add(startDay.Day);
                     startDay = startDay.AddDays(1);
@@ -38,7 +38,7 @@ public class GetAreaChartDataQueryHandler : GetByIdQueryHandler<GetAreaChartData
 
                 break;
             case ByTime.Week:
-                for (int i = 0; i < 7; i++)
+                for (var i = 0; i < 7; i++)
                 {
                     dates.Add(startDay.Day);
                     startDay = startDay.AddDays(1);
@@ -85,37 +85,25 @@ public class GetAreaChartDataQueryHandler : GetByIdQueryHandler<GetAreaChartData
             });
 
 
-        List<float> resultInts = confirmedClasses
+        var resultInts = confirmedClasses
             .Select(x => x.sum)
             .ToList();
-        if (resultInts.Count <= 0)
-        {
-            resultInts.Add(1);
-        }
+        if (resultInts.Count <= 0) resultInts.Add(1);
 
-        List<float> resultInts1 = canceledClasses
+        var resultInts1 = canceledClasses
             .Select(x => x.sum)
             .ToList();
-        if (resultInts1.Count <= 0)
-        {
-            resultInts1.Add(1);
-        }
+        if (resultInts1.Count <= 0) resultInts1.Add(1);
 
-        List<float> resultInts2 = onPurchasingClasses
+        var resultInts2 = onPurchasingClasses
             .Select(x => x.sum)
             .ToList();
-        if (resultInts2.Count <= 0)
-        {
-            resultInts2.Add(1);
-        }
+        if (resultInts2.Count <= 0) resultInts2.Add(1);
 
         var resultStrings = dates
             .Select(x => x.ToString()).ToList();
-        
-        if (resultStrings.Count <= 0)
-        {
-            resultStrings.Add("None");
-        }
+
+        if (resultStrings.Count <= 0) resultStrings.Add("None");
 
 
         return new AreaChartData

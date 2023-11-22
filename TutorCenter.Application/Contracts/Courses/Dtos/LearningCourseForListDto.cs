@@ -20,6 +20,7 @@ public sealed class LearningCourseForListDto : BasicAuditedEntityDto<int>
     //Student related information
     public string LearnerGender { get; set; } = "None";
     public int NumberOfLearner { get; set; } = 1;
+
     public string ContactNumber { get; set; } = string.Empty;
     //public int? LearnerId { get; set; }
 
@@ -33,10 +34,9 @@ public sealed class LearningCourseForListDto : BasicAuditedEntityDto<int>
     //Subject related information
     public int SubjectId { get; set; }
     public string SubjectName { get; set; } = string.Empty;
-    
+
     //Tutor related information
     public int TutorId { get; set; }
     public string TutorName { get; set; } = string.Empty;
     public string TutorPhoneNumber { get; set; } = string.Empty;
-  
 }

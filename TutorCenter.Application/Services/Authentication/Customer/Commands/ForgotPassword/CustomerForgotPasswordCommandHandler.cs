@@ -11,16 +11,18 @@ public class CustomerForgotPasswordCommandHandler
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IUserRepository _userRepository;
+
     public CustomerForgotPasswordCommandHandler(IJwtTokenGenerator jwtTokenGenerator,
         IUserRepository userRepository)
     {
         _jwtTokenGenerator = jwtTokenGenerator;
         _userRepository = userRepository;
     }
-    public async Task<Result<AuthenticationResult>> Handle(CustomerForgotPasswordCommand command, CancellationToken cancellationToken)
+
+    public async Task<Result<AuthenticationResult>> Handle(CustomerForgotPasswordCommand command,
+        CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
         return Result.Fail("Not implemented");
     }
 }
-

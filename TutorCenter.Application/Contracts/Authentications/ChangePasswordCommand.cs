@@ -7,4 +7,3 @@ public record ChangePasswordCommand
     string NewPassword,
     string ConfirmedPassword
 );
-

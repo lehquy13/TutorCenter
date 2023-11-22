@@ -7,7 +7,7 @@ public class ValidateTokenQueryHandler
     : IRequestHandler<ValidateTokenQuery, bool>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
-    
+
     public ValidateTokenQueryHandler(IJwtTokenGenerator jwtTokenGenerator)
     {
         _jwtTokenGenerator = jwtTokenGenerator;
@@ -19,4 +19,3 @@ public class ValidateTokenQueryHandler
         return _jwtTokenGenerator.ValidateToken(query.ValidateToken);
     }
 }
-

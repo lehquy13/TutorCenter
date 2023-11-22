@@ -11,21 +11,21 @@ public class ManageAccountQueryHandler
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IUserRepository _userRepository;
+
     public ManageAccountQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
     {
         _jwtTokenGenerator = jwtTokenGenerator;
         _userRepository = userRepository;
     }
-    public async Task<Result<AuthenticationResult>> Handle(ManageAccountQuery query, CancellationToken cancellationToken)
+
+    public async Task<Result<AuthenticationResult>> Handle(ManageAccountQuery query,
+        CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
         //1. Check if user exist
-        if (_jwtTokenGenerator.ValidateToken(query.Token) is false)
-        {
-            return Result.Fail("Token is invalid");
-        }
-            //throw new Exception("User with an email doesn't exist");
-       
+        if (_jwtTokenGenerator.ValidateToken(query.Token) is false) return Result.Fail("Token is invalid");
+        //throw new Exception("User with an email doesn't exist");
+
         //2. Check if logining with right password
 
         //if (user.Password != query.Password)
@@ -41,4 +41,3 @@ public class ManageAccountQueryHandler
         return Result.Ok();
     }
 }
-
