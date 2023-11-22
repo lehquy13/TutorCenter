@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using MapsterMapper;
+using MediatR;
 using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Contracts.Subjects;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
@@ -9,23 +10,21 @@ using TutorCenter.Domain.Users;
 
 namespace TutorCenter.Application.Services.Subjects.Queries;
 
-public class
-    GetAllSubjectsQueryHandler : GetAllQueryHandler<GetObjectQuery<PaginatedList<SubjectDto>>,
-        SubjectDto> // không nên như này
-//public class GetAllSubjectsQueryHandler : GetAllQueryHandler<GetAllSubjectsQuery, SubjectDto>// nên như này
+public class GetAllSubjectsQueryHandler : IRequestHandler<GetAllSubjectsQuery, Result<List<SubjectDto>>>
 {
     private readonly ISubjectRepository _subjectRepository;
     private readonly IRepository<TutorMajor> _tutorMajorRepository;
+    private readonly IMapper _mapper;
 
     public GetAllSubjectsQueryHandler(ISubjectRepository subjectRepository,
-        IRepository<TutorMajor> tutorMajorRepository, IMapper mapper) : base(mapper)
+        IRepository<TutorMajor> tutorMajorRepository, IMapper mapper)
     {
         _subjectRepository = subjectRepository;
         _tutorMajorRepository = tutorMajorRepository;
+        _mapper = mapper;
     }
 
-    public override async Task<Result<PaginatedList<SubjectDto>>> Handle(
-        GetObjectQuery<PaginatedList<SubjectDto>> query, CancellationToken cancellationToken)
+    public async Task<Result<List<SubjectDto>>> Handle(GetAllSubjectsQuery query, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
         try
@@ -41,8 +40,7 @@ public class
 
             var totalSubjects = subjects.Count;
 
-            return PaginatedList<SubjectDto>.CreateAsync(_mapper.Map<List<SubjectDto>>(subjects), query.PageIndex,
-                query.PageSize, totalSubjects);
+            return _mapper.Map<List<SubjectDto>>(subjects);
         }
         catch (Exception ex)
         {
