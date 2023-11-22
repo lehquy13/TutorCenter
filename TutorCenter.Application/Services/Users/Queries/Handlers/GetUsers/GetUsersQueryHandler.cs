@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using MapsterMapper;
+using MediatR;
 using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Contracts.Users;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
@@ -7,16 +8,18 @@ using TutorCenter.Domain.Users.Repos;
 
 namespace TutorCenter.Application.Services.Users.Queries.Handlers.GetUsers;
 
-public class GetUsersQueryHandler : GetAllQueryHandler<GetUsersQuery, UserDto>
+public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, Result<PaginatedList<UserDto>>>
 {
     private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
 
-    public GetUsersQueryHandler(IUserRepository userRepository, IMapper mapper) : base(mapper)
+    public GetUsersQueryHandler(IUserRepository userRepository, IMapper mapper)
     {
         _userRepository = userRepository;
+        _mapper = mapper;
     }
 
-    public override async Task<Result<PaginatedList<UserDto>>> Handle(GetUsersQuery query,
+    public async Task<Result<PaginatedList<UserDto>>> Handle(GetUsersQuery query,
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;

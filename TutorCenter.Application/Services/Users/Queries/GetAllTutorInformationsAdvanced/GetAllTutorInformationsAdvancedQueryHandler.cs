@@ -9,7 +9,7 @@ using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Users;
 using TutorCenter.Domain.Users.Repos;
 
-namespace TutorCenter.Application.Services.Users.Queries.CustomerQueries;
+namespace TutorCenter.Application.Services.Users.Queries.GetAllTutorInformationsAdvanced;
 
 public class
     GetAllTutorInformationsAdvancedQueryHandler

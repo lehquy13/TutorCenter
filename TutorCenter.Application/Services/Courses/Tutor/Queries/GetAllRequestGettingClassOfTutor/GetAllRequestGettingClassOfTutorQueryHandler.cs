@@ -1,31 +1,32 @@
 ﻿using FluentResults;
 using MapsterMapper;
+using MediatR;
 using TutorCenter.Application.Common.Errors.User;
 using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Contracts.Courses.Dtos;
-using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Domain.Courses.Repos;
 using TutorCenter.Domain.Users.Repos;
 
 namespace TutorCenter.Application.Services.Courses.Tutor.Queries.GetAllRequestGettingClassOfTutor;
 
-public class
-    GetAllRequestGettingClassOfTutorQueryHandler : GetAllQueryHandler<GetAllRequestGettingClassOfTutorQuery,
-        RequestGettingClassForListDto>
+public class GetAllRequestGettingClassOfTutorQueryHandler
+    : IRequestHandler<GetAllRequestGettingClassOfTutorQuery, Result<PaginatedList<RequestGettingClassForListDto>>>
 {
     private readonly ICourseRepository _courseRepository;
     private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
 
     public GetAllRequestGettingClassOfTutorQueryHandler(
         ICourseRepository courseRepository,
         IUserRepository userRepository,
-        IMapper mapper) : base(mapper)
+        IMapper mapper)
     {
         _courseRepository = courseRepository;
         _userRepository = userRepository;
+        _mapper = mapper;
     }
 
-    public override async Task<Result<PaginatedList<RequestGettingClassForListDto>>> Handle(
+    public async Task<Result<PaginatedList<RequestGettingClassForListDto>>> Handle(
         GetAllRequestGettingClassOfTutorQuery query, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;

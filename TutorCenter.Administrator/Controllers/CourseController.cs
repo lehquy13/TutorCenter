@@ -11,7 +11,7 @@ using TutorCenter.Application.Contracts.Users.Learners;
 using TutorCenter.Application.Contracts.Users.Tutors;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Application.Services.Courses.Queries.GetAllCoursesQuery;
-using TutorCenter.Application.Services.Users.Queries.CustomerQueries;
+using TutorCenter.Application.Services.Users.Queries.GetAllTutorInformationsAdvanced;
 using TutorCenter.Domain;
 
 namespace TutorCenter.Administrator.Controllers;

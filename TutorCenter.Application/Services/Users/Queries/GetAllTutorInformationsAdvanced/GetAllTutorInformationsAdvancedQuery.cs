@@ -4,7 +4,7 @@ using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Contracts.Users.Tutors;
 using TutorCenter.Domain.ClassInformationConsts;
 
-namespace TutorCenter.Application.Services.Users.Queries.CustomerQueries;
+namespace TutorCenter.Application.Services.Users.Queries.GetAllTutorInformationsAdvanced;
 
 public class GetAllTutorInformationsAdvancedQuery : IRequest<Result<PaginatedList<TutorForListDto>>>
 {

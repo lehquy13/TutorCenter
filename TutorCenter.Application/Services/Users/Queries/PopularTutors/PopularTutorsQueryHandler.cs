@@ -5,7 +5,7 @@ using TutorCenter.Domain.ClassInformationConsts;
 using TutorCenter.Domain.Courses.Repos;
 using TutorCenter.Domain.Users.Repos;
 
-namespace TutorCenter.Application.Services.Users.Queries.CustomerQueries;
+namespace TutorCenter.Application.Services.Users.Queries.PopularTutors;
 
 public class PopularTutorsQueryHandler : IRequestHandler<PopularTutorsQuery, List<TutorForDetailDto>>
 {

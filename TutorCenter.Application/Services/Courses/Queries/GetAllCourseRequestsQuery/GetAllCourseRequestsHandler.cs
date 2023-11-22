@@ -1,23 +1,26 @@
 ﻿using FluentResults;
 using MapsterMapper;
+using MediatR;
 using TutorCenter.Application.Contracts.Courses.Dtos;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Domain.Courses.Repos;
 
 namespace TutorCenter.Application.Services.Courses.Queries.GetAllCourseRequestsQuery;
 
-internal class GetAllCourseRequestsHandler : GetAllListQueryHandler<GetAllCourseRequests, CourseRequestDto>
+internal class GetAllCourseRequestsHandler : IRequestHandler<GetAllCourseRequests, Result<List<CourseRequestDto>>>
 {
     private readonly ICourseRepository _courseRepository;
+    private readonly IMapper _mapper;
 
     public GetAllCourseRequestsHandler(
         ICourseRepository courseRepository,
-        IMapper mapper) : base(mapper)
+        IMapper mapper)
     {
         _courseRepository = courseRepository;
+        _mapper = mapper;
     }
 
-    public override async Task<Result<List<CourseRequestDto>>> Handle(GetAllCourseRequests query,
+    public async Task<Result<List<CourseRequestDto>>> Handle(GetAllCourseRequests query,
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;

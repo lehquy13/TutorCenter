@@ -8,7 +8,7 @@ using TutorCenter.Application.Contracts.Users.Learners;
 using TutorCenter.Domain.Courses.Repos;
 using TutorCenter.Domain.Users.Repos;
 
-namespace TutorCenter.Application.Services.Users.Student.Queries;
+namespace TutorCenter.Application.Services.Users.Student.Queries.GetLearnerById;
 
 public class GetLearnerByIdQueryHandler : IRequestHandler<GetLearnerByIdQuery, Result<LearnerDto>>
 {

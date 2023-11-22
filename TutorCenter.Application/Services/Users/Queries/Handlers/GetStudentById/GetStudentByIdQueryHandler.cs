@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using MapsterMapper;
+using MediatR;
 using TutorCenter.Application.Common.Errors.User;
 using TutorCenter.Application.Contracts.Users.Learners;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
@@ -8,16 +9,18 @@ using TutorCenter.Domain.Users.Repos;
 namespace TutorCenter.Application.Services.Users.Queries.Handlers.GetStudentById;
 
 //Not using currently
-public class GetStudentByIdQueryHandler : GetByIdQueryHandler<GetStudentByIdQuery, LearnerDto>
+public class GetStudentByIdQueryHandler : IRequestHandler<GetStudentByIdQuery, Result<LearnerDto>>
 {
     private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
 
-    public GetStudentByIdQueryHandler(IUserRepository userRepository, IMapper mapper) : base(mapper)
+    public GetStudentByIdQueryHandler(IUserRepository userRepository, IMapper mapper)
     {
         _userRepository = userRepository;
+        _mapper = mapper;
     }
 
-    public override async Task<Result<LearnerDto>> Handle(GetStudentByIdQuery query,
+    public async Task<Result<LearnerDto>> Handle(GetStudentByIdQuery query,
         CancellationToken cancellationToken)
     {
         try

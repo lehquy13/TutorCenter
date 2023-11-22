@@ -1,28 +1,30 @@
 ﻿using FluentResults;
 using MapsterMapper;
+using MediatR;
 using TutorCenter.Application.Common.Errors.User;
 using TutorCenter.Application.Contracts.Users;
-using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Domain.Users.Repos;
 
-namespace TutorCenter.Application.Services.Users.Queries.CustomerQueries;
+namespace TutorCenter.Application.Services.Users.Queries.GetUserById;
 
-public class GetUserByIdQueryHandler : GetByIdQueryHandler<GetObjectQuery<UserForDetailDto>, UserForDetailDto>
+public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, Result<UserForDetailDto>>
 {
     private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
 
     public GetUserByIdQueryHandler(IUserRepository userRepository,
-        IMapper mapper) : base(mapper)
+        IMapper mapper)
     {
         _userRepository = userRepository;
+        _mapper = mapper;
     }
 
-    public override async Task<Result<UserForDetailDto>> Handle(GetObjectQuery<UserForDetailDto> query,
+    public async Task<Result<UserForDetailDto>> Handle(GetUserByIdQuery query,
         CancellationToken cancellationToken)
     {
         try
         {
-            var user = await _userRepository.GetById(query.ObjectId);
+            var user = await _userRepository.GetById(query.Id);
             if (user is null) return Result.Fail(new NonExistUserError());
             var result = _mapper.Map<UserForDetailDto>(user);
 

@@ -22,7 +22,6 @@
     <ItemGroup>
         <Folder Include="Services\Courses\Queries\GetTeachingClassDetailQuery\"/>
         <Folder Include="Services\SubscribeRegistration\Commands\"/>
-        <Folder Include="Services\Users\Queries\CustomerQueries\"/>
         <Folder Include="Services\Users\Queries\GetTutorProfile\"/>
     </ItemGroup>
 

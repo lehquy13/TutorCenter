@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using MapsterMapper;
+using MediatR;
 using TutorCenter.Application.Common.Errors.Courses;
 using TutorCenter.Application.Contracts.Courses.Dtos;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
@@ -8,19 +9,21 @@ using TutorCenter.Domain.Courses.Repos;
 namespace TutorCenter.Application.Services.Courses.Tutor.Queries.GetTeachingClassDetailQuery;
 
 public class GetTeachingClassDetailQueryHandler
-    : GetByIdQueryHandler<GetTeachingClassDetailQuery, RequestGettingClassExtendDto>
+    : IRequestHandler<GetTeachingClassDetailQuery, Result<RequestGettingClassExtendDto>>
 
 {
     private readonly ICourseRepository _courseRepository;
+    private readonly IMapper _mapper;
 
     public GetTeachingClassDetailQueryHandler(
         ICourseRepository classInformationRepository,
-        IMapper mapper) : base(mapper)
+        IMapper mapper)
     {
         _courseRepository = classInformationRepository;
+        _mapper = mapper;
     }
 
-    public override async Task<Result<RequestGettingClassExtendDto>> Handle(GetTeachingClassDetailQuery query,
+    public async Task<Result<RequestGettingClassExtendDto>> Handle(GetTeachingClassDetailQuery query,
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;

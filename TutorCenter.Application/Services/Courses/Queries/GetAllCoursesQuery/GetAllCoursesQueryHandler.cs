@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using MapsterMapper;
+using MediatR;
 using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Contracts.Courses.Dtos;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
@@ -9,25 +10,26 @@ using TutorCenter.Domain.Users.Repos;
 
 namespace TutorCenter.Application.Services.Courses.Queries.GetAllCoursesQuery;
 
-public class GetAllCoursesQueryHandler : GetAllQueryHandler<GetAllCoursesQuery, CourseForListDto>
+public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQuery, Result<PaginatedList<CourseForListDto>>>
 {
     private readonly ICourseRepository _courseRepository;
     private readonly ISubjectRepository _subjectRepository;
     private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
 
     public GetAllCoursesQueryHandler(
         ICourseRepository courseRepository,
         ISubjectRepository subjectRepository,
         IUserRepository userRepository,
-        IMapper mapper
-    ) : base(mapper)
+        IMapper mapper)
     {
         _courseRepository = courseRepository;
         _subjectRepository = subjectRepository;
         _userRepository = userRepository;
+        _mapper = mapper;
     }
 
-    public override async Task<Result<PaginatedList<CourseForListDto>>> Handle(GetAllCoursesQuery query,
+    public async Task<Result<PaginatedList<CourseForListDto>>> Handle(GetAllCoursesQuery query,
         CancellationToken cancellationToken)
     {
         await Task.CompletedTask;

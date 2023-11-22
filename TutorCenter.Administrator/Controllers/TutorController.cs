@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Contracts.Users.Tutors;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
-using TutorCenter.Application.Services.Users.Queries.CustomerQueries;
+using TutorCenter.Application.Services.Users.Queries.GetAllTutorInformationsAdvanced;
 using TutorCenter.Domain;
 
 namespace TutorCenter.Administrator.Controllers;
