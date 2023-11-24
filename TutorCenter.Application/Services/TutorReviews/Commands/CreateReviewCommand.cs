@@ -10,7 +10,7 @@ public class CreateReviewCommand
     public TutorReviewDto ReviewDto { get; set; } = null!;
     public string LearnerEmail { get; set; } = null!;
     public string TutorEmail { get; set; } = null!;
-    public int ClassInformationId { get; set; }
+    public Guid ClassInformationId { get; set; }
 
 }
 

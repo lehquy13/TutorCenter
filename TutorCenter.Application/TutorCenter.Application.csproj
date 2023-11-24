@@ -6,44 +6,26 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FluentResults" Version="3.15.2" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
-    <PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
-    <PackageReference Include="Mapster" Version="7.3.0" />
-    <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
-    <PackageReference Include="MediatR" Version="12.1.1" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="CloudinaryDotNet" Version="1.22.0" />
+        <PackageReference Include="FluentResults" Version="3.15.2" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
+        <PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
+        <PackageReference Include="Mapster" Version="7.3.0" />
+        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
+        <PackageReference Include="MediatR" Version="12.1.1" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Common\Errors\" />
-    <Folder Include="Services\Courses\Queries\GetTeachingClassDetailQuery\" />
-    <Folder Include="Services\Courses\Tutor\Commands\" />
-    <Folder Include="Services\Courses\Tutor\Queries\GetAllRequestGettingClassOfTutor\" />
-    <Folder Include="Services\Courses\Tutor\Queries\GetTeachingClassDetailQuery\" />
-    <Folder Include="Services\SubscribeRegistration\Commands\" />
-    <Folder Include="Services\Users\Admin\Commands\" />
-    <Folder Include="Services\Users\Commands\" />
-    <Folder Include="Services\Users\Queries\CustomerQueries\" />
-    <Folder Include="Services\Users\Queries\GetTutorProfile\" />
-    <Folder Include="Services\Users\Queries\Handlers\" />
-    <Folder Include="Services\Users\Student\Commands\" />
-    <Folder Include="Services\Users\Student\Queries\" />
-    <Folder Include="Services\Users\Tutor\ChangeInfo\" />
-    <Folder Include="Services\Users\Tutor\Registers\" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Services\Courses\Queries\GetTeachingClassDetailQuery\" />
+        <Folder Include="Services\Users\Queries\GetTutorProfile\" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TutorCenter.Domain\TutorCenter.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="CED.Domain">
-      <HintPath>..\..\CED-ASP_NET_Core.DDD\CED.Domain\bin\Debug\net7.0\CED.Domain.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\TutorCenter.Domain\TutorCenter.Domain.csproj" />
+    </ItemGroup>
 
 </Project>
