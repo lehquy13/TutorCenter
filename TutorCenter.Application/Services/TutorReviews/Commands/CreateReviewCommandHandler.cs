@@ -8,6 +8,7 @@ using TutorCenter.Application.Common.Errors.User;
 using TutorCenter.Application.Contracts.Users.Tutors;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Application.Services.Courses.Commands;
+using TutorCenter.Domain.Courses.Repos;
 using TutorCenter.Domain.NotificationConsts;
 using TutorCenter.Domain.Repository;
 using TutorCenter.Domain.Review;
@@ -18,7 +19,7 @@ namespace TutorCenter.Application.Services.TutorReviews.Commands;
 public class CreateReviewCommandHandler : IRequestHandler<CreateReviewCommand,Result<bool>>
 {
     private readonly IRepository<TutorReview> _tutorReviewRepository;
-    private readonly IClassInformationRepository _classInformationRepository;
+    private readonly ICourseRepository _courseRepository;
     private readonly IPublisher _publisher;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IAppCache _cache;
@@ -28,7 +29,7 @@ public class CreateReviewCommandHandler : IRequestHandler<CreateReviewCommand,Re
 
     public CreateReviewCommandHandler(IRepository<TutorReview> tutorReviewRepository, IAppCache cache,
         ILogger<CreateReviewCommandHandler> logger, IMapper mapper, ITutorRepository tutorRepository,
-        IClassInformationRepository classInformationRepository,
+        ICourseRepository courseRepository,
         IPublisher publisher, IUnitOfWork unitOfWork)
     {
         _tutorReviewRepository = tutorReviewRepository;
@@ -36,7 +37,7 @@ public class CreateReviewCommandHandler : IRequestHandler<CreateReviewCommand,Re
         this._logger = logger;
         this._mapper = mapper;
         _tutorRepository = tutorRepository;
-        _classInformationRepository = classInformationRepository;
+        _courseRepository = courseRepository;
         this._publisher = publisher;
         this._unitOfWork = unitOfWork;
     }
@@ -63,10 +64,10 @@ public class CreateReviewCommandHandler : IRequestHandler<CreateReviewCommand,Re
             {
                 command.ReviewDto.TutorId = tutor.Id;
                 review = _mapper.Map<TutorReview>(command.ReviewDto);
-                var cls = await _classInformationRepository.GetById(review.ClassInformationId);
+                var cls = await _courseRepository.GetById(review.ClassInformationId);
                 if (cls != null)
                 {
-                    cls.TutorReviews = review;
+                    //cls.TutorReviews = review;
                 }
                 //await _tutorReviewRepository.Insert(review);
             }
