@@ -57,7 +57,7 @@ public class UserMappingConfig : IRegister
             .Map(des => des.AcademicLevel, src => src.AcademicLevel.ToString())
             .Map(des => des, src => src);
         config.NewConfig<TutorVerificationInfo, TutorVerificationInfoDto>();
-        
+
         config.NewConfig<Tutor, TutorBasicForUpdateDto>()
             .Map(des => des.Majors, src => src.Subjects.Select(x => x.Id).ToList())
             .Map(des => des.TutorVerificationInfoDtos, src => src.TutorVerificationInfos)

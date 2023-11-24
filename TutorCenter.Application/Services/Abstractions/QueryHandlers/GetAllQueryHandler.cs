@@ -17,8 +17,8 @@ public abstract class GetAllQueryHandler<TQuery, TDto>
     }
 
     public abstract Task<Result<PaginatedList<TDto>>> Handle(TQuery query, CancellationToken cancellationToken);
-
 }
+
 public abstract class GetAllListQueryHandler<TQuery, TDto>
     : IRequestHandler<TQuery, Result<List<TDto>>>
     where TDto : class where TQuery : IRequest<Result<List<TDto>>>
@@ -31,6 +31,4 @@ public abstract class GetAllListQueryHandler<TQuery, TDto>
     }
 
     public abstract Task<Result<List<TDto>>> Handle(TQuery query, CancellationToken cancellationToken);
-
 }
-

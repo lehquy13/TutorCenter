@@ -17,7 +17,7 @@ public class UserRepository : Repository<User>, IUserRepository
         try
         {
             //TODO: still lack of tutor learning class
-            var user = await AppDbContext.Users
+            var user = await Context.Users
                 .Where(o => o.Id == id && o.IsDeleted == false)
                 .Include(x => x.LearningCourses)
                 .FirstOrDefaultAsync();
@@ -33,7 +33,7 @@ public class UserRepository : Repository<User>, IUserRepository
     {
         try
         {
-            var users = await AppDbContext.Set<User>().Where(x => x.IsDeleted == false && x.Role == UserRole.Tutor).ToListAsync();
+            var users = await Context.Set<User>().Where(x => x.IsDeleted == false && x.Role == UserRole.Tutor).ToListAsync();
             return users;
         }
         catch (Exception ex)
@@ -46,7 +46,7 @@ public class UserRepository : Repository<User>, IUserRepository
     {
         try
         {
-            var users = await AppDbContext.Set<User>().Where(o => o.Role == UserRole.Learner && o.IsDeleted == false).ToListAsync();
+            var users = await Context.Set<User>().Where(o => o.Role == UserRole.Learner && o.IsDeleted == false).ToListAsync();
             return users;
         }
         catch (Exception ex)
@@ -61,7 +61,7 @@ public class UserRepository : Repository<User>, IUserRepository
         {
             if (email != null)
             {
-                return await AppDbContext.Set<User>().AnyAsync(o => o.Email.Equals(email));
+                return await Context.Set<User>().AnyAsync(o => o.Email.Equals(email));
             }
 
             return false;
@@ -76,7 +76,7 @@ public class UserRepository : Repository<User>, IUserRepository
     {
         try
         {
-            var user = await AppDbContext.Users.FirstOrDefaultAsync(o => o.Email == email);
+            var user = await Context.Users.FirstOrDefaultAsync(o => o.Email == email);
 
             return user;
         }

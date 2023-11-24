@@ -1,24 +1,24 @@
-﻿using EduSmart.Domain.Repository;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TutorCenter.Domain.Common.Models;
+using TutorCenter.Domain.Repository;
 using TutorCenter.Infrastructure.Entity_Framework_Core;
 
 namespace TutorCenter.Infrastructure.Persistence.Repository;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity<int>
 {
-    protected readonly AppDbContext AppDbContext;
+    protected readonly AppDbContext Context;
 
-    public Repository(AppDbContext cEdDbAppDbContext)
+    public Repository(AppDbContext appDbContext)
     {
-        AppDbContext = cEdDbAppDbContext;
+        Context = appDbContext;
     }
 
     public void Delete(TEntity entity)
     {
         try
         {
-            AppDbContext.Set<TEntity>().Remove(entity);
+            Context.Set<TEntity>().Remove(entity);
         }
         catch (Exception ex)
         {
@@ -37,10 +37,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity<i
     {
         try
         {
-            var deleteRecord = await AppDbContext.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            var deleteRecord = await Context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
             if (deleteRecord == null) return false;
-            AppDbContext.Set<TEntity>().Remove(deleteRecord);
-            await AppDbContext.SaveChangesAsync();
+            Context.Set<TEntity>().Remove(deleteRecord);
+            await Context.SaveChangesAsync();
             return true;
         }
         catch (Exception ex)
@@ -51,14 +51,14 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity<i
 
     public async Task SaveAll()
     {
-        await AppDbContext.SaveChangesAsync();
+        await Context.SaveChangesAsync();
     }
 
     public async Task<TEntity?> ExistenceCheck(int id)
     {
         try
         {
-            return await AppDbContext.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await Context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
         catch (Exception ex)
         {
@@ -68,14 +68,14 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity<i
 
     public void Dispose()
     {
-        AppDbContext.Dispose();
+        Context.Dispose();
     }
 
     public virtual async Task<List<TEntity>> GetAllList()
     {
         try
         {
-            return await AppDbContext.Set<TEntity>().ToListAsync();
+            return await Context.Set<TEntity>().ToListAsync();
         }
         catch (Exception ex)
         {
@@ -87,7 +87,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity<i
     {
         try
         {
-            return AppDbContext.Set<TEntity>().AsQueryable<TEntity>();
+            return Context.Set<TEntity>().AsQueryable<TEntity>();
         }
         catch (Exception ex)
         {
@@ -99,7 +99,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity<i
     {
         try
         {
-            return await AppDbContext.Set<TEntity>().FirstOrDefaultAsync(x => x.Id == id);
+            return await Context.Set<TEntity>().FirstOrDefaultAsync(x => x.Id == id);
         }
         catch (Exception ex)
         {
@@ -111,7 +111,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity<i
     {
         try
         {
-            var createdEntity = await AppDbContext.Set<TEntity>().AddAsync(entity);
+            var createdEntity = await Context.Set<TEntity>().AddAsync(entity);
             return createdEntity.Entity;
         }
         catch (Exception ex)
@@ -130,8 +130,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity<i
     {
         try
         {
-            var updateEntity = AppDbContext.Set<TEntity>().Update(entity);
-            AppDbContext.SaveChanges();
+            var updateEntity = Context.Set<TEntity>().Update(entity);
+            Context.SaveChanges();
             return updateEntity.Entity;
         }
         catch (Exception ex)

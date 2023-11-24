@@ -7,4 +7,3 @@ public record RegisterCommand
     string Email,
     string Password
 );
-

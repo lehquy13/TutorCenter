@@ -1,6 +1,6 @@
 ﻿using TutorCenter.Domain.Common.Models;
 
-namespace EduSmart.Domain.Repository;
+namespace TutorCenter.Domain.Repository;
 
 public interface IRepository<TEntity> : IDisposable where TEntity : Entity<int>
 {
@@ -21,9 +21,19 @@ public interface IRepository<TEntity> : IDisposable where TEntity : Entity<int>
     Task<TEntity> Insert(TEntity entity);
 
     //Update
+    /// <summary>
+    /// Deprecated function
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
     TEntity? Update(TEntity entity);
 
     //Remove
+    /// <summary>
+    /// Deprecated function
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
     void Delete(TEntity entity);
 
     Task<bool> DeleteById(int id);

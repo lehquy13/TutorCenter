@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace CED.Application.Services.Authentication.Customer.Queries.Login;
+namespace TutorCenter.Application.Services.Authentication.Customer.Queries.Login;
 
 public class CustomerLoginQueryValidator : AbstractValidator<CustomerLoginQuery>
 {
@@ -10,4 +10,3 @@ public class CustomerLoginQueryValidator : AbstractValidator<CustomerLoginQuery>
         RuleFor(x => x.Password).NotEmpty();
     }
 }
-

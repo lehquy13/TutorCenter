@@ -1,8 +1,7 @@
 using MediatR;
 
-namespace CED.Application.Services.Cloudinaries.Commmands;
+namespace TutorCenter.Application.Services.Cloudinaries.Commmands;
 
-public class UploadImageCommand: IRequest<string>
+public class UploadImageCommand : IRequest<string>
 {
-    
 }

@@ -4,14 +4,12 @@ namespace TutorCenter.Application.Contracts.Subjects;
 
 public class SubjectDto : FullAuditedAggregateRootDto<int>
 {
-
-    public string Name { get; set; }
-    public string Description { get; set; }
-
-    public SubjectDto() {
+    public SubjectDto()
+    {
         Name = string.Empty;
         Description = string.Empty;
     }
-  
-}
 
+    public string Name { get; set; }
+    public string Description { get; set; }
+}

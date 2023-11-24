@@ -1,8 +1,7 @@
-﻿using CED.Application.Services.Authentication.Admin.Commands.ChangePassword;
-using FluentValidation;
-using TutorCenter.Application.Services.Authentication.Admin.Commands.ChangePassword;
+﻿using FluentValidation;
+using TutorCenter.Application.Contracts.Authentications;
 
-namespace CED.Application.Services.Authentication.Customer.Commands.ChangePassword;
+namespace TutorCenter.Application.Services.Authentication.Customer.Commands.ChangePassword;
 
 public class CustomerChangePasswordCommandCommandValidator : AbstractValidator<ChangePasswordCommand>
 {
@@ -14,4 +13,3 @@ public class CustomerChangePasswordCommandCommandValidator : AbstractValidator<C
         RuleFor(x => x.ConfirmedPassword).NotEmpty();
     }
 }
-

@@ -10,12 +10,15 @@ public class CourseMappingConfig : IRegister
     {
         //Config for Request getting class
         config.NewConfig<Course, LearningCourseForListDto>()
-            .Map(dest => dest.TutorName, src => src.CourseRequests.FirstOrDefault()!.Tutor.GetFullNAme(),  srcCon => srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorName, src => "",  srcCon => !srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorId, src => src.CourseRequests.FirstOrDefault()!.Tutor.Id , srcCon => srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorId, src => 0 , srcCon => !srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorPhoneNumber, src => src.CourseRequests.FirstOrDefault()!.Tutor.PhoneNumber,  srcCon => srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorPhoneNumber, src => "",  srcCon => !srcCon.CourseRequests.Any())
+            .Map(dest => dest.TutorName, src => src.CourseRequests.FirstOrDefault()!.Tutor.GetFullNAme(),
+                srcCon => srcCon.CourseRequests.Any())
+            .Map(dest => dest.TutorName, src => "", srcCon => !srcCon.CourseRequests.Any())
+            .Map(dest => dest.TutorId, src => src.CourseRequests.FirstOrDefault()!.Tutor.Id,
+                srcCon => srcCon.CourseRequests.Any())
+            .Map(dest => dest.TutorId, src => 0, srcCon => !srcCon.CourseRequests.Any())
+            .Map(dest => dest.TutorPhoneNumber, src => src.CourseRequests.FirstOrDefault()!.Tutor.PhoneNumber,
+                srcCon => srcCon.CourseRequests.Any())
+            .Map(dest => dest.TutorPhoneNumber, src => "", srcCon => !srcCon.CourseRequests.Any())
             .Map(dest => dest, src => src);
 
         config.NewConfig<CourseRequest, CourseRequestDto>();
@@ -39,34 +42,34 @@ public class CourseMappingConfig : IRegister
         //Config for Tutor review
         config.NewConfig<ReviewDetail, ReviewDetailDto>();
         config.NewConfig<ReviewDetailDto, ReviewDetail>();
-       
-        
+
+
         //Config for Class Information
-        config.NewConfig<CourseDto, Course>()        
+        config.NewConfig<CourseDto, Course>()
             //.Map(dest => dest.TutorId, src => src.TutorId)
             .Map(dest => dest, src => src);
-        config.NewConfig<Course, CourseDto >()        
+        config.NewConfig<Course, CourseDto>()
             //.Map(dest => dest.TutorId, src => src.TutorId)
             .Map(dest => dest, src => src);
         config.NewConfig<Course, CourseForDetailDto>()
-            .Map(dest => dest.TutorName, src => src.CourseRequests.FirstOrDefault()!.Tutor.GetFullNAme(),  srcCon => srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorName, src => "",  srcCon => !srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorId, src => src.CourseRequests.FirstOrDefault()!.Tutor.Id , srcCon => srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorId, src => 0 , srcCon => !srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorPhoneNumber, src => src.CourseRequests.FirstOrDefault()!.Tutor.PhoneNumber,  srcCon => srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorPhoneNumber, src => "",  srcCon => !srcCon.CourseRequests.Any())
+            .Map(dest => dest.TutorName, src => src.CourseRequests.FirstOrDefault()!.Tutor.GetFullNAme(),
+                srcCon => srcCon.CourseRequests.Any())
+            .Map(dest => dest.TutorName, src => "", srcCon => !srcCon.CourseRequests.Any())
+            .Map(dest => dest.TutorId, src => src.CourseRequests.FirstOrDefault()!.Tutor.Id,
+                srcCon => srcCon.CourseRequests.Any())
+            .Map(dest => dest.TutorId, src => 0, srcCon => !srcCon.CourseRequests.Any())
+            .Map(dest => dest.TutorPhoneNumber, src => src.CourseRequests.FirstOrDefault()!.Tutor.PhoneNumber,
+                srcCon => srcCon.CourseRequests.Any())
+            .Map(dest => dest.TutorPhoneNumber, src => "", srcCon => !srcCon.CourseRequests.Any())
             .Map(dest => dest, src => src);
         config.NewConfig<Course, CourseForListDto>();
 
 
         //Config for ReviewDetail
         config.NewConfig<ReviewDetailDto, ReviewDetail>();
-       
-      
+
+
         config.NewConfig<Subject, SubjectDto>();
         config.NewConfig<SubjectDto, Subject>();
-
-
     }
 }
-

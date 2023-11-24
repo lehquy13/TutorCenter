@@ -1,8 +1,9 @@
-﻿using CED.Domain.Shared.ClassInformationConsts;
+﻿using FluentResults;
 using MediatR;
-using TutorCenter.Application.Contracts.Authentication;
+using TutorCenter.Application.Contracts.Authentications;
+using TutorCenter.Domain.ClassInformationConsts;
 
-namespace CED.Application.Services.Authentication.Customer.Commands.Register;
+namespace TutorCenter.Application.Services.Authentication.Customer.Commands.Register;
 
 public record CustomerRegisterCommand
 (
@@ -14,4 +15,4 @@ public record CustomerRegisterCommand
     string Address,
     int BirthYear,
     Gender Gender
-) : IRequest<AuthenticationResult>;
+) : IRequest<Result<AuthenticationResult>>;

@@ -1,12 +1,18 @@
 ﻿namespace TutorCenter.Application.Contracts.Courses.Dtos;
 
-public class CourseForDetailDto 
+public class CourseForDetailDto
 {
+    //List of Request
+
+    public List<CourseRequestForDetailDto> RequestGettingClassDtos = new();
+
+    public ReviewDetailDto ReviewDetailDto = new();
+
     //Basic Information
     public int Id { get; set; } = 0;
     public DateTime CreationTime { get; set; } = DateTime.Now;
     public bool IsDeleted { get; set; }
-    public DateTime? LastModificationTime { get; set; } 
+    public DateTime? LastModificationTime { get; set; }
 
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
@@ -32,7 +38,6 @@ public class CourseForDetailDto
     public int MinutePerSession { get; set; } = 90;
     public int SessionPerWeek { get; set; } = 2;
 
-    
 
     // Address related information
     public string Address { get; set; } = string.Empty;
@@ -46,10 +51,4 @@ public class CourseForDetailDto
     public string TutorName { get; set; } = string.Empty;
     public string TutorPhoneNumber { get; set; } = string.Empty;
     public string TutorEmail { get; set; } = string.Empty;
-    
-    //List of Request
-
-    public List<CourseRequestForDetailDto> RequestGettingClassDtos = new();
-    public ReviewDetailDto ReviewDetailDto = new();
 }
-

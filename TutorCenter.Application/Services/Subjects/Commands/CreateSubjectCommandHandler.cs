@@ -1,5 +1,4 @@
-﻿using EduSmart.Domain.Repository;
-using FluentResults;
+﻿using FluentResults;
 using LazyCache;
 using MapsterMapper;
 using MediatR;
@@ -11,12 +10,14 @@ using TutorCenter.Application.Services.Abstractions.CommandHandlers;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Domain.Courses;
 using TutorCenter.Domain.Courses.Repos;
+using TutorCenter.Domain.Repository;
 
 namespace TutorCenter.Application.Services.Subjects.Commands;
 
 public class CreateUpdateSubjectCommandHandler : CreateUpdateCommandHandler<CreateUpdateSubjectCommand>
 {
     private readonly ISubjectRepository _subjectRepository;
+
     public CreateUpdateSubjectCommandHandler(ISubjectRepository subjectRepository, IAppCache cache,
         ILogger<CreateUpdateSubjectCommandHandler> logger, IMapper mapper, IUnitOfWork unitOfWork, IPublisher publisher)
         : base(logger, mapper, unitOfWork, cache, publisher)
@@ -45,9 +46,7 @@ public class CreateUpdateSubjectCommandHandler : CreateUpdateCommandHandler<Crea
             }
 
             if (await _unitOfWork.SaveChangesAsync() <= 0)
-            {
                 return Result.Fail($"Fail to save changes to database when {task} subject.");
-            }
 
             var defaultRequest = new GetObjectQuery<PaginatedList<SubjectDto>>();
             _cache.Remove(defaultRequest.GetType() + JsonConvert.SerializeObject(defaultRequest));

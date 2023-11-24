@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace CED.Application.Services.Authentication.Customer.Commands.ForgotPassword;
+namespace TutorCenter.Application.Services.Authentication.Customer.Commands.ForgotPassword;
 
 public class CustomerForgotPasswordCommandValidator : AbstractValidator<CustomerForgotPasswordCommand>
 {
@@ -9,4 +9,3 @@ public class CustomerForgotPasswordCommandValidator : AbstractValidator<Customer
         RuleFor(x => x.Email).NotEmpty();
     }
 }
-

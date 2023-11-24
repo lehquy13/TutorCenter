@@ -16,7 +16,4 @@ public abstract class GetByIdQueryHandler<TQuery, TDto>
     }
 
     public abstract Task<Result<TDto>> Handle(TQuery request, CancellationToken cancellationToken);
-
 }
-
-

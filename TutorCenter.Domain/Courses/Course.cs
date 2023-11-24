@@ -37,8 +37,10 @@ public sealed class Course : FullAuditedAggregateRoot<int>
     //Subject related information
     public int SubjectId { get; set; }
     public Subject Subject { get; set; }= null!;
-    
-  
+    public int? TutorId { get; set; }
+    public Tutor? Tutor { get; set; }
+
+
 
     //Request of class
     public List<CourseRequest> CourseRequests { get; set; } = new();

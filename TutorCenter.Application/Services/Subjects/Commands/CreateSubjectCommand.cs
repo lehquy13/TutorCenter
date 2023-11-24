@@ -9,4 +9,3 @@ public class CreateUpdateSubjectCommand
 {
     public SubjectDto SubjectDto { get; set; } = null!;
 }
-

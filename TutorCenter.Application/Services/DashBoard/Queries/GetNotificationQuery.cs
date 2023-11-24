@@ -5,5 +5,4 @@ namespace TutorCenter.Application.Services.DashBoard.Queries;
 
 public class GetNotificationQuery : GetObjectQuery<List<NotificationDto>>
 {
-    
 }

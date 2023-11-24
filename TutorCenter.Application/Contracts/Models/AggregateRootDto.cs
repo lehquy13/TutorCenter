@@ -8,7 +8,6 @@ public abstract class AggregateRootDto<TId> : EntityDto<TId>
     }
 
     protected AggregateRootDto()
-        : base()
     {
     }
 }

@@ -2,6 +2,7 @@
 using TutorCenter.Application.Contracts.Models;
 
 namespace TutorCenter.Application.Contracts.Users.Tutors;
+
 public class TutorBasicDto : BasicAuditedEntityDto<int>
 {
     //is tutor related informtions
@@ -12,5 +13,4 @@ public class TutorBasicDto : BasicAuditedEntityDto<int>
     public short Rate { get; set; } = 5;
     public List<SubjectDto> Majors { get; set; } = new();
     public List<TutorVerificationInfoDto> TutorVerificationInfoDtos { get; set; } = new();
-
 }
