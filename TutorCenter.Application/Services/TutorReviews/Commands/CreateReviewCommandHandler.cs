@@ -67,9 +67,11 @@ public class CreateReviewCommandHandler : IRequestHandler<CreateReviewCommand,Re
                 var cls = await _courseRepository.GetById(review.ClassInformationId);
                 if (cls != null)
                 {
-                    //cls.TutorReviews = review;
+                    cls.ReviewDetail.Rate = review.Rate;
+                    cls.ReviewDetail.Detail = review.Description;
+
                 }
-                //await _tutorReviewRepository.Insert(review);
+                await _tutorReviewRepository.Insert(review);
             }
 
             if (await _unitOfWork.SaveChangesAsync(cancellationToken) > 0)
