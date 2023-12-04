@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.JsonWebTokens;
 
-namespace CED.Web.Utilities;
+namespace TutorCenter.Web.Utilities;
 
 public class AuthenticationFilter : IAsyncActionFilter
 {

@@ -1,4 +1,4 @@
-﻿using CED.Web.Utilities;
+﻿using TutorCenter.Web.Utilities;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -8,6 +8,8 @@ using TutorCenter.Application.Contracts.Users.Tutors;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Application.Services.Users.Queries.GetAllTutorInformationsAdvanced;
 using TutorCenter.Domain;
+using TutorCenter.Application.Contracts.Subjects;
+using TutorCenter.Application.Services.Users.Admin.Commands.RemoveTutorVerification;
 
 namespace TutorCenter.Administrator.Controllers;
 [Authorize(Policy = "RequireAdministratorRole")]
@@ -210,19 +212,19 @@ public class TutorController : Controller
 
     #endregion
     [HttpGet("Subjects")]
-    public async Task<IActionResult> Subjects(string id)
+    public async Task<IActionResult> Subjects(int id)
     {
         var query = new GetObjectQuery<PaginatedList<SubjectDto>>()
         {
-            ObjectId = new Guid(id)
+            ObjectId = id
         };
         var subjectDtos = await _mediator.Send(query);
         return Helper.RenderRazorViewToString(this, "_Subjects", subjectDtos.Value);
     }
     [HttpPost("RemoveTutorVerification")]
-    public async Task<IActionResult> RemoveTutorVerification(string id)
+    public async Task<IActionResult> RemoveTutorVerification(int id)
     {
-        var query = new RemoveTutorVerificationCommand(new Guid(id));
+        var query = new RemoveTutorVerificationCommand(id);
         var result = await _mediator.Send(query);
         return Json(new
         {

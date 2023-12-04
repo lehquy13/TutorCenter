@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System.Text.Json;
 
 
-namespace CED.Web.Utilities;
+namespace TutorCenter.Web.Utilities;
 
 public static class Helper
 {

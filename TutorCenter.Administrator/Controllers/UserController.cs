@@ -1,4 +1,4 @@
-﻿using CED.Web.Utilities;
+﻿using TutorCenter.Web.Utilities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +7,8 @@ using TutorCenter.Application.Contracts.Users;
 using TutorCenter.Application.Contracts.Users.Learners;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Domain;
+using TutorCenter.Application.Services.Users.Admin.Commands.CreateUpdateUser;
+using TutorCenter.Application.Services.Users.Admin.Commands.DeleteUser;
 
 namespace TutorCenter.Administrator.Controllers;
 
@@ -51,7 +53,7 @@ public class UserController : Controller
     }
 
     [HttpGet("Edit")]
-    public async Task<IActionResult> Edit(Guid id)
+    public async Task<IActionResult> Edit(int id)
     {
         PackStaticListToView();
         var query = new GetObjectQuery<UserDto>()
@@ -66,7 +68,7 @@ public class UserController : Controller
 
     [HttpPost("Edit")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(Guid id, UserDto userDto)
+    public async Task<IActionResult> Edit(int id, UserDto userDto)
     {
         if (id != userDto.Id)
         {
@@ -139,14 +141,14 @@ public class UserController : Controller
     }
 
     [HttpGet("Delete")]
-    public async Task<IActionResult> Delete(Guid? id)
+    public async Task<IActionResult> Delete(int id)
     {
         if (id == null)
         {
             return NotFound();
         }
 
-        var query = new GetObjectQuery<UserDto>() { ObjectId = (Guid)id };
+        var query = new GetObjectQuery<UserDto>() { ObjectId = id };
         var result = await _mediator.Send(query);
 
         if (result.IsFailed)
@@ -163,14 +165,14 @@ public class UserController : Controller
     }
 
     [HttpPost("DeleteConfirmed")]
-    public async Task<IActionResult> DeleteConfirmed(Guid? id)
+    public async Task<IActionResult> DeleteConfirmed(int id)
     {
         if (id == null || id.Equals(Guid.Empty))
         {
             return NotFound();
         }
 
-        var query = new DeleteUserCommand((Guid)id);
+        var query = new DeleteUserCommand(id);
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
@@ -182,14 +184,14 @@ public class UserController : Controller
     }
 
     [HttpGet("Detail")]
-    public async Task<IActionResult> Detail(Guid? id)
+    public async Task<IActionResult> Detail(int id)
     {
         if (id == null || id.Equals(Guid.Empty))
         {
             return NotFound();
         }
 
-        var query = new GetObjectQuery<UserDto>() { ObjectId = (Guid)id };
+        var query = new GetObjectQuery<UserDto>() { ObjectId = id };
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)

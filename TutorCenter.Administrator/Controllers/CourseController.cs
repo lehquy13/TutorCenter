@@ -1,4 +1,4 @@
-﻿using CED.Web.Utilities;
+﻿using TutorCenter.Web.Utilities;
 using FluentResults;
 using MapsterMapper;
 using MediatR;
@@ -13,6 +13,9 @@ using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Application.Services.Courses.Queries.GetAllCoursesQuery;
 using TutorCenter.Application.Services.Users.Queries.GetAllTutorInformationsAdvanced;
 using TutorCenter.Domain;
+using TutorCenter.Application.Services.Courses.Commands;
+using TutorCenter.Application.Contracts.Authentications;
+using TutorCenter.Application.Services.Users.Admin.Commands.RemoveTutorReview;
 
 namespace TutorCenter.Administrator.Controllers;
 
@@ -71,7 +74,7 @@ public class CourseController : Controller
     }
 
     [HttpGet("Edit")]
-    public async Task<IActionResult> Edit(Guid id)
+    public async Task<IActionResult> Edit(int id)
     {
         await PackStaticListToView();
 
@@ -146,14 +149,14 @@ public class CourseController : Controller
     }
 
     [HttpGet("Delete")]
-    public async Task<IActionResult> Delete(Guid? id)
+    public async Task<IActionResult> Delete(int id)
     {
         if (id == null)
         {
             return NotFound();
         }
 
-        var query = new GetObjectQuery<CourseForDetailDto>() { ObjectId = (Guid)id };
+        var query = new GetObjectQuery<CourseForDetailDto>() { ObjectId = id };
         var result = await _mediator.Send(query);
 
         if (result.IsFailed)
@@ -166,14 +169,14 @@ public class CourseController : Controller
     }
 
     [HttpPost("DeleteConfirmed")]
-    public async Task<IActionResult> DeleteConfirmed(Guid? id)
+    public async Task<IActionResult> DeleteConfirmed(int id)
     {
         if (id == null || id.Equals(Guid.Empty))
         {
             return NotFound();
         }
 
-        var query = new DeleteCourseCommand((Guid)id);
+        var query = new DeleteCourseCommand(id);
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
@@ -185,14 +188,14 @@ public class CourseController : Controller
     }
 
     [HttpGet("Detail")]
-    public async Task<IActionResult> Detail(Guid? id)
+    public async Task<IActionResult> Detail(int id)
     {
-        if (id == null || id.Equals(Guid.Empty))
+        if (id == 0 || id.Equals(0))
         {
             return NotFound();
         }
 
-        var query = new GetObjectQuery<CourseForDetailDto> { ObjectId = (Guid)id };
+        var query = new GetObjectQuery<CourseForDetailDto> { ObjectId = id };
 
         var result = await _mediator.Send(query);
 
@@ -214,14 +217,14 @@ public class CourseController : Controller
     }
 
     [HttpGet("ViewTutor")]
-    public async Task<IActionResult> ViewTutor(Guid? id)
+    public async Task<IActionResult> ViewTutor(int id)
     {
-        if (id == null || id.Equals(Guid.Empty))
+        if (id == 0 || id.Equals(0))
         {
             return NotFound();
         }
 
-        var query = new GetObjectQuery<TutorForDetailDto>() { ObjectId = (Guid)id };
+        var query = new GetObjectQuery<TutorForDetailDto>() { ObjectId = id };
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
@@ -232,14 +235,14 @@ public class CourseController : Controller
         return RedirectToAction("Error", "Home");
     }
     [HttpGet("ViewReview")]
-    public async Task<IActionResult> ViewReview(Guid? id)
+    public async Task<IActionResult> ViewReview(int id)
     {
-        if (id == null || id.Equals(Guid.Empty))
+        if (id == 0 || id.Equals(0))
         {
             return NotFound();
         }
 
-        var query = new GetObjectQuery<TutorReviewDto>() { ObjectId = (Guid)id };
+        var query = new GetObjectQuery<TutorReviewDto>() { ObjectId = id };
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
@@ -252,9 +255,9 @@ public class CourseController : Controller
     }
 
     [HttpPost("Choose")]
-    public IActionResult Choose(Guid? tutorId)
+    public IActionResult Choose(int tutorId)
     {
-        if (tutorId == null || tutorId.Equals(Guid.Empty))
+        if (tutorId == 0 || tutorId.Equals(0))
         {
             return NotFound();
         }
@@ -262,7 +265,7 @@ public class CourseController : Controller
         return Json(new { tutorId = tutorId });
     }
     [HttpPost("RemoveReview")]
-    public async Task<IActionResult> RemoveReview(Guid id)
+    public async Task<IActionResult> RemoveReview(int id)
     {
         if (id.Equals(Guid.Empty))
         {
@@ -280,7 +283,7 @@ public class CourseController : Controller
     }
 
     [HttpGet("EditRequest")]
-    public async Task<IActionResult> EditRequest(Guid id)
+    public async Task<IActionResult> EditRequest(int id)
     {
         if (id.Equals(Guid.Empty))
         {

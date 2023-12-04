@@ -1,4 +1,4 @@
-namespace CED.Web.Utilities;
+namespace TutorCenter.Web.Utilities;
 
 public interface ILocalStorageService
 {

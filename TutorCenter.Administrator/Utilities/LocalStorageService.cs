@@ -1,7 +1,7 @@
 
 using Hanssens.Net;
 
-namespace CED.Web.Utilities;
+namespace TutorCenter.Web.Utilities;
 
 public class LocalStorageServiceService : ILocalStorageService
 {

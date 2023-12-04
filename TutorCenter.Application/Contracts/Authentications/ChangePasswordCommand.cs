@@ -1,4 +1,6 @@
-﻿namespace TutorCenter.Application.Contracts.Authentications;
+﻿using MediatR;
+
+namespace TutorCenter.Application.Contracts.Authentications;
 
 public record ChangePasswordCommand
 (
@@ -6,4 +8,4 @@ public record ChangePasswordCommand
     string CurrentPassword,
     string NewPassword,
     string ConfirmedPassword
-);
+):IRequest<AuthenticationResult>;
