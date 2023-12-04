@@ -98,7 +98,7 @@ public class CourseController : Controller
 
     [HttpPost("Edit")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(Guid Id, CourseForEditDto classDto)
+    public async Task<IActionResult> Edit(int Id, CourseForEditDto classDto)
     {
         if (Id != classDto.Id)
         {

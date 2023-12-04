@@ -1,5 +1,7 @@
 
 
+using TutorCenter.Application.Contracts.Courses.Dtos;
+using TutorCenter.Application.Contracts.Notifications;
 using TutorCenter.Application.Contracts.Users.Learners;
 using TutorCenter.Application.Contracts.Users.Tutors;
 
@@ -10,7 +12,7 @@ public class DashBoardViewModel
     public TotalValueModel<TutorForListDto> TutorTotalValueModel{ get; set; } = new();
     public TotalValueModel<LearnerDto> StudentTotalValueModel{ get; set; } = new();
 
-    public TotalValueModel<ClassInformationForListDto> ClassTotalValueModel{ get; set; } = new();
+    public TotalValueModel<CourseForListDto> ClassTotalValueModel{ get; set; } = new();
 
     public object? ChartWeekData { get; set; }
     public object? PieWeekData1 { get; set; }
@@ -18,7 +20,7 @@ public class DashBoardViewModel
     public object? DatesWeekData { get; set; }
     public AreaChartViewModel AreaChartViewModel { get; set; } = new AreaChartViewModel();
     
-    public List<TutorCenter.Contracts.Subjects.SubjectDto> SubjectDtos { get; set; } = new();
+    public List<TutorCenter.Application.Contracts.Subjects.SubjectDto> SubjectDtos { get; set; } = new();
     public List<NotificationDto> NotificationDtos { get; set; } = new();
 }
 
@@ -27,7 +29,7 @@ public class PieChartViewModel
     public object? series { get; set; } 
     public object? labels { get; set; }
 
-    public string ByTime = Domain.Shared.ClassInformationConsts.ByTime.Today;
+    public string ByTime = Domain.ClassInformationConsts.ByTime.Today;
 }
 public class AreaChartViewModel
 {
@@ -39,5 +41,5 @@ public class AreaChartViewModel
     public string? incomingSeries { get; set; } 
     public string? dates { get; set; }
 
-    public string ByTime = Domain.Shared.ClassInformationConsts.ByTime.Today;
+    public string ByTime = Domain.ClassInformationConsts.ByTime.Today;
 }

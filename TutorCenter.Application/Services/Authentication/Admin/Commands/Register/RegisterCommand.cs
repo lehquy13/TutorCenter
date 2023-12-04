@@ -1,5 +1,6 @@
 ﻿using TutorCenter.Contracts.Authentication;
 using MediatR;
+using TutorCenter.Application.Contracts.Authentications;
 
 namespace TutorCenter.Application.Services.Authentication.Admin.Commands.Register;
 

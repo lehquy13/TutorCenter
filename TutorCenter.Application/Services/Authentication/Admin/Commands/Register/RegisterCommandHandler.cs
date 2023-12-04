@@ -3,6 +3,8 @@ using TutorCenter.Domain.Interfaces.Authentication;
 using TutorCenter.Domain.Users;
 using MapsterMapper;
 using MediatR;
+using TutorCenter.Application.Contracts.Authentications;
+using TutorCenter.Domain.Users.Repos;
 
 namespace TutorCenter.Application.Services.Authentication.Admin.Commands.Register;
 

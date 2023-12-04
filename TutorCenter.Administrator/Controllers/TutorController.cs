@@ -10,6 +10,8 @@ using TutorCenter.Application.Services.Users.Queries.GetAllTutorInformationsAdva
 using TutorCenter.Domain;
 using TutorCenter.Application.Contracts.Subjects;
 using TutorCenter.Application.Services.Users.Admin.Commands.RemoveTutorVerification;
+using TutorCenter.Application.Services.Users.Admin.Commands.CreateUpdateTutor;
+using TutorCenter.Application.Services.Users.Admin.Commands.DeleteUser;
 
 namespace TutorCenter.Administrator.Controllers;
 [Authorize(Policy = "RequireAdministratorRole")]
@@ -50,7 +52,7 @@ public class TutorController : Controller
     }
 
     [HttpGet("Edit")]
-    public async Task<IActionResult> Edit(Guid id)
+    public async Task<IActionResult> Edit(int id)
     {
         PackStaticListToView();
         var query = new GetObjectQuery<TutorForDetailDto>
@@ -65,7 +67,7 @@ public class TutorController : Controller
 
     [HttpPost("Edit")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(Guid id, TutorForDetailDto userForDetailDto, List<Guid> subjectId)
+    public async Task<IActionResult> Edit(int id, TutorForDetailDto userForDetailDto, List<int> subjectId)
     {
         if (id != userForDetailDto.Id)
         {
@@ -130,7 +132,7 @@ public class TutorController : Controller
 
     [HttpPost("Create")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(TutorForDetailDto userForDetailDto, List<Guid> subjectId) // cant use userdto
+    public async Task<IActionResult> Create(TutorForDetailDto userForDetailDto, List<int> subjectId) // cant use userdto
     {
         userForDetailDto.LastModificationTime = DateTime.UtcNow;
         var command = new CreateUpdateTutorCommand(userForDetailDto, subjectId);
@@ -153,9 +155,9 @@ public class TutorController : Controller
     }
 
     [HttpGet("Delete")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(int id)
     {
-        if (id == Guid.Empty)
+        if (id ==0)
         {
             return NotFound();
         }
@@ -173,14 +175,14 @@ public class TutorController : Controller
     }
 
     [HttpPost("DeleteConfirmed")]
-    public async Task<IActionResult> DeleteConfirmed(Guid? id)
+    public async Task<IActionResult> DeleteConfirmed(int? id)
     {
-        if (id == null || id.Equals(Guid.Empty))
+        if (id == 0|| id.Equals(0))
         {
             return NotFound();
         }
 
-        var query = new DeleteUserCommand((Guid)id);
+        var query = new DeleteUserCommand((int)id);
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
@@ -192,14 +194,14 @@ public class TutorController : Controller
     }
 
     [HttpGet("Detail")]
-    public async Task<IActionResult> Detail(Guid? id)
+    public async Task<IActionResult> Detail(int? id)
     {
-        if (id == null || id.Equals(Guid.Empty))
+        if (id == null || id.Equals(0))
         {
             return NotFound();
         }
 
-        var query = new GetObjectQuery<TutorForDetailDto>() { ObjectId = (Guid)id };
+        var query = new GetObjectQuery<TutorForDetailDto>() { ObjectId = (int)id };
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)

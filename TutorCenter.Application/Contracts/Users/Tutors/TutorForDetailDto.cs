@@ -1,9 +1,11 @@
 ﻿using TutorCenter.Application.Contracts.Courses.Dtos;
 using TutorCenter.Application.Contracts.Models;
+using TutorCenter.Application.Contracts.TutorReview;
+using TutorCenter.Domain.ClassInformationConsts;
 
 namespace TutorCenter.Application.Contracts.Users.Tutors;
 
-public class TutorForDetailDto : BasicAuditedEntityDto<int>
+public class TutorForDetailDto : FullAuditedAggregateRootDto<int>
 {
     //Admin information
     public string FirstName { get; set; } = string.Empty;
@@ -23,11 +25,15 @@ public class TutorForDetailDto : BasicAuditedEntityDto<int>
     public string PhoneNumber { get; set; } = string.Empty;
 
     //Tutor's related informations
-    public string Role { get; set; } = "Tutor";
+    public UserRole Role { get; set; } = UserRole.Tutor;
     public string AcademicLevel { get; set; } = "Student";
     public string University { get; set; } = string.Empty;
     public bool IsVerified { get; set; } = false;
     public short Rate { get; set; } = 5;
-    public List<string> Majors { get; set; } = new();
+    public List<SubjectDto> Majors { get; set; } = new();
     public PaginatedList<ReviewDetailDto> ReviewDetailDtos { get; set; } = new();
+
+    public List<TutorVerificationInfoDto> TutorVerificationInfoDtos { get; set; } = new();
+    public PaginatedList<TutorReviewDto> TutorReviewDtos { get; set; } = new();
+    public PaginatedList<RequestGettingClassForListDto> RequestGettingClassForListDtos = new();
 }

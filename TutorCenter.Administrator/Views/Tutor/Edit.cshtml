@@ -1,4 +1,6 @@
-﻿@model TutorCenter.Contracts.Users.Tutors.TutorForDetailDto
+﻿@using TutorCenter.Application.Contracts.Users.Tutors;
+@using TutorCenter.Domain.ClassInformationConsts;
+@model TutorForDetailDto
 
 @{
     ViewData["Title"] = "Edit";
@@ -129,7 +131,7 @@
 
 
             <!-- ----------------------------------- -->
-            @if (Model.Role == TutorCenter.Domain.Shared.ClassInformationConsts.UserRole.Tutor)
+            @if (Model.Role == UserRole.Tutor)
             {
                 <h5 class="card-title">Tutor information</h5>
 

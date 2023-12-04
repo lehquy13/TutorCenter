@@ -1,4 +1,4 @@
-using TutorCenter.Domain.Shared.ClassInformationConsts;
+using TutorCenter.Domain;
 
 namespace TutorCenter.Web.Models;
 

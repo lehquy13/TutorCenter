@@ -1,5 +1,5 @@
-﻿@using TutorCenter.Contracts.Users
-@model TutorCenter.Contracts.Users.UserDto
+﻿@using TutorCenter.Application.Contracts.Users;
+@model TutorCenter.Application.Contracts.Users.UserDto;
 @{
     List<string> genders = ViewData["Genders"] as List<string> ?? new List<string>();
     //AddressDto addressDto = ViewData["Addresses"] as AddressDto ?? new AddressDto(new List<CityDto>());
