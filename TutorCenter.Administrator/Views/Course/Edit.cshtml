@@ -1,7 +1,7 @@
-﻿@using CED.Contracts.Subjects
-@using CED.Contracts
+﻿@using TutorCenter.Application.Contracts.Subjects
+@using TutorCenter.Application.Contracts
 
-@model CED.Contracts.ClassInformations.Dtos.ClassInformationForEditDto
+@model TutorCenter.Application.Contracts.Courses.Dtos.CourseForDetailDto
 
 @{
     ViewData["Title"] = "Edit";
@@ -45,7 +45,7 @@
                 <label asp-for="SubjectId" class="form-label">Subject Name</label>
                 <select asp-for="SubjectId" class="form-select">
                     <option selected value="@Model.SubjectId">
-                        @Model.Subject.Name
+                        @Model.SubjectName
                     </option>
 
                     @foreach (var i in subjects)

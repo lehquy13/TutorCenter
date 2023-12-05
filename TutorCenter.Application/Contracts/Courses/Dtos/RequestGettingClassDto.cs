@@ -30,7 +30,7 @@ public class RequestGettingClassMinimalDto : EntityDto<Guid>
 {
     public Guid TutorId { get; set; }
     public string TutorName { get; set; } = string.Empty;
-    public Guid ClassInformationId { get; set; }
+    public Guid CourseId { get; set; }
     public string TutorPhoneNumber { get; set; } = string.Empty;
     public string TutorEmail { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;

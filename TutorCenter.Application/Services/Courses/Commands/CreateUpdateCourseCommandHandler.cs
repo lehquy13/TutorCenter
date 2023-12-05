@@ -1,4 +1,4 @@
-﻿using FluentResults;
+﻿ using FluentResults;
 using LazyCache;
 using MapsterMapper;
 using MediatR;

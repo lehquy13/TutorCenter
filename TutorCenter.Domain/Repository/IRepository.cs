@@ -1,4 +1,5 @@
 ﻿using TutorCenter.Domain.Common.Models;
+using TutorCenter.Domain.Courses;
 
 namespace TutorCenter.Domain.Repository;
 
@@ -39,5 +40,5 @@ public interface IRepository<TEntity> : IDisposable where TEntity : Entity<int>
     Task<bool> DeleteById(int id);
     Task SaveAll();    
     Task<TEntity?> ExistenceCheck(int id);
-
+    Task<CourseRequest> GetById(Guid id);
 }
