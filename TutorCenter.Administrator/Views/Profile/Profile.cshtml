@@ -1,7 +1,6 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@using TutorCenter.Web.Models;
 @model ProfileViewModel
 @{
     List<string> genders = ViewData["Genders"] as List<string> ?? new List<string>();
@@ -122,7 +121,7 @@
 
                         <div class="tab-pane fade pt-3" id="profile-change-password">
                             <!-- Change Password Form -->
-                            <partial name="_ChangePassword" model="@Model.ChangePasswordRequest" />
+                            <partial name="_ChangePassword" model="@Model.ChangePasswordCommand" />
                             <!-- End Change Password Form -->
 
                         </div>

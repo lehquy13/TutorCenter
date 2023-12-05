@@ -2,15 +2,15 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TutorCenter.Administrator.Models;
+using TutorCenter.Administrator.Utilities;
 using TutorCenter.Application.Contracts.Authentications;
 using TutorCenter.Application.Contracts.Users;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Application.Services.Users.Admin.Commands.CreateUpdateUser;
 using TutorCenter.Domain;
-using TutorCenter.Web.Models;
-using TutorCenter.Web.Utilities;
 
-namespace Tutor.Web.Controllers
+namespace TutorCenter.Administrator.Controllers
 {
     [Authorize(Policy = "RequireAdministratorRole")]
     [Route("[controller]")]

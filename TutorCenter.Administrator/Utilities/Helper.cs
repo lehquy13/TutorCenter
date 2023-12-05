@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using System.Text.Json;
 
-
-namespace TutorCenter.Web.Utilities;
+namespace TutorCenter.Administrator.Utilities;
 
 public static class Helper
 {

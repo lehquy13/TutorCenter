@@ -1,4 +1,4 @@
-﻿namespace TutorCenter.Web.Utilities;
+﻿namespace TutorCenter.Administrator.Utilities;
 
 public record JsonActionResult(
     string res,

@@ -1,7 +1,7 @@
 using TutorCenter.Application.Contracts.Authentications;
 using TutorCenter.Application.Contracts.Users;
 
-namespace TutorCenter.Web.Models;
+namespace TutorCenter.Administrator.Models;
 
 public class ProfileViewModel
 {

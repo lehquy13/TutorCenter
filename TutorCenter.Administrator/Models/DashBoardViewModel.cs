@@ -1,11 +1,9 @@
-
-
 using TutorCenter.Application.Contracts.Courses.Dtos;
 using TutorCenter.Application.Contracts.Notifications;
 using TutorCenter.Application.Contracts.Users.Learners;
 using TutorCenter.Application.Contracts.Users.Tutors;
 
-namespace TutorCenter.Web.Models;
+namespace TutorCenter.Administrator.Models;
 
 public class DashBoardViewModel
 {

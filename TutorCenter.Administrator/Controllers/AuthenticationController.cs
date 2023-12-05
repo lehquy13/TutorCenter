@@ -1,15 +1,12 @@
-﻿
-using MapsterMapper;
+﻿using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using TutorCenter.Application.Contracts.Authentications;
-using TutorCenter.Application.Contracts.Users;
 using TutorCenter.Application.Services.Authentication.Admin.Commands.ForgotPassword;
-using TutorCenter.Domain.Users;
 
-namespace Tutor.Web.Controllers;
+namespace TutorCenter.Administrator.Controllers;
 
 [Route("[controller]")]
 [Route("")]

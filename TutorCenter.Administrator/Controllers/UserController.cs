@@ -1,7 +1,7 @@
-﻿using TutorCenter.Web.Utilities;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TutorCenter.Administrator.Utilities;
 using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Contracts.Users;
 using TutorCenter.Application.Contracts.Users.Learners;

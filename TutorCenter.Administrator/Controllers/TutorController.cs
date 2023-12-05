@@ -1,8 +1,8 @@
-﻿using TutorCenter.Web.Utilities;
-using MapsterMapper;
+﻿using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TutorCenter.Administrator.Utilities;
 using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Contracts.Users.Tutors;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;

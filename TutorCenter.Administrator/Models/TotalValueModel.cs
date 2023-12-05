@@ -1,6 +1,6 @@
-using TutorCenter.Domain;
+using TutorCenter.Domain.ClassInformationConsts;
 
-namespace TutorCenter.Web.Models;
+namespace TutorCenter.Administrator.Models;
 
 public class TotalValueModel<T> where  T : class
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Tutor.Web.Controllers;
+namespace TutorCenter.Administrator.Controllers;
 
 /// <summary>
 /// A navigate controller
@@ -14,6 +14,6 @@ public class RequestGettingClassController : Controller
     [Route("Detail")]
     public IActionResult Detail(string? id)
     {
-        return RedirectToAction("Edit", "ClassInformation", new { id = id });
+        return RedirectToAction("Edit", "Course", new { id = id });
     }
 }
