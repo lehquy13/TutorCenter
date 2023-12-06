@@ -1,12 +1,11 @@
-﻿@using TutorCenter.Application.Contracts.Users.Tutors;
-@model TutorForDetailDto
+﻿@model TutorCenter.Application.Contracts.Users.Tutors.TutorForDetailDto
 
 @{
     ViewData["Title"] = "Details";
 }
 
 <h1>
-    <span style="color:#5c7bd9" class="font-weight-bold">@Model.FirstName @Model.LastName</span>'s information
+    <span style="color:#5c7bd9" class="font-weight-bold">Tutor: @Model.FirstName @Model.LastName</span>
 </h1>
 <h4></h4>
 
@@ -146,6 +145,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Edit" asp-controller="User" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+

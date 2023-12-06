@@ -3,7 +3,7 @@ using TutorCenter.Application.Contracts.Models;
 
 namespace TutorCenter.Application.Contracts.Users.Learners;
 
-public class LearnerForUpdateDto : FullAuditedAggregateRootDto<Guid>
+public class LearnerForUpdateDto : FullAuditedAggregateRootDto<int>
 {
     //Admin information
     public string FirstName { get; set; } = string.Empty;

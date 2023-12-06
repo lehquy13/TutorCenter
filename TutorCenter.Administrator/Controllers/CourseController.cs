@@ -10,12 +10,13 @@ using TutorCenter.Application.Contracts.TutorReview;
 using TutorCenter.Application.Contracts.Users.Learners;
 using TutorCenter.Application.Contracts.Users.Tutors;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
-using TutorCenter.Application.Services.Courses.Queries.GetAllCoursesQuery;
-using TutorCenter.Application.Services.Users.Queries.GetAllTutorInformationsAdvanced;
-using TutorCenter.Domain;
 using TutorCenter.Application.Services.Courses.Commands;
-using TutorCenter.Application.Contracts.Authentications;
+using TutorCenter.Application.Services.Courses.Queries.GetAllCoursesQuery;
+using TutorCenter.Application.Services.Courses.Queries.GetCourseQuery;
 using TutorCenter.Application.Services.Users.Admin.Commands.RemoveTutorReview;
+using TutorCenter.Application.Services.Users.Queries.GetAllTutorInformationsAdvanced;
+using TutorCenter.Application.Services.Users.Queries.GetLearningCoursesOfUserQuery;
+using TutorCenter.Domain;
 
 namespace TutorCenter.Administrator.Controllers;
 
@@ -65,10 +66,10 @@ public class CourseController : Controller
         //var query = new GetObjectQuery<List<CourseDto>>();
         var query = new GetAllCoursesQuery()
         {
-            Filter = type??""
+            Filter = type ?? ""
         };
         var courses = await _mediator.Send(query);
-        if(courses.IsSuccess)
+        if (courses.IsSuccess)
             return View(courses.Value);
         return View(new List<CourseForListDto>());
     }
@@ -80,9 +81,9 @@ public class CourseController : Controller
 
         await PackStudentAndTuTorList();
 
-        var query = new GetObjectQuery<CourseForDetailDto>
+        var query = new GetCourseQuery()
         {
-            ObjectId = id
+            Id = id
         };
         var result = await _mediator.Send(query);
         ViewBag.Action = "Edit";
@@ -91,14 +92,14 @@ public class CourseController : Controller
         {
             var classDtoViewModel = _mapper.Map<CourseForDetailDto>(result.Value);
             return View(classDtoViewModel);
-            
         }
+
         return RedirectToAction("Error", "Home");
     }
 
     [HttpPost("Edit")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int Id, CourseForEditDto classDto)
+    public async Task<IActionResult> Edit(int Id, CourseForDetailDto classDto)
     {
         if (Id != classDto.Id)
         {
@@ -134,12 +135,12 @@ public class CourseController : Controller
         await PackStaticListToView();
         //await PackStudentAndTuTorList();
 
-        return View(new CourseForEditDto());
+        return View(new CourseForDetailDto());
     }
 
     [HttpPost("Create")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(CourseForEditDto classDto)
+    public async Task<IActionResult> Create(CourseForDetailDto classDto)
     {
         classDto.LastModificationTime = DateTime.UtcNow;
         var query = new CreateUpdateCourseCommand() { CourseDto = classDto };
@@ -149,14 +150,14 @@ public class CourseController : Controller
     }
 
     [HttpGet("Delete")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
         {
             return NotFound();
         }
 
-        var query = new GetObjectQuery<CourseForDetailDto>() { ObjectId = id };
+        var query = new GetObjectQuery<CourseForDetailDto>() { ObjectId = (int)id };
         var result = await _mediator.Send(query);
 
         if (result.IsFailed)
@@ -169,14 +170,14 @@ public class CourseController : Controller
     }
 
     [HttpPost("DeleteConfirmed")]
-    public async Task<IActionResult> DeleteConfirmed(int id)
+    public async Task<IActionResult> DeleteConfirmed(int? id)
     {
-        if (id == null || id.Equals(Guid.Empty))
+        if (id == null || id == 0)
         {
             return NotFound();
         }
 
-        var query = new DeleteCourseCommand(id);
+        var query = new DeleteCourseCommand((int)id);
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
@@ -188,14 +189,14 @@ public class CourseController : Controller
     }
 
     [HttpGet("Detail")]
-    public async Task<IActionResult> Detail(int id)
+    public async Task<IActionResult> Detail(int? id)
     {
-        if (id == 0 || id.Equals(0))
+        if (id == null || id == 0)
         {
             return NotFound();
         }
 
-        var query = new GetObjectQuery<CourseForDetailDto> { ObjectId = id };
+        var query = new GetObjectQuery<CourseForDetailDto> { ObjectId = (int)id };
 
         var result = await _mediator.Send(query);
 
@@ -217,14 +218,14 @@ public class CourseController : Controller
     }
 
     [HttpGet("ViewTutor")]
-    public async Task<IActionResult> ViewTutor(int id)
+    public async Task<IActionResult> ViewTutor(int? id)
     {
-        if (id == 0 || id.Equals(0))
+        if (id == null || id == 0)
         {
             return NotFound();
         }
 
-        var query = new GetObjectQuery<TutorForDetailDto>() { ObjectId = id };
+        var query = new GetObjectQuery<TutorForDetailDto>() { ObjectId = (int)id };
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
@@ -234,15 +235,16 @@ public class CourseController : Controller
 
         return RedirectToAction("Error", "Home");
     }
+
     [HttpGet("ViewReview")]
-    public async Task<IActionResult> ViewReview(int id)
+    public async Task<IActionResult> ViewReview(int? id)
     {
-        if (id == 0 || id.Equals(0))
+        if (id == null || id == 0)
         {
             return NotFound();
         }
 
-        var query = new GetObjectQuery<TutorReviewDto>() { ObjectId = id };
+        var query = new GetObjectQuery<TutorReviewDto>() { ObjectId = (int)id };
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
@@ -255,28 +257,29 @@ public class CourseController : Controller
     }
 
     [HttpPost("Choose")]
-    public IActionResult Choose(int tutorId)
+    public IActionResult Choose(int? tutorId)
     {
-        if (tutorId == 0 || tutorId.Equals(0))
+        if (tutorId == null || tutorId == 0)
         {
             return NotFound();
         }
 
         return Json(new { tutorId = tutorId });
     }
+
     [HttpPost("RemoveReview")]
     public async Task<IActionResult> RemoveReview(int id)
     {
-        if (id.Equals(Guid.Empty))
+        if (id == 0)
         {
             return NotFound();
         }
 
         var result = await _mediator.Send(new RemoveTutorReviewCommand(id));
-        if (TempData["ClassId"] != null && result.IsSuccess )
+        if (TempData["ClassId"] != null && result.IsSuccess)
         {
-            Guid guid = (Guid)(TempData["ClassId"]??"");
-            return RedirectToAction("Edit", new {id = guid});
+            int guid = (int)(TempData["ClassId"] ?? 0);
+            return RedirectToAction("Edit", new { id = guid });
         }
 
         return NotFound();
@@ -285,7 +288,7 @@ public class CourseController : Controller
     [HttpGet("EditRequest")]
     public async Task<IActionResult> EditRequest(int id)
     {
-        if (id.Equals(Guid.Empty))
+        if (id == 0)
         {
             return NotFound();
         }
@@ -298,17 +301,17 @@ public class CourseController : Controller
                 }
             );
 
-        return Helper.RenderRazorViewToString(this,"_EditRequest", result.Value );
+        return Helper.RenderRazorViewToString(this, "_EditRequest", result.Value);
     }
+
     [HttpPost("CancelRequest")]
     public async Task<IActionResult> CancelRequest(RequestGettingClassMinimalDto requestGettingClassMinimalDto)
     {
         var result = await _mediator
             .Send(
-                new CancelRequestGettingClassCommand(requestGettingClassMinimalDto)
-                
+                new CancelRequestGettingCourseCommand(requestGettingClassMinimalDto)
             );
 
-        return RedirectToAction("Edit", new {id = requestGettingClassMinimalDto.CourseId});
+        return RedirectToAction("Edit", new { id = requestGettingClassMinimalDto.CourseId });
     }
 }

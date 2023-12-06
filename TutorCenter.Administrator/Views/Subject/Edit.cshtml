@@ -1,0 +1,96 @@
+﻿@model TutorCenter.Application.Contracts.Subjects.SubjectDto
+
+@{
+}
+<h1>Edit</h1>
+
+<div class="alert alert-success alert-dismissible fade collapse" role="alert" id="successAlert">
+    <i class="bi bi-check-circle me-1"></i>
+    Update successfully!
+    <button type="button" class="btn-close" data-bs-toggle="collapse" id="successAlertButton" data-bs-target="#successAlert" aria-expanded="false" aria-controls="successAlert" aria-label="Close"></button>
+</div>
+
+
+<hr />
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+
+        <!-- Multi Columns Form -->
+        <form class="row g-3" asp-action="Edit" asp-controller="Subject" onsubmit="return callPostActionWithForm(this);">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-md-12">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input type="text" asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <!-- ----------------------------------- -->
+
+            <div class="col-12">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Address" asp-for="Description" style="height: 100px;"></textarea>
+                    <label asp-for="Description" class="form-label">Description</label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+
+                </div>
+            </div>
+
+
+            <!-- ----------------------------------- -->
+            <!-- ----------------------------------- hidden info -->
+
+            <div class="form-group" hidden>
+                <label asp-for="DeleterUserId" class="control-label"></label>
+                <input asp-for="DeleterUserId" class="form-control" />
+                <span asp-validation-for="DeleterUserId" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="DeletionTime" class="control-label"></label>
+                <input asp-for="DeletionTime" class="form-control" />
+                <span asp-validation-for="DeletionTime" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="LastModificationTime" class="control-label"></label>
+                <input asp-for="LastModificationTime" class="form-control" />
+                <span asp-validation-for="LastModificationTime" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="LastModifierUserId" class="control-label"></label>
+                <input asp-for="LastModifierUserId" class="form-control" />
+                <span asp-validation-for="LastModifierUserId" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="CreationTime" class="control-label"></label>
+                <input asp-for="CreationTime" class="form-control" />
+                <span asp-validation-for="CreationTime" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="CreatorUserId" class="control-label"></label>
+                <input asp-for="CreatorUserId" class="form-control" />
+                <span asp-validation-for="CreatorUserId" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a type="reset" asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+            @Html.AntiForgeryToken()
+        </form><!-- End Multi Columns Form -->
+        <form asp-action="DeleteConfirmed" asp-controller="Subject">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <input type="hidden" asp-for="Id" />
+
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

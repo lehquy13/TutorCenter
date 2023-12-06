@@ -25,6 +25,7 @@ public class CourseRequestForDetailDto
     public bool IsDeleted { get; set; }
     public DateTime? LastModificationTime { get; set; }
 
+    public int TutorId { get; set; }
     public string TutorName { get; set; } = string.Empty;
     public string TutorPhone { get; set; } = string.Empty;
     public string TutorEmail { get; set; } = string.Empty;

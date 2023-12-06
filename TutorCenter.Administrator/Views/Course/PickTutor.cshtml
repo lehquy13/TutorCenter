@@ -1,34 +1,25 @@
-﻿@model List<TutorCenter.Application.Contracts.Users.Learners.LearnerDto>
+﻿@model List<TutorCenter.Application.Contracts.Users.Tutors.TutorForListDto>
 @{
     int i = 0;
-}
-<div class="pagetitle">
-    <h1>User Management</h1>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active">Students</li>
-        </ol>
-    </nav>
-</div><!-- End Page Title -->
+    Layout = "_ScriptLayout";
 
-<a type="button" class="btn btn-success rounded-pill" asp-action="Create" asp-controller="User">Create</a>
+}
+
 <div class="card">
     <div class="card-body">
-        <div class="card-title">Student</div>
-
+        <h5 class="card-title">Pick the tutor for class</h5>
 
         <!-- Table with stripped rows -->
         <table id="example" class="table datatable">
             <thead>
             <tr>
-
+                <!-- a avatar comlumn will be added -->
                 <th scope="col">#</th>
                 <th scope="col">Full Name</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Birth Year</th>
+                <th scope="col">Academic Level</th>
+                <th scope="col">University</th>
                 <th scope="col">Phone Number</th>
                 <th data-sortable="false" scope="col" style="width:30%;">Actions</th>
-
             </tr>
             </thead>
             <tbody>
@@ -42,14 +33,13 @@
                         @i
                     </th>
                     <td>@user.FirstName @user.LastName</td>
-                    <td>@user.Gender</td>
-                    <td>@user.BirthYear</td>
+                    <td>@user.AcademicLevel.ToString()</td>
+                    <td>@user.University</td>
                     <td>@user.PhoneNumber</td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@user.Id">Edit</a>|
-                        <a asp-action="Detail" asp-route-id="@user.Id">Details</a> |
-
-                        <a href="#" onclick="OpenGetDialog('@Url.Action("Delete", "User", new { id = @user.Id })','Are you sure you want to delete this user?');">Delete</a>
+                        <button type="button" class="btn btn-primary" onclick="ChooseTutor('@user.Id','@user.FirstName @user.LastName', '@user.PhoneNumber');">
+                            Choose
+                        </button>
                     </td>
                 </tr>
             }
@@ -58,3 +48,6 @@
         <!-- End Table with stripped rows -->
     </div>
 </div>
+
+
+

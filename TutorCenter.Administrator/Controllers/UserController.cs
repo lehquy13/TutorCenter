@@ -26,7 +26,7 @@ public class UserController : Controller
     {
         _logger = logger;
         _mediator = sender;
-       // _mapper = mapper;
+        // _mapper = mapper;
     }
 
     private void PackStaticListToView()
@@ -47,7 +47,7 @@ public class UserController : Controller
             PageSize = 200
         };
         var userDtos = await _mediator.Send(query);
-        if(userDtos.IsSuccess)
+        if (userDtos.IsSuccess)
             return View(userDtos.Value);
         return RedirectToAction("Error", "Home");
     }
@@ -61,7 +61,7 @@ public class UserController : Controller
             ObjectId = id
         };
         var result = await _mediator.Send(query);
-        if(result.IsSuccess)
+        if (result.IsSuccess)
             return View(result.Value);
         return RedirectToAction("Error", "Home");
     }
@@ -79,7 +79,7 @@ public class UserController : Controller
         {
             try
             {
-                var query = new CreateUpdateUserCommand(userDto,"");
+                var query = new CreateUpdateUserCommand(userDto, "");
 
 
                 var result = await _mediator.Send(query);
@@ -123,7 +123,7 @@ public class UserController : Controller
     public async Task<IActionResult> Create(UserDto userDto) // cant use userdto
     {
         userDto.LastModificationTime = DateTime.UtcNow;
-        var command = new CreateUpdateUserCommand(userDto,"");
+        var command = new CreateUpdateUserCommand(userDto, "");
 
 
         var result = await _mediator.Send(command);
@@ -133,8 +133,10 @@ public class UserController : Controller
             {
                 _logger.LogError("Create user failed! {VMessage}", v.Message);
             }
+
             return RedirectToAction("Error", "Home");
         }
+
         {
             return RedirectToAction("Index");
         }
@@ -157,6 +159,7 @@ public class UserController : Controller
             {
                 _logger.LogError("Delete user failed! {VMessage}", v.Message);
             }
+
             return RedirectToAction("Error", "Home");
         }
 
@@ -167,7 +170,7 @@ public class UserController : Controller
     [HttpPost("DeleteConfirmed")]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-        if (id == null || id.Equals(Guid.Empty))
+        if (id == null || id == 0)
         {
             return NotFound();
         }
@@ -186,7 +189,7 @@ public class UserController : Controller
     [HttpGet("Detail")]
     public async Task<IActionResult> Detail(int id)
     {
-        if (id == null || id.Equals(Guid.Empty))
+        if (id == 0)
         {
             return NotFound();
         }
@@ -212,11 +215,8 @@ public class UserController : Controller
             PageSize = 200
         };
         var studentDtos = await _mediator.Send(query);
-        if(studentDtos.IsSuccess)
+        if (studentDtos.IsSuccess)
             return View(studentDtos.Value);
         return RedirectToAction("Error", "Home");
     }
-
-  
-   
 }
