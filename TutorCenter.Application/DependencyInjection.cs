@@ -32,13 +32,7 @@ public static class DependencyInjection
         services.AddScoped(
             typeof(IPipelineBehavior<,>),
             typeof(ValidationBehavior<,>));
-        services.AddScoped(
-            typeof(IPipelineBehavior<GetObjectQuery<PaginatedList<SubjectDto>>, Result<PaginatedList<SubjectDto>>>),
-            typeof(CachingBehavior<GetObjectQuery<PaginatedList<SubjectDto>>, Result<PaginatedList<SubjectDto>>>));
-
-        services.AddScoped(typeof(IPipelineBehavior<GetAllCoursesQuery, PaginatedList<CourseForListDto>>)
-            , typeof(CachingBehavior<GetAllCoursesQuery, Result<PaginatedList<CourseForListDto>>>));
-
+       
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         return services;
     }

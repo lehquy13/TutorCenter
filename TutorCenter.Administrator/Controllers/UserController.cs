@@ -9,6 +9,9 @@ using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Domain;
 using TutorCenter.Application.Services.Users.Admin.Commands.CreateUpdateUser;
 using TutorCenter.Application.Services.Users.Admin.Commands.DeleteUser;
+using TutorCenter.Application.Services.Users.Queries.GetUserById;
+using TutorCenter.Application.Services.Users.Queries.Handlers.GetAllStudents;
+using TutorCenter.Application.Services.Users.Queries.Handlers.GetUsers;
 
 namespace TutorCenter.Administrator.Controllers;
 
@@ -42,7 +45,7 @@ public class UserController : Controller
     [Route("")]
     public async Task<IActionResult> Index()
     {
-        var query = new GetObjectQuery<PaginatedList<UserDto>>()
+        var query = new GetUsersQuery()
         {
             PageSize = 200
         };
@@ -56,9 +59,9 @@ public class UserController : Controller
     public async Task<IActionResult> Edit(int id)
     {
         PackStaticListToView();
-        var query = new GetObjectQuery<UserDto>()
+        var query = new GetUserByIdQuery()
         {
-            ObjectId = id
+            Id = id
         };
         var result = await _mediator.Send(query);
         if (result.IsSuccess)
@@ -68,7 +71,7 @@ public class UserController : Controller
 
     [HttpPost("Edit")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, UserDto userDto)
+    public async Task<IActionResult> Edit(int id, UserForDetailDto userDto)
     {
         if (id != userDto.Id)
         {
@@ -92,11 +95,7 @@ public class UserController : Controller
 
                 PackStaticListToView();
 
-                return Helper.RenderRazorViewToString(
-                    this,
-                    "Edit",
-                    userDto
-                );
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -120,7 +119,7 @@ public class UserController : Controller
 
     [HttpPost("Create")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(UserDto userDto) // cant use userdto
+    public async Task<IActionResult> Create(UserForDetailDto userDto) // cant use userdto
     {
         userDto.LastModificationTime = DateTime.UtcNow;
         var command = new CreateUpdateUserCommand(userDto, "");
@@ -150,7 +149,7 @@ public class UserController : Controller
             return NotFound();
         }
 
-        var query = new GetObjectQuery<UserDto>() { ObjectId = id };
+        var query = new GetUserByIdQuery() { Id = id };
         var result = await _mediator.Send(query);
 
         if (result.IsFailed)
@@ -167,7 +166,7 @@ public class UserController : Controller
         // return View(result);
     }
 
-    [HttpPost("DeleteConfirmed")]
+    [HttpGet("DeleteConfirmed")]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         if (id == null || id == 0)
@@ -194,7 +193,7 @@ public class UserController : Controller
             return NotFound();
         }
 
-        var query = new GetObjectQuery<UserDto>() { ObjectId = id };
+        var query = new GetUserByIdQuery() { Id = id };
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
@@ -210,7 +209,7 @@ public class UserController : Controller
     [HttpGet("Student")]
     public async Task<IActionResult> Student()
     {
-        var query = new GetObjectQuery<PaginatedList<LearnerDto>>
+        var query = new GetAllStudentsQuery()
         {
             PageSize = 200
         };

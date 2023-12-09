@@ -9,11 +9,14 @@ using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Application.Services.Users.Queries.GetAllTutorInformationsAdvanced;
 using TutorCenter.Domain;
 using TutorCenter.Application.Contracts.Subjects;
+using TutorCenter.Application.Services.Subjects.Queries;
 using TutorCenter.Application.Services.Users.Admin.Commands.RemoveTutorVerification;
 using TutorCenter.Application.Services.Users.Admin.Commands.CreateUpdateTutor;
 using TutorCenter.Application.Services.Users.Admin.Commands.DeleteUser;
+using TutorCenter.Application.Services.Users.Queries.Handlers.GetTutorById;
 
 namespace TutorCenter.Administrator.Controllers;
+
 [Authorize(Policy = "RequireAdministratorRole")]
 [Route("[controller]")]
 public class TutorController : Controller
@@ -46,7 +49,7 @@ public class TutorController : Controller
     {
         var query = new GetAllTutorInformationsAdvancedQuery();
         var userDtos = await _mediator.Send(query);
-        if(userDtos.IsSuccess)
+        if (userDtos.IsSuccess)
             return View(userDtos.Value);
         return RedirectToAction("Error", "Home");
     }
@@ -55,12 +58,13 @@ public class TutorController : Controller
     public async Task<IActionResult> Edit(int id)
     {
         PackStaticListToView();
-        var query = new GetObjectQuery<TutorForDetailDto>
+        var query = new GetTutorByIdQuery()
         {
             ObjectId = id
         };
         var result = await _mediator.Send(query);
-        if(result.IsSuccess)
+        
+        if (result.IsSuccess)
             return View(result.Value);
         return RedirectToAction("Error", "Home");
     }
@@ -88,6 +92,7 @@ public class TutorController : Controller
                     {
                         _logger.LogError("Error: " + v.Message);
                     }
+
                     return Helper.RenderRazorViewToString(
                         this,
                         "Edit",
@@ -98,11 +103,7 @@ public class TutorController : Controller
 
                 PackStaticListToView();
 
-                return Helper.RenderRazorViewToString(
-                    this,
-                    "Edit",
-                    userForDetailDto
-                );
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -119,7 +120,6 @@ public class TutorController : Controller
             userForDetailDto,
             true
         );
-
     }
 
     [HttpGet("Create")]
@@ -148,21 +148,22 @@ public class TutorController : Controller
             {
                 _logger.LogError("{0}", v.Message);
             }
+
             return RedirectToAction("Error", "Home");
         }
-       
-            return RedirectToAction("Index");
+
+        return RedirectToAction("Index");
     }
 
     [HttpGet("Delete")]
     public async Task<IActionResult> Delete(int id)
     {
-        if (id ==0)
+        if (id == 0)
         {
             return NotFound();
         }
 
-        var query = new GetObjectQuery<TutorForDetailDto>() { ObjectId = id };
+        var query = new GetTutorByIdQuery() { ObjectId = id };
         var result = await _mediator.Send(query);
 
         if (result.IsFailed)
@@ -171,13 +172,12 @@ public class TutorController : Controller
         }
 
         return Helper.RenderRazorViewToString(this, "Delete", result.Value);
-
     }
 
     [HttpPost("DeleteConfirmed")]
     public async Task<IActionResult> DeleteConfirmed(int? id)
     {
-        if (id == 0|| id.Equals(0))
+        if (id == 0 || id.Equals(0))
         {
             return NotFound();
         }
@@ -201,7 +201,7 @@ public class TutorController : Controller
             return NotFound();
         }
 
-        var query = new GetObjectQuery<TutorForDetailDto>() { ObjectId = (int)id };
+        var query = new GetTutorByIdQuery() { ObjectId = (int)id };
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
@@ -213,16 +213,18 @@ public class TutorController : Controller
     }
 
     #endregion
+
     [HttpGet("Subjects")]
     public async Task<IActionResult> Subjects(int id)
     {
-        var query = new GetObjectQuery<PaginatedList<SubjectDto>>()
+        var query = new GetAllSubjectsQuery()
         {
             ObjectId = id
         };
         var subjectDtos = await _mediator.Send(query);
         return Helper.RenderRazorViewToString(this, "_Subjects", subjectDtos.Value);
     }
+
     [HttpPost("RemoveTutorVerification")]
     public async Task<IActionResult> RemoveTutorVerification(int id)
     {
@@ -232,7 +234,5 @@ public class TutorController : Controller
         {
             res = result
         });
-        
     }
-
 }

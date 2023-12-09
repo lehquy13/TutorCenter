@@ -43,11 +43,18 @@ public class CreateUpdateCourseCommandHandler
             //Check if the class existed
             if (course is not null)
             {
-                course = _mapper.Map<Course>(command.CourseDto);
+                 _mapper.Map(command.CourseDto,course);
 
                 //update last modification time
                 course.LastModificationTime = DateTime.Now;
-                if (course.TutorId != null) course.Status = Status.Confirmed;
+                if (course.TutorId != 0 && course.TutorId != null)
+                {
+                    course.Status = Status.Confirmed;
+                }
+                else
+                {
+                    course.TutorId = null;
+                }
 
                 //Update existed class
                 var requestGettingCoursesFromDb =
@@ -56,7 +63,10 @@ public class CreateUpdateCourseCommandHandler
                             .Id)) // get all request getting classes by class ObjectId
                     .Where(x => x.TutorId != course.TutorId); // get all other request in order to cancel them
                 // Cancel them 
-                foreach (var iClass in requestGettingCoursesFromDb) iClass.RequestStatus = RequestStatus.Canceled;
+                foreach (var iClass in requestGettingCoursesFromDb)
+                {
+                    iClass.RequestStatus = RequestStatus.Canceled;
+                }
 
                 if (await _unitOfWork.SaveChangesAsync() > 0) return true;
 

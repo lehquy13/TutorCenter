@@ -8,8 +8,7 @@ using TutorCenter.Domain.Users.Repos;
 
 namespace TutorCenter.Application.Services.Authentication.Admin.Queries.Login;
 
-public class LoginQueryHandler
-    : IRequestHandler<LoginQuery, Result<AuthenticationResult>>
+public class LoginQueryHandler : IRequestHandler<LoginQuery, Result<AuthenticationResult>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IMapper _mapper;

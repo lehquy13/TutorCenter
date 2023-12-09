@@ -170,7 +170,9 @@
                     <div class="card-body">
                         <div class="card-title row">
                             <h5 class="col-11">Tutor Majors</h5>
-                            <button type="button" class="btn btn-primary col-1" onclick="OpenGetDialog('@Url.Action("Subjects","Tutor", new {id = @Model.Id})','Add major for @Model.FirstName @Model.LastName')">
+                            <button type="button" class="btn btn-primary col-1"
+                                    onclick="OpenGetDialog('@Url.Action("Subjects","Tutor", new {id = @Model.Id})'
+                                    ,'Add major for @Model.FirstName @Model.LastName')">
                                 <span class="bi bi-plus-circle"> </span>
                                 Add
                             </button>
@@ -191,14 +193,11 @@
                                             </div>
                                             <p class="mb-1">@s.Description</p>
                                         </a>
-                                        <button type="button"class="col-1 btn btn-danger" onclick="RemoveMajorSubject('@s.Id')">Remove</button>
+                                        <button type="button" class="col-1 btn btn-danger" onclick="RemoveMajorSubject('@s.Id')">Remove</button>
 
                                     </div>
                                 </div>
-
                             }
-
-
                         </div><!-- End List group Advanced Content -->
 
 

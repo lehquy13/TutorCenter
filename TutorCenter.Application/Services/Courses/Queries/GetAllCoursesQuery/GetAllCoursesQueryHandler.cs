@@ -1,6 +1,7 @@
 ﻿using FluentResults;
 using MapsterMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Contracts.Courses.Dtos;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
@@ -66,7 +67,8 @@ public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQuery, Res
             //Filter by Status if it is not null
             if (query.Status is not null) classesQuery = classesQuery.Where(x => x.Status == query.Status);
 
-            var classesQueryResult = classesQuery.ToList();
+            var classesQueryResult = classesQuery.Include(x => x.Subject)
+                .ToList();
 
             //totalPages after filtering
             var totalPages = classesQuery.Count();

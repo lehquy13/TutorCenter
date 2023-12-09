@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using TutorCenter.Application.Contracts.Authentications;
+using TutorCenter.Application.Services.Authentication.Admin.Commands.ChangePassword;
 
 namespace TutorCenter.Application.Services.Authentication.Customer.Commands.ChangePassword;
 

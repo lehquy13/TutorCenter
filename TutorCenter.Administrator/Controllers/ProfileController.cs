@@ -4,11 +4,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TutorCenter.Administrator.Models;
 using TutorCenter.Administrator.Utilities;
-using TutorCenter.Application.Contracts.Authentications;
 using TutorCenter.Application.Contracts.Users;
-using TutorCenter.Application.Services.Abstractions.QueryHandlers;
+using TutorCenter.Application.Services.Authentication.Admin.Commands.ChangePassword;
+using TutorCenter.Application.Services.Authentication.Admin.Queries.Login;
 using TutorCenter.Application.Services.Users.Admin.Commands.CreateUpdateUser;
 using TutorCenter.Domain;
+using GetUserByIdQuery = TutorCenter.Application.Services.Users.Queries.GetUserById.GetUserByIdQuery;
 
 namespace TutorCenter.Administrator.Controllers
 {
@@ -44,9 +45,9 @@ namespace TutorCenter.Administrator.Controllers
 
             var identity = HttpContext.User.Identities.First();
 
-            var query = new GetObjectQuery<UserDto>()
+            var query = new GetUserByIdQuery()
             {
-                ObjectId =Int32.Parse( identity.Claims.FirstOrDefault()?.Value )
+                Id = Int32.Parse(identity.Claims.FirstOrDefault()?.Value)
             };
 
             var loginResult = await _mediator.Send(query);
@@ -73,15 +74,14 @@ namespace TutorCenter.Administrator.Controllers
             }
 
             var image = await Helper.SaveFiles(formFile, _webHostEnvironment.WebRootPath);
-           
-            return Json(new { res = true, image = "temp\\" +  Path.GetFileName(image) });
+
+            return Json(new { res = true, image = "temp\\" + Path.GetFileName(image) });
         }
 
         [HttpPost("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(UserDto userDto, IFormFile? formFile)
+        public async Task<IActionResult> Edit(UserForDetailDto userDto, IFormFile? formFile)
         {
-           
             PackStaticListToView();
 
             if (ModelState.IsValid)
@@ -93,7 +93,8 @@ namespace TutorCenter.Administrator.Controllers
                     {
                         filePath = await Helper.SaveFiles(formFile, _webHostEnvironment.WebRootPath);
                     }
-                    var query = new CreateUpdateUserCommand(userDto,filePath);
+
+                    var query = new CreateUpdateUserCommand(userDto, filePath);
 
                     var result = await _mediator.Send(query);
                     ViewBag.Updated = result;
@@ -104,6 +105,7 @@ namespace TutorCenter.Administrator.Controllers
                         HttpContext.Session.SetString("name", query.UserDto.FirstName + query.UserDto.LastName);
                         HttpContext.Session.SetString("image", query.UserDto.Image);
                     }
+
                     return Helper.RenderRazorViewToString(this, "Profile", new ProfileViewModel
                     {
                         UserDto = userDto,
@@ -129,8 +131,6 @@ namespace TutorCenter.Administrator.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordCommand changePasswordRequest)
         {
-           
-
             if (ModelState.IsValid)
             {
                 try
@@ -141,7 +141,9 @@ namespace TutorCenter.Administrator.Controllers
 
                     if (loginResult.IsSuccess)
                     {
-                        return Helper.RenderRazorViewToString(this, "_ChangePassword", new TutorCenter.Contracts.Authentication.ChangePasswordRequest { Id = changePasswordRequest.Id});
+                        return Helper.RenderRazorViewToString(this, "_ChangePassword",
+                            new TutorCenter.Contracts.Authentication.ChangePasswordRequest
+                                { Id = changePasswordRequest.Id });
                     }
                 }
                 catch (Exception ex)
@@ -153,8 +155,7 @@ namespace TutorCenter.Administrator.Controllers
                 }
             }
 
-            return Helper.RenderRazorViewToString(this, "_ChangePassword", changePasswordRequest,true);
-
+            return Helper.RenderRazorViewToString(this, "_ChangePassword", changePasswordRequest, true);
         }
     }
 }

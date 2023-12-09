@@ -10,7 +10,7 @@
     List<string> learningModes = ViewData["LearningModes"] as List<string> ?? new List<string>();
     List<string> statuses = ViewData["Statuses"] as List<string> ?? new List<string>();
 
-    var subjects = (PaginatedList<SubjectDto>)(ViewData["Subjects"] ?? "");
+    var subjects = (List<SubjectDto>)(ViewData["Subjects"] ?? "");
 
 
 }

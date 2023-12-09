@@ -12,10 +12,12 @@ using TutorCenter.Application.Contracts.Users.Tutors;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Application.Services.Courses.Commands;
 using TutorCenter.Application.Services.Courses.Queries.GetAllCoursesQuery;
+using TutorCenter.Application.Services.Courses.Queries.GetCoureRequestById;
 using TutorCenter.Application.Services.Courses.Queries.GetCourseQuery;
+using TutorCenter.Application.Services.Subjects.Queries;
 using TutorCenter.Application.Services.Users.Admin.Commands.RemoveTutorReview;
 using TutorCenter.Application.Services.Users.Queries.GetAllTutorInformationsAdvanced;
-using TutorCenter.Application.Services.Users.Queries.GetLearningCoursesOfUserQuery;
+using TutorCenter.Application.Services.Users.Queries.GetLearners;
 using TutorCenter.Domain;
 
 namespace TutorCenter.Administrator.Controllers;
@@ -47,14 +49,14 @@ public class CourseController : Controller
         ViewData["Statuses"] = EnumProvider.Status;
 
 
-        var subjects = await _mediator.Send(new GetObjectQuery<PaginatedList<SubjectDto>>());
+        var subjects = await _mediator.Send(new GetAllSubjectsQuery());
         ViewData["Subjects"] = subjects.Value;
     }
 
     private async Task PackStudentAndTuTorList()
     {
         var tutorDtos = await _mediator.Send(new GetAllTutorInformationsAdvancedQuery());
-        var studentDtos = await _mediator.Send(new GetObjectQuery<PaginatedList<LearnerDto>>());
+        var studentDtos = await _mediator.Send(new GetLearnersQuery());
         ViewData["TutorDtos"] = tutorDtos;
         ViewData["StudentDtos"] = studentDtos;
     }
@@ -99,9 +101,9 @@ public class CourseController : Controller
 
     [HttpPost("Edit")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int Id, CourseForDetailDto classDto)
+    public async Task<IActionResult> Edit(int id, CourseForDetailDto classDto)
     {
-        if (Id != classDto.Id)
+        if (id != classDto.Id)
         {
             return NotFound();
         }
@@ -126,7 +128,7 @@ public class CourseController : Controller
         await PackStaticListToView();
         await PackStudentAndTuTorList();
 
-        return Helper.RenderRazorViewToString(this, "Edit", classDto);
+        return RedirectToAction("Index");
     }
 
     [HttpGet("Create")]
@@ -157,7 +159,7 @@ public class CourseController : Controller
             return NotFound();
         }
 
-        var query = new GetObjectQuery<CourseForDetailDto>() { ObjectId = (int)id };
+        var query = new GetCourseQuery() { Id = (int)id };
         var result = await _mediator.Send(query);
 
         if (result.IsFailed)
@@ -196,7 +198,7 @@ public class CourseController : Controller
             return NotFound();
         }
 
-        var query = new GetObjectQuery<CourseForDetailDto> { ObjectId = (int)id };
+        var query = new GetCourseQuery() { Id = (int)id };
 
         var result = await _mediator.Send(query);
 
@@ -225,7 +227,7 @@ public class CourseController : Controller
             return NotFound();
         }
 
-        var query = new GetObjectQuery<TutorForDetailDto>() { ObjectId = (int)id };
+        var query = new GetCourseQuery() { Id = (int)id };
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
@@ -244,7 +246,7 @@ public class CourseController : Controller
             return NotFound();
         }
 
-        var query = new GetObjectQuery<TutorReviewDto>() { ObjectId = (int)id };
+        var query = new GetCourseQuery(){ Id = (int)id };
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
@@ -295,9 +297,9 @@ public class CourseController : Controller
 
         var result = await _mediator
             .Send(
-                new GetObjectQuery<Result<RequestGettingClassMinimalDto>>
+                new GetCourseRequestByIdQuery()
                 {
-                    ObjectId = id
+                    Id = id
                 }
             );
 

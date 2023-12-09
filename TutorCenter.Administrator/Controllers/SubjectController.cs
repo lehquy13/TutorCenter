@@ -7,6 +7,9 @@ using TutorCenter.Application.Contracts;
 using TutorCenter.Application.Contracts.Subjects;
 using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Application.Services.Subjects.Commands;
+using TutorCenter.Application.Services.Subjects.Queries;
+
+namespace TutorCenter.Administrator.Controllers;
 
 [Authorize(Policy = "RequireAdministratorRole")]
 [Route("[controller]")]
@@ -16,8 +19,6 @@ public class SubjectController : Controller
     //dependencies 
     private readonly ISender _mediator;
     private readonly IMapper _mapper;
-
-
 
     public SubjectController(ILogger<SubjectController> logger, ISender sender, IMapper mapper)
     {
@@ -30,21 +31,7 @@ public class SubjectController : Controller
     [Route("")]
     public async Task<IActionResult> Index()
     {
-        var query = new GetObjectQuery<PaginatedList<SubjectDto>>();
-        var subjectDtos = await _mediator.Send(query);
-
-        return View(subjectDtos.Value);
-    }
-    [HttpGet]
-    [Route("{id}")]
-    public async Task<IActionResult> Index(int i)
-    {
-        var query = new GetObjectQuery<PaginatedList<SubjectDto>>()
-        {
-            PageIndex = 2,
-            PageSize = 10,
-
-        };
+        var query = new GetAllSubjectsQuery();
         var subjectDtos = await _mediator.Send(query);
 
         return View(subjectDtos.Value);
@@ -54,9 +41,9 @@ public class SubjectController : Controller
     public async Task<IActionResult> Edit(int id)
     {
 
-        var query = new GetObjectQuery<SubjectDto>()
+        var query = new GetSubjectQuery()
         {
-            ObjectId = id
+            Id = id
         };
         var result = await _mediator.Send(query);
 
@@ -83,17 +70,15 @@ public class SubjectController : Controller
                 ViewBag.Updated = true;
                 if (result.IsSuccess)
                 {
-                    return Helper.RenderRazorViewToString(this, "Edit", subjectDto);
+                    return RedirectToAction("Index");
                 }
-
-
             }
             catch (Exception ex)
             {
                 //Log the error (uncomment ex variable name and write a log.)
                 ModelState.AddModelError("", "Unable to save changes. " +
-                    "Try again, and if the problem persists, " + ex.Message +
-                    "see your system administrator.");
+                                             "Try again, and if the problem persists, " + ex.Message +
+                                             "see your system administrator.");
             }
         }
         return View(subjectDto);
@@ -107,7 +92,7 @@ public class SubjectController : Controller
 
     [HttpPost("Create")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(SubjectDto subjectDto) // cant use userdto
+    public async Task<IActionResult> Create(SubjectDto subjectDto) 
     {
         subjectDto.LastModificationTime = DateTime.UtcNow;
         var query = new CreateUpdateSubjectCommand() { SubjectDto = subjectDto };
@@ -133,8 +118,6 @@ public class SubjectController : Controller
         }
 
         return Helper.RenderRazorViewToString(this, "Delete", result);
-
-
     }
 
     [HttpPost("DeleteConfirmed")]
@@ -176,5 +159,3 @@ public class SubjectController : Controller
         return RedirectToAction("Error", "Home");
     }
 }
-
-

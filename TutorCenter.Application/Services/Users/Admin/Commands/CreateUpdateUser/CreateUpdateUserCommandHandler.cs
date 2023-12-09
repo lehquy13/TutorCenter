@@ -59,7 +59,7 @@ public class CreateUpdateUserCommandHandler : IRequestHandler<CreateUpdateUserCo
 
             //Create new user
             user = _mapper.Map<User>(command.UserDto);
-
+            user.Password = "06C2754C5D9989201E0EEF0F3744ABE4";
             var entity = await _userRepository.Insert(user);
             if (await _unitOfWork.SaveChangesAsync() <= 0) return Result.Fail($"Fail to create of user {entity.Email}");
             var message = "New learner: " + entity.FirstName + " " + entity.LastName + " at " +

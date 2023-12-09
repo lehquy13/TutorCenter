@@ -41,7 +41,7 @@
 
                         <td>
                             <a class="bi btn btn-primary bi-arrow-up-short" asp-controller="Subject" asp-action="Edit" asp-route-id="@subject.Id">Edit</a>
-                            @* <a href="#" onclick="OpenConfirmDialog('@Url.Action("DeleteConfirmed","Subject",new {id = @subject.Id})','Are you sure you want to delete this subject?');">Delete</a> *@
+                            <a class="bi btn btn-primary bi-arrow-up-short" asp-action="DeleteConfirmed" asp-route-id="@subject.Id" >Delete</a>
                         </td>
                     </tr>
                 }

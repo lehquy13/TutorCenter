@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using TutorCenter.Application.Contracts.Authentications;
 using TutorCenter.Application.Services.Authentication.Admin.Commands.ForgotPassword;
+using TutorCenter.Application.Services.Authentication.Admin.Queries.Login;
 
 namespace TutorCenter.Administrator.Controllers;
 
@@ -32,6 +33,7 @@ public class AuthenticationController : Controller
         {
             return View("Login", new LoginQuery("", ""));
         }
+
         var query = new ValidateTokenQuery(validateToken);
 
         var loginResult = await _mediator.Send(query);
@@ -53,21 +55,23 @@ public class AuthenticationController : Controller
         var loginResult = await _mediator.Send(query);
 
 
-        if (loginResult.IsSuccess is false || loginResult.User is null)
+        if (loginResult.IsSuccess is false || loginResult.Value.User is null)
         {
             ViewBag.isFail = true;
             return View("Login", new LoginQuery("", ""));
         }
         // Store the JWT token in a cookie
-      
+
         //store token into session
-        HttpContext.Session.SetString("access_token", loginResult.Token);
-        HttpContext.Session.SetString("name", loginResult.User.FullName);
-        HttpContext.Session.SetString("image", loginResult.User.Image);
+        HttpContext.Session.SetString("access_token", loginResult.Value.Token);
+        HttpContext.Session.SetString("name", loginResult.Value.User.FullName);
+        HttpContext.Session.SetString("image", loginResult.Value.User.Image);
 
         var returnUrl = TempData["ReturnUrl"] as string;
         if (returnUrl is null)
-            return RedirectToAction("Index", "Home");
+        {
+            return Redirect("/home");
+        }
 
         return Redirect(returnUrl);
     }
@@ -77,7 +81,6 @@ public class AuthenticationController : Controller
     [HttpGet("Logout")]
     public IActionResult Logout()
     {
-     
         HttpContext.Session.Clear();
 
         return View("Login", new LoginQuery("", ""));

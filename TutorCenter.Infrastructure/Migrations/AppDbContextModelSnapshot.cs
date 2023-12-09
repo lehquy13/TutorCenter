@@ -109,11 +109,16 @@ namespace TutorCenter.Infrastructure.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
+                    b.Property<int?>("TutorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("LearnerId");
 
                     b.HasIndex("SubjectId");
+
+                    b.HasIndex("TutorId");
 
                     b.ToTable("Course", (string)null);
                 });
@@ -406,6 +411,10 @@ namespace TutorCenter.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TutorCenter.Domain.Users.Tutor", "Tutor")
+                        .WithMany()
+                        .HasForeignKey("TutorId");
+
                     b.OwnsOne("TutorCenter.Domain.Courses.ReviewDetail", "ReviewDetail", b1 =>
                         {
                             b1.Property<int>("CourseId")
@@ -432,6 +441,8 @@ namespace TutorCenter.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Subject");
+
+                    b.Navigation("Tutor");
                 });
 
             modelBuilder.Entity("TutorCenter.Domain.Courses.CourseRequest", b =>

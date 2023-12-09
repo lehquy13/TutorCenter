@@ -51,7 +51,7 @@ public class UserMappingConfig : IRegister
         config.NewConfig<ReviewDetail, ReviewDetailDto>();
         config.NewConfig<Subject, SubjectDto>();
         config.NewConfig<Tutor, TutorForDetailDto>()
-            .Map(des => des.Majors, src => src.Subjects.Select(x => x.Name).ToList())
+            .Map(des => des.Majors, src => src.Subjects.ToList())
             .Map(des => des.Gender, src => src.Gender.ToString())
             .Map(des => des.Role, src => src.Role.ToString())
             .Map(des => des.AcademicLevel, src => src.AcademicLevel.ToString())

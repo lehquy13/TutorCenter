@@ -1,6 +1,6 @@
 ﻿@using TutorCenter.Application.Contracts.Users;
 @using TutorCenter.Domain.ClassInformationConsts;
-@model UserDto
+@model UserForDetailDto
 
 @{
     ViewData["Title"] = "Edit";
@@ -108,7 +108,7 @@
             <div class="col-md-6">
                 <label asp-for="PhoneNumber" class="form-label">Number</label>
                 <div class="col-sm-12">
-                    <input type="number" asp-for="PhoneNumber" class="form-control" />
+                    <input type="text" asp-for="PhoneNumber" class="form-control" />
                 </div>
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
 
@@ -135,42 +135,7 @@
 
                 </div>
             </div>
-
-
            
-
-            <!-- ----------------------------------- hidden info -->
-
-            <div class="form-group" hidden>
-                <label asp-for="DeleterUserId" class="control-label"></label>
-                <input asp-for="DeleterUserId" class="form-control" />
-                <span asp-validation-for="DeleterUserId" class="text-danger"></span>
-            </div>
-            <div class="form-group" hidden>
-                <label asp-for="DeletionTime" class="control-label"></label>
-                <input asp-for="DeletionTime" class="form-control" />
-                <span asp-validation-for="DeletionTime" class="text-danger"></span>
-            </div>
-            <div class="form-group" hidden>
-                <label asp-for="LastModificationTime" class="control-label"></label>
-                <input asp-for="LastModificationTime" class="form-control" />
-                <span asp-validation-for="LastModificationTime" class="text-danger"></span>
-            </div>
-            <div class="form-group" hidden>
-                <label asp-for="LastModifierUserId" class="control-label"></label>
-                <input asp-for="LastModifierUserId" class="form-control" />
-                <span asp-validation-for="LastModifierUserId" class="text-danger"></span>
-            </div>
-            <div class="form-group" hidden="hidden" >
-                <label asp-for="CreationTime" class="control-label"></label>
-                <input asp-for="CreationTime" class="form-control" />
-                <span asp-validation-for="CreationTime" class="text-danger"></span>
-            </div>
-            <div class="form-group" hidden>
-                <label asp-for="CreatorUserId" class="control-label"></label>
-                <input asp-for="CreatorUserId" class="form-control" />
-                <span asp-validation-for="CreatorUserId" class="text-danger"></span>
-            </div>
             <input type="hidden" asp-for="Id" />
             <div class="text-center">
                 @if (Model.Role == UserRole.Admin)

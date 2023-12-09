@@ -6,6 +6,6 @@ namespace TutorCenter.Application.Services.Users.Admin.Commands.CreateUpdateUser
 
 public record CreateUpdateUserCommand
 (
-    UserDto UserDto,
+    UserForDetailDto UserDto,
     string FilePath
 ) : IRequest<Result<bool>>;
