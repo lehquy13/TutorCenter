@@ -70,7 +70,7 @@ public class AuthenticationController : Controller
         var returnUrl = TempData["ReturnUrl"] as string;
         if (returnUrl is null)
         {
-            return Redirect("/home");
+            return Redirect("/Home");
         }
 
         return Redirect(returnUrl);

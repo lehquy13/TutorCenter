@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorCenter.Application", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorCenter.Infrastructure", "TutorCenter.Infrastructure\TutorCenter.Infrastructure.csproj", "{238A8F42-9493-4C0B-AF5A-846BB1433486}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorCenter.Client", "TutorCenter.Client\TutorCenter.Client.csproj", "{75871465-CF64-437C-BF65-0525700B2A2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorCenter.Client", "TutorCenter.Client\TutorCenter.Client.csproj", "{75871465-CF64-437C-BF65-0525700B2A2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorCenter.DBMigrator", "TutorCenter.DBMigrator\TutorCenter.DBMigrator.csproj", "{33A574D2-E2AF-4CF0-9331-C881D7003804}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorCenter.DBMigrator", "TutorCenter.DBMigrator\TutorCenter.DBMigrator.csproj", "{33A574D2-E2AF-4CF0-9331-C881D7003804}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
