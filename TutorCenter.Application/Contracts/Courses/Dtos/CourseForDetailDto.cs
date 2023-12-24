@@ -6,7 +6,7 @@ public class CourseForDetailDto
 
     public List<CourseRequestForDetailDto> RequestGettingClassDtos = new();
 
-    public ReviewDetailDto ReviewDetailDto = new();
+    public string ReviewDetailDto { get; set; } = string.Empty;
 
     //Basic Information
     public int Id { get; set; } = 0;

@@ -52,17 +52,17 @@ public class CourseMappingConfig : IRegister
             //.Map(dest => dest.TutorId, src => src.TutorId)
             .Map(dest => dest, src => src);
         config.NewConfig<Course, CourseForDetailDto>()
-            .Map(dest => dest.TutorName, src => src.CourseRequests.FirstOrDefault()!.Tutor.GetFullNAme(),
-                srcCon => srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorName, src => "", srcCon => !srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorId, src => src.CourseRequests.FirstOrDefault()!.Tutor.Id,
-                srcCon => srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorId, src => 0, srcCon => !srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorPhoneNumber, src => src.CourseRequests.FirstOrDefault()!.Tutor.PhoneNumber,
-                srcCon => srcCon.CourseRequests.Any())
-            .Map(dest => dest.TutorPhoneNumber, src => "", srcCon => !srcCon.CourseRequests.Any())
+            .Map(dest => dest.TutorName, src => src.Tutor.GetFullNAme())
+            .Map(dest => dest.TutorId, src => src.Tutor.Id)
+            .Map(dest => dest.TutorPhoneNumber, src => src.Tutor.PhoneNumber)
+            .Map(dest => dest.ReviewDetailDto, src => src.ReviewDetail.Detail)
             .Map(dest => dest, src => src);
+        
         config.NewConfig<Course, CourseForListDto>();
+        
+        config.NewConfig<CourseForDetailDto, Course>()
+            .Map(dest => dest.ReviewDetail, src => new ReviewDetail { Detail = src.ReviewDetailDto })
+            .Map(dest => dest, src => src);
 
 
         //Config for ReviewDetail

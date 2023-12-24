@@ -1,4 +1,4 @@
-﻿ using FluentResults;
+﻿using FluentResults;
 using LazyCache;
 using MapsterMapper;
 using MediatR;
@@ -43,7 +43,7 @@ public class CreateUpdateCourseCommandHandler
             //Check if the class existed
             if (course is not null)
             {
-                 _mapper.Map(command.CourseDto,course);
+                _mapper.Map(command.CourseDto, course);
 
                 //update last modification time
                 course.LastModificationTime = DateTime.Now;

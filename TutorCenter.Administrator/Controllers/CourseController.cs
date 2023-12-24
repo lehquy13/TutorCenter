@@ -18,12 +18,13 @@ using TutorCenter.Application.Services.Subjects.Queries;
 using TutorCenter.Application.Services.Users.Admin.Commands.RemoveTutorReview;
 using TutorCenter.Application.Services.Users.Queries.GetAllTutorInformationsAdvanced;
 using TutorCenter.Application.Services.Users.Queries.GetLearners;
+using TutorCenter.Application.Services.Users.Queries.Handlers.GetTutorById;
 using TutorCenter.Domain;
 
 namespace TutorCenter.Administrator.Controllers;
 
 [Route("[controller]")]
-[Authorize]
+//[Authorize]
 public class CourseController : Controller
 {
     private readonly ILogger<CourseController> _logger;
@@ -231,7 +232,7 @@ public class CourseController : Controller
             return NotFound();
         }
 
-        var query = new GetCourseQuery() { Id = (int)id };
+        var query = new GetTutorByIdQuery() { ObjectId = (int)id };
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
