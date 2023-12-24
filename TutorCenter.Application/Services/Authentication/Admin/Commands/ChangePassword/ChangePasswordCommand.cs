@@ -3,11 +3,12 @@ using TutorCenter.Application.Contracts.Authentications;
 
 namespace TutorCenter.Application.Services.Authentication.Admin.Commands.ChangePassword;
 
-public record ChangePasswordCommand
-(
-    int Id,
+public record ChangePasswordCommand(
     string CurrentPassword,
     string NewPassword,
     string ConfirmedPassword
-    ) : IRequest<AuthenticationResult>;
+) : IRequest<AuthenticationResult>
+{
+    public int Id { get; set; }
+}
 

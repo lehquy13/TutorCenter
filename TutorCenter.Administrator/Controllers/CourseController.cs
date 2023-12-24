@@ -128,7 +128,11 @@ public class CourseController : Controller
         await PackStaticListToView();
         await PackStudentAndTuTorList();
 
-        return RedirectToAction("Index");
+        return Helper.RenderRazorViewToString(
+            this,
+            "Edit",
+            classDto
+        );
     }
 
     [HttpGet("Create")]
@@ -168,7 +172,7 @@ public class CourseController : Controller
         }
 
         return
-            Helper.RenderRazorViewToString(this, "Delete", result);
+            Helper.RenderRazorViewToString(this, "Delete", result.Value);
     }
 
     [HttpPost("DeleteConfirmed")]

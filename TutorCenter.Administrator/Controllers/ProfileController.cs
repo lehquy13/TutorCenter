@@ -1,4 +1,5 @@
-﻿using MapsterMapper;
+﻿using System.Security.Claims;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -54,11 +55,10 @@ namespace TutorCenter.Administrator.Controllers
 
             if (loginResult.IsSuccess)
             {
-                var changePasswordRequest = _mapper.Map<ChangePasswordCommand>(loginResult);
+               
                 return View(new ProfileViewModel
                 {
-                    UserDto = loginResult.Value,
-                    ChangePasswordCommand = changePasswordRequest
+                    UserDto = loginResult.Value
                 });
             }
 
@@ -108,8 +108,7 @@ namespace TutorCenter.Administrator.Controllers
 
                     return Helper.RenderRazorViewToString(this, "Profile", new ProfileViewModel
                     {
-                        UserDto = userDto,
-                        ChangePasswordCommand = _mapper.Map<ChangePasswordCommand>(userDto)
+                        UserDto = userDto
                     });
                 }
                 catch (Exception ex)
@@ -135,9 +134,10 @@ namespace TutorCenter.Administrator.Controllers
             {
                 try
                 {
-                    var query = _mapper.Map<ChangePasswordCommand>(changePasswordRequest);
-
-                    var loginResult = await _mediator.Send(query);
+                    changePasswordRequest.Id = Int32.Parse(User.FindFirstValue(ClaimTypes.Name) ?? "-1");
+                    
+                    
+                    var loginResult = await _mediator.Send(changePasswordRequest);
 
                     if (loginResult.IsSuccess)
                     {

@@ -74,7 +74,13 @@ public static class Helper
     public static  string ClearTempFile(string wwwRootPath)
     {
         string path = Path.Combine(wwwRootPath + "\\temp\\");
-
+        
+        //Ensure created path
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+        
         DirectoryInfo di = new DirectoryInfo(path);
 
         foreach (FileInfo file in di.GetFiles())

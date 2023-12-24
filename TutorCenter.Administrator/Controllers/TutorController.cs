@@ -103,7 +103,11 @@ public class TutorController : Controller
 
                 PackStaticListToView();
 
-                return RedirectToAction("Index");
+                return Helper.RenderRazorViewToString(
+                    this,
+                    "Edit",
+                    userForDetailDto
+                );
             }
             catch (Exception ex)
             {

@@ -16,35 +16,35 @@
         <!-- Table with stripped rows -->
         <table id="example" class="table datatable">
             <thead>
-                <tr>
+            <tr>
 
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th data-sortable="false" scope="col" style="width:30%;">Actions</th>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th data-sortable="false" scope="col" style="width:30%;">Actions</th>
 
-                </tr>
+            </tr>
             </thead>
             <tbody>
 
-                @foreach (var subject in Model)
-                {
-                    i++;
-                    <tr>
-                        <th scope="row">
-                            <input hidden value="@subject.Id" />
-                            @i
-                        </th>
+            @foreach (var subject in Model)
+            {
+                i++;
+                <tr>
+                    <th scope="row">
+                        <input hidden value="@subject.Id"/>
+                        @i
+                    </th>
 
-                        <td>@subject.Name</td>
-                        <td>@subject.Description</td>
+                    <td>@subject.Name</td>
+                    <td>@subject.Description</td>
 
-                        <td>
-                            <a class="bi btn btn-primary bi-arrow-up-short" asp-controller="Subject" asp-action="Edit" asp-route-id="@subject.Id">Edit</a>
-                            <a class="bi btn btn-primary bi-arrow-up-short" asp-action="DeleteConfirmed" asp-route-id="@subject.Id" >Delete</a>
-                        </td>
-                    </tr>
-                }
+                    <td>
+                        <a class="bi btn btn-primary bi-arrow-up-short" asp-controller="Subject" asp-action="Edit" asp-route-id="@subject.Id">Edit</a>
+                        <a class="bi btn btn-primary bi-arrow-up-short" asp-action="DeleteConfirmed" asp-route-id="@subject.Id">Delete</a>
+                    </td>
+                </tr>
+            }
 
 
             </tbody>

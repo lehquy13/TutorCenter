@@ -18,9 +18,8 @@ function callPostActionWithForm(formInput) {
             if (res.res === true) {
                 if(res.viewName === "Profile" )
                     $('#main').html(res.partialView);
-
-                $('#successAlert').removeClass("collapse");
-                $('#successAlert').removeClass("fade");
+                alertify.success('Change successfully');
+               
             } else if (res.res === "deleted") {
                 $('#verticalycentered').modal('hide');
                 
@@ -34,12 +33,11 @@ function callPostActionWithForm(formInput) {
                     $('#profile-change-password').html(res.partialView);
                     $('#profile-change-password-button').click();
                 }
-                
 
                 //$('#failAlertButton').click();
-                $('#failAlert').removeClass("collapse");
-                $('#failAlert').removeClass("fade");
-             
+                alertify.error('Change failed');
+
+
             }
         },
         error: function (err) {

@@ -1,5 +1,5 @@
 ﻿@using TutorCenter.Application.Contracts.Users;
-@model TutorCenter.Application.Contracts.Users.UserDto;
+@model UserForDetailDto
 @{
     List<string> genders = ViewData["Genders"] as List<string> ?? new List<string>();
     //AddressDto addressDto = ViewData["Addresses"] as AddressDto ?? new AddressDto(new List<CityDto>());
@@ -20,9 +20,6 @@
                     <i class="bi bi-upload"></i>
                 </a>
 
-                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image">
-                    <i class="bi bi-trash"></i>
-                </a>
             </div>
         </div>
     </div>
@@ -127,69 +124,14 @@
 
         </div>
     </div>
-
-    <div class="row mb-3">
-        <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-        <div class="col-md-8 col-lg-9">
-            <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-        <div class="col-md-8 col-lg-9">
-            <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-        <div class="col-md-8 col-lg-9">
-            <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-        <div class="col-md-8 col-lg-9">
-            <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
-        </div>
-    </div>
-    <!-- hidden info-->
-    <div class="col-md-6" hidden>
-        <label asp-for="Password" class="form-label">Password</label>
-        <input type="password" asp-for="Password" class="form-control">
-    </div>
-    <div class="form-group" hidden>
-        <label asp-for="DeleterUserId" class="control-label"></label>
-        <input asp-for="DeleterUserId" class="form-control"/>
-        <span asp-validation-for="DeleterUserId" class="text-danger"></span>
-    </div>
-    <div class="form-group" hidden>
-        <label asp-for="DeletionTime" class="control-label"></label>
-        <input asp-for="DeletionTime" class="form-control"/>
-        <span asp-validation-for="DeletionTime" class="text-danger"></span>
-    </div>
+    
+   
     <div class="form-group" hidden>
         <label asp-for="LastModificationTime" class="control-label"></label>
         <input asp-for="LastModificationTime" class="form-control"/>
         <span asp-validation-for="LastModificationTime" class="text-danger"></span>
     </div>
-    <div class="form-group" hidden>
-        <label asp-for="LastModifierUserId" class="control-label"></label>
-        <input asp-for="LastModifierUserId" class="form-control"/>
-        <span asp-validation-for="LastModifierUserId" class="text-danger"></span>
-    </div>
-    <div class="form-group" hidden>
-        <label asp-for="CreationTime" class="control-label"></label>
-        <input asp-for="CreationTime" class="form-control"/>
-        <span asp-validation-for="CreationTime" class="text-danger"></span>
-    </div>
-    <div class="form-group" hidden>
-        <label asp-for="CreatorUserId" class="control-label"></label>
-        <input asp-for="CreatorUserId" class="form-control"/>
-        <span asp-validation-for="CreatorUserId" class="text-danger"></span>
-    </div>
+  
     <input type="hidden" asp-for="Id"/>
 
     <div class="text-center">

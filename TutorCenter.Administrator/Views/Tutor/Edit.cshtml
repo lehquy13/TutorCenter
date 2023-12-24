@@ -138,7 +138,7 @@
                 <div class="col-md-4">
                     <label asp-for="AcademicLevel" class="form-label">Academic Level</label>
                     <select asp-for="AcademicLevel" class="form-select">
-                        <option selected>@Model.AcademicLevel.ToString()</option>
+                        <option selected>@Model.AcademicLevel</option>
 
                         @foreach (var i in academics)
                         {

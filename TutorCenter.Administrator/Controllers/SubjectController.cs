@@ -11,7 +11,7 @@ using TutorCenter.Application.Services.Subjects.Queries;
 
 namespace TutorCenter.Administrator.Controllers;
 
-[Authorize(Policy = "RequireAdministratorRole")]
+//[Authorize(Policy = "RequireAdministratorRole")]
 [Route("[controller]")]
 public class SubjectController : Controller
 {
@@ -70,7 +70,7 @@ public class SubjectController : Controller
                 ViewBag.Updated = true;
                 if (result.IsSuccess)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index","Subject");
                 }
             }
             catch (Exception ex)
@@ -120,20 +120,20 @@ public class SubjectController : Controller
         return Helper.RenderRazorViewToString(this, "Delete", result);
     }
 
-    [HttpPost("DeleteConfirmed")]
-    public async Task<IActionResult> DeleteConfirmed(int? id)
+    [HttpGet("DeleteConfirmed/{id}")]
+    public async Task<IActionResult> DeleteConfirmed(int id)
     {
         if (id == null || id == 0)
         {
             return NotFound();
         }
 
-        var query = new DeleteSubjectCommand((int)id);
+        var query = new DeleteSubjectCommand(id);
         var result = await _mediator.Send(query);
 
         if (result.IsSuccess)
         {
-            return Json(new { res = "deleted" });
+            return RedirectToAction("Index", "Home");
 
         }
         return RedirectToAction("Error", "Home");

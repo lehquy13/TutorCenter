@@ -7,6 +7,6 @@ namespace TutorCenter.Administrator.Models;
 public class ProfileViewModel
 {
     public UserForDetailDto UserDto { get; set; } = new();
-    public ChangePasswordCommand ChangePasswordCommand { get; set; }
+    public ChangePasswordCommand ChangePasswordCommand { get; set; } = new("","","");
     
 }

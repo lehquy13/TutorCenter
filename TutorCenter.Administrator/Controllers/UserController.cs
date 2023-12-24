@@ -95,7 +95,11 @@ public class UserController : Controller
 
                 PackStaticListToView();
 
-                return RedirectToAction("Index");
+                return Helper.RenderRazorViewToString(
+                    this,
+                    "Edit",
+                    userDto
+                );
             }
             catch (Exception ex)
             {
