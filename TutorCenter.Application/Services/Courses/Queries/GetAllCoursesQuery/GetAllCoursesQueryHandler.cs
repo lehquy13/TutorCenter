@@ -38,6 +38,7 @@ public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQuery, Res
         {
             //Create a list of class query
             var classesQuery = _courseRepository.GetAll()
+                .Where(x => x.IsDeleted == false)
                 .OrderByDescending(x => x.CreationTime)
                 .Where(x => x.IsDeleted == false);
             //Filter by Today | Verifying | Purchasing | All

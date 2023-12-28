@@ -25,9 +25,8 @@ public static class DependencyInjection
                 cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
                 cfg.NotificationPublisher = new TaskWhenAllPublisher();
             });
-        ;
+        
         services.AddLazyCache();
-
 
         services.AddScoped(
             typeof(IPipelineBehavior<,>),

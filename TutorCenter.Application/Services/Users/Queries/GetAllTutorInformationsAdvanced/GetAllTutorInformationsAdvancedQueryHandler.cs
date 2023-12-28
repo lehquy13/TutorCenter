@@ -42,7 +42,7 @@ public class
         try
         {
             var subjects = await _subjectRepository.GetAllList();
-            var tutors = _tutorRepository.GetAll();
+            var tutors = _tutorRepository.GetAll().Where(x => x.IsDeleted == false);
 
             if (query.Academic != AcademicLevel.Optional)
                 tutors = tutors.Where(user => user.AcademicLevel == query.Academic);

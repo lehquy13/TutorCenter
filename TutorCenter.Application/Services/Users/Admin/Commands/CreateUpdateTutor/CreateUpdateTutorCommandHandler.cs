@@ -3,7 +3,11 @@ using LazyCache;
 using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using TutorCenter.Application.Contracts;
+using TutorCenter.Application.Services.Abstractions.QueryHandlers;
 using TutorCenter.Application.Services.Courses.Commands;
+using TutorCenter.Application.Services.Users.Queries.Handlers.GetAllTutors;
 using TutorCenter.Domain.Interfaces.Services;
 using TutorCenter.Domain.NotificationConsts;
 using TutorCenter.Domain.Repository;
@@ -99,6 +103,8 @@ public class CreateUpdateTutorCommandHandler : IRequestHandler<CreateUpdateTutor
                           entityToCreate.CreationTime.ToLongDateString();
             await _publisher.Publish(new NewObjectCreatedEvent(entityToCreate.Id, message, NotificationEnum.Tutor),
                 cancellationToken);
+            var defaultRequest = new GetAllTutorsQuery();
+            _cache.Remove(defaultRequest.GetType() + JsonConvert.SerializeObject(defaultRequest));
             return true;
         }
         catch (Exception ex)
