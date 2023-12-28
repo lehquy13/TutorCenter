@@ -52,9 +52,9 @@ public class CourseMappingConfig : IRegister
             //.Map(dest => dest.TutorId, src => src.TutorId)
             .Map(dest => dest, src => src);
         config.NewConfig<Course, CourseForDetailDto>()
-            .Map(dest => dest.TutorName, src => src.Tutor.GetFullNAme())
-            .Map(dest => dest.TutorId, src => src.Tutor.Id)
-            .Map(dest => dest.TutorPhoneNumber, src => src.Tutor.PhoneNumber)
+            .Map(dest => dest.TutorName, src => src.Tutor == null? "" : src.Tutor.GetFullNAme())
+            .Map(dest => dest.TutorPhoneNumber, src => src.Tutor == null? "" : src.Tutor.PhoneNumber)
+            .Map(dest => dest.TutorId, src => src.Tutor == null? 0 : src.Tutor.Id)
             .Map(dest => dest.ReviewDetailDto, src => src.ReviewDetail.Detail)
             .Map(dest => dest, src => src);
         

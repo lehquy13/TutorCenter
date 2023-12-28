@@ -163,14 +163,14 @@ public class UserController : Controller
                 _logger.LogError("Delete user failed! {VMessage}", v.Message);
             }
 
-            return RedirectToAction("Error", "Home");
+            return Helper.RenderRazorViewToString(this, "Error", result.Errors);
         }
 
-        return Helper.RenderRazorViewToString(this, "Delete", result.Value);
-        // return View(result);
+        var resultView = Helper.RenderRazorViewToString(this, "Delete", result.Value);
+        return resultView;
     }
 
-    [HttpGet("DeleteConfirmed")]
+    [HttpPost("DeleteConfirmed")]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         if (id == null || id == 0)

@@ -1,5 +1,5 @@
 ﻿@using TutorCenter.Application.Contracts.Users;
-@model UserDto
+@model UserForDetailDto
 
 @{
     ViewData["Title"] = "Delete";
@@ -75,56 +75,11 @@
         <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.Role)
         </dd>
-      
-        <dt class="col-sm-4" hidden>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-        <dd class="col-sm-8" hidden>
-            
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-        <dt class = "col-sm-4" hidden>
-            @Html.DisplayNameFor(model => model.DeleterUserId)
-        </dt>
-        <dd class="col-sm-8" hidden>
-            @Html.DisplayFor(model => model.DeleterUserId)
-        </dd>
-        <dt class="col-sm-4" hidden>
-            @Html.DisplayNameFor(model => model.DeletionTime)
-        </dt>
-        <dd class="col-sm-8" hidden>
-            @Html.DisplayFor(model => model.DeletionTime)
-        </dd>
-        <dt class = "col-sm-4">
-            @Html.DisplayNameFor(model => model.LastModificationTime)
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.LastModificationTime)
-        </dd>
-        <dt class="col-sm-4" hidden>
-            @Html.DisplayNameFor(model => model.LastModifierUserId)
-        </dt>
-        <dd class="col-sm-8" hidden>
-            @Html.DisplayFor(model => model.LastModifierUserId)
-        </dd>
-        <dt class = "col-sm-4">
-            @Html.DisplayNameFor(model => model.CreationTime)
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.CreationTime)
-        </dd>
-        <dt class="col-sm-4" hidden>
-            @Html.DisplayNameFor(model => model.CreatorUserId)
-        </dt>
-        <dd class = "col-sm-8" hidden>
-            @Html.DisplayFor(model => model.CreatorUserId)
-        </dd>
     </dl>
     
-    <form asp-action="DeleteConfirmed" class="modal-footer">
+    <form asp-action="DeleteConfirmed" asp-controller="User" class="modal-footer">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
     </form>
 </div>

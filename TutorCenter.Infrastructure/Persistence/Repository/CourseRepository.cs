@@ -19,6 +19,7 @@ public class CourseRepository : Repository<Course>, ICourseRepository
             .Include(x => x.CourseRequests)
             .Include(x => x.Subject)
             .Include(x => x.Tutor)
+            .Include(x => x.Learner)
             //.Include(x => x.Learner)
             .SingleOrDefaultAsync();
         return result;
